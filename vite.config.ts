@@ -22,9 +22,9 @@ export default defineConfig({
       'class-variance-authority@0.7.1': 'class-variance-authority',
       
       // Figma assets - Fix: add /assets/ subdirectory
-      path.resolve(__dirname, './src/assets/fabbcc2ddb4dcba8f9559b2c9e3586bccec643a7.png'),
-      path.resolve(__dirname, './src/assets/f84c696c6e55bb2f8b05dddc10bd4f496c3dbfa4.png'),
-      path.resolve(__dirname, './src/assets/f46cf8132aa06ba90a78f10bf40f233920a66b60.png'),
+      'figma:asset/fabbcc2ddb4dcba8f9559b2c9e3586bccec643a7.png': path.resolve(__dirname, './src/assets/fabbcc2ddb4dcba8f9559b2c9e3586bccec643a7.png'),
+      'figma:asset/f84c696c6e55bb2f8b05dddc10bd4f496c3dbfa4.png': path.resolve(__dirname, './src/assets/f84c696c6e55bb2f8b05dddc10bd4f496c3dbfa4.png'),
+      'figma:asset/f46cf8132aa06ba90a78f10bf40f233920a66b60.png': path.resolve(__dirname, './src/assets/f46cf8132aa06ba90a78f10bf40f233920a66b60.png'),
       'figma:asset/e4919ab478ae10e52c6ae5877047f88b58f5dabe.png': path.resolve(__dirname, './src/assets/e4919ab478ae10e52c6ae5877047f88b58f5dabe.png'),
       'figma:asset/ca6c720a8effcb157096c63f651968dc671144d9.png': path.resolve(__dirname, './src/assets/ca6c720a8effcb157096c63f651968dc671144d9.png'),
       'figma:asset/c39f91be012f28a930d59ddfef67b01fed26e05d.png': path.resolve(__dirname, './src/assets/c39f91be012f28a930d59ddfef67b01fed26e05d.png'),
@@ -39,7 +39,7 @@ export default defineConfig({
       'figma:asset/266f83345b5407372661358259f08602f9877410.png': path.resolve(__dirname, './src/assets/266f83345b5407372661358259f08602f9877410.png'),
       'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png': path.resolve(__dirname, './src/assets/0c25104b46225be8f6c90058d814171b8b129dab.png'),
       'figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png': path.resolve(__dirname, './src/assets/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png'),
-      
+            
       // Radix UI aliases (kept as-is)
       '@radix-ui/react-tooltip@1.1.8': '@radix-ui/react-tooltip',
       '@radix-ui/react-toggle@1.1.2': '@radix-ui/react-toggle',
