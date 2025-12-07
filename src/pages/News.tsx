@@ -1,54 +1,67 @@
 import { Navigation } from '../components/Navigation';
 import { Calendar, ExternalLink } from 'lucide-react';
 
+import newsImage1 from 'figma:asset/f46cf8132aa06ba90a78f10bf40f233920a66b60.png';
+import newsImage2 from 'figma:asset/b74248734c89fc30b177ddd12a3139cc100e35e2.png';
+import newsImage3 from 'figma:asset/6f0b4657432398977b1ff8e63e88fdd6c82d2b0a.png';
+import newsImage4 from 'figma:asset/65aeb3f625463161c87c547aab331a9ab4a5d82e.png';
+import newsImage5 from 'figma:asset/266f83345b5407372661358259f08602f9877410.png';
+import newsImage6 from 'figma:asset/e4919ab478ae10e52c6ae5877047f88b58f5dabe.png';
+
 const newsArticles = [
   {
     id: 1,
-    title: 'Dr. Radheshyam Gupta Leads Major Social Welfare Initiative in Mumbai',
-    date: '2024-11-15',
-    category: 'Social Service',
-    excerpt: 'Dr. Radheshyam S. Gupta spearheaded a comprehensive social welfare program reaching over 5,000 families in Mumbai, providing essential supplies and medical assistance to underprivileged communities.',
-    image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80',
+    title: 'North Indian Conference Organized in Vidhan Sabha - उत्तर भारतीय सम्मेलन',
+    date: '2025-11-18',
+    category: 'Political Event',
+    excerpt: 'North Indian Conference organized successfully in Vidhan Sabha with the support of North Indian Forum. Mumbai BJP President and MLA Amit Satam along with North-West District President Gyan Moti Sharma were the chief guests.',
+    image: newsImage1,
+    source: 'Navbharat ePaper, Mumbai',
   },
   {
     id: 2,
-    title: 'BJP Leader Participates in State-Level Policy Discussion',
-    date: '2024-10-28',
-    category: 'Politics',
-    excerpt: 'As a prominent BJP leader, Dr. Gupta contributed to important policy discussions focusing on economic development and social welfare initiatives for Maharashtra.',
-    image: 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=800&q=80',
+    title: 'Chhath Puja Concludes with Arghya to Rising Sun - Dr. Radheshyam Gupta Organizes Grand Event',
+    date: '2025-10-22',
+    category: 'Social Service',
+    excerpt: 'Dr. Radheshyam Gupta organized a grand Chhath Puja celebration at the village ghat in Vikroli. After 66 hours of fasting, devotees offered Arghya to the rising sun, concluding the sacred festival with traditional rituals and community participation.',
+    image: newsImage2,
+    source: 'Lokmanya Bharat News, Vikroli',
   },
   {
     id: 3,
-    title: 'Community Food Distribution Program Reaches New Milestone',
-    date: '2024-10-10',
-    category: 'Social Service',
-    excerpt: 'The ongoing food distribution initiative led by Dr. Gupta has successfully served over 50,000 meals to those in need, continuing the legacy of service started during the COVID-19 pandemic.',
-    image: 'https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=800&q=80',
+    title: 'Chhath Mahaparvा Concludes with Traditional Rituals in Mirajpur',
+    date: '2025-10-22',
+    category: 'Religious Event',
+    excerpt: 'The grand Chhath festival concluded with devotees offering Arghya to the rising sun. Women devotees completed their fast after performing traditional rituals. The event witnessed massive participation from the community.',
+    image: newsImage3,
+    source: 'Aaj Mirajpur, Varanasi',
   },
   {
     id: 4,
-    title: 'International Yoga Day Celebration Organized at Juhu Beach',
-    date: '2024-06-21',
-    category: 'Events',
-    excerpt: 'Dr. Radheshyam Gupta organized a massive International Yoga Day celebration at Juhu Beach, bringing together thousands of participants to promote health and wellness.',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
+    title: 'Educational Event at Girls School - विधानिधी विद्यालयात श्रावण महिन्याच्या परिपाठाचे आयोजन',
+    date: '2025-08-26',
+    category: 'Education',
+    excerpt: 'A special educational event was organized at the girls\' school during the month of Shravan. The event featured cultural programs, competitions, and educational activities for students, promoting learning through creative expression.',
+    image: newsImage4,
+    source: 'Rashtramudra, Mumbai',
   },
   {
     id: 5,
-    title: 'Educational Scholarship Program Launched for Underprivileged Students',
-    date: '2024-05-15',
+    title: 'Educational Materials Distribution at Juhu School - विधानिधी शाळेत परिपाठाचे आयोजन',
+    date: '2025-08-24',
     category: 'Education',
-    excerpt: 'A new scholarship program was announced to support deserving students from economically disadvantaged backgrounds, covering tuition and educational materials.',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+    excerpt: 'Educational materials and prizes were distributed to students at Juhu Yethil Upnagar Shikshan Mandal. The event was organized by Vidhanidhi Vrjalal Parekh High School with participation from honored guests and students.',
+    image: newsImage5,
+    source: 'Lokmat, Mumbai',
   },
   {
     id: 6,
-    title: 'Lions Club Recognizes Outstanding Community Service',
-    date: '2024-04-22',
-    category: 'Awards',
-    excerpt: 'Dr. Gupta received special recognition from the Lions Club for exemplary service and dedication to community development initiatives.',
-    image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80',
+    title: 'Educational Support for Tribal Children - आदिवासी विद्यार्थियों को शैक्षणिक सामग्री वितरित',
+    date: '2025-08-25',
+    category: 'Social Service',
+    excerpt: 'On August 24th, educational materials were distributed to 110 tribal children from colonies near Mumbai as part of a special social service initiative. The event aimed to support underprivileged students with necessary learning resources.',
+    image: newsImage6,
+    source: 'Darphar ka Samna Hindi Samna, Mumbai',
   },
 ];
 
@@ -75,7 +88,7 @@ export default function News() {
               key={article.id} 
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
-              <div className="h-48 overflow-hidden">
+              <div className="h-64 overflow-hidden">
                 <img
                   src={article.image}
                   alt={article.title}
@@ -98,14 +111,13 @@ export default function News() {
                   {article.title}
                 </h3>
                 
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-gray-600 mb-3 line-clamp-3">
                   {article.excerpt}
                 </p>
                 
-                <button className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
-                  <span>Read More</span>
-                  <ExternalLink className="w-4 h-4" />
-                </button>
+                <p className="text-sm text-gray-500 italic">
+                  Source: {article.source}
+                </p>
               </div>
             </div>
           ))}

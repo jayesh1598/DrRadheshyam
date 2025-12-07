@@ -1,190 +1,121 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Navigation } from '../components/Navigation';
-import { Loader2, Calendar, ExternalLink, AlertCircle } from 'lucide-react';
-import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { Facebook, ExternalLink } from 'lucide-react';
 
-interface FacebookPost {
-  id: string;
-  message?: string;
-  created_time: string;
-  full_picture?: string;
-  permalink_url: string;
-  attachments?: {
-    data: Array<{
-      media?: {
-        image?: {
-          src: string;
-        };
-      };
-      type: string;
-      subattachments?: {
-        data: Array<{
-          media?: {
-            image?: {
-              src: string;
-            };
-          };
-        }>;
-      };
-    }>;
-  };
-}
+import gallery1 from 'figma:asset/2e59774886a10ef6a8eff35dc67de97be1d2f53f.png';
+import gallery2 from 'figma:asset/74c5306cf08d2dc570125917f167e65b2a0cbf96.png';
+import gallery3 from 'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png';
+import gallery4 from 'figma:asset/a576c49936a9762fc3ce642d8fd4ef5eb0da7a1e.png';
+import gallery5 from 'figma:asset/ca6c720a8effcb157096c63f651968dc671144d9.png';
+
+const galleryImages = [
+  {
+    id: 1,
+    image: gallery1,
+    alt: 'Temple Visit - Dr. Radheshyam S. Gupta with community members',
+  },
+  {
+    id: 2,
+    image: gallery2,
+    alt: 'Community Service - Dr. Radheshyam S. Gupta serving at temple',
+  },
+  {
+    id: 3,
+    image: gallery3,
+    alt: 'Food Distribution - Community service and food distribution event',
+  },
+  {
+    id: 4,
+    image: gallery4,
+    alt: 'Educational Event - School program with students and teachers',
+  },
+  {
+    id: 5,
+    image: gallery5,
+    alt: 'Educational Program - Blackboard presentation at school event',
+  },
+];
 
 export default function Gallery() {
-  const [posts, setPosts] = useState<FacebookPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-dcb37a05/facebook-posts`,
-        {
-          headers: {
-            'Authorization': `Bearer ${publicAnonKey}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to fetch posts');
-      }
-
-      if (data.success) {
-        setPosts(data.posts);
-      }
-    } catch (err) {
-      console.error('Error fetching Facebook posts:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load posts');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
-  const getPostImage = (post: FacebookPost) => {
-    if (post.full_picture) return post.full_picture;
-    
-    if (post.attachments?.data?.[0]?.media?.image?.src) {
-      return post.attachments.data[0].media.image.src;
-    }
-    
-    return null;
-  };
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl text-gray-900 mb-4">
-            Social Media Gallery
-          </h1>
-          <p className="text-xl text-gray-600">
+      {/* Page Header */}
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Facebook className="w-12 h-12" />
+            <h1 className="text-center">Social Media Gallery</h1>
+          </div>
+          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
             Latest updates and activities from Dr. Radheshyam S. Gupta
           </p>
-        </div>
-
-        {loading && (
-          <div className="flex justify-center items-center py-20">
-            <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+          <div className="text-center mt-4">
+            <a 
+              href="https://www.facebook.com/dr.radheshyamguptaji" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-blue-100 hover:text-white transition-colors"
+            >
+              <span>Follow on Facebook</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
-        )}
+        </div>
+      </div>
 
-        {error && (
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-red-50 border border-red-200 rounded-xl p-6 flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-red-900 mb-2">Unable to Load Facebook Posts</h3>
-                <p className="text-red-700 mb-4">{error}</p>
-                <div className="bg-white rounded-lg p-4 text-sm text-gray-700">
-                  <p className="mb-2">To display Facebook posts, you need to:</p>
-                  <ol className="list-decimal list-inside space-y-1">
-                    <li>Create a Facebook App at <a href="https://developers.facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">developers.facebook.com</a></li>
-                    <li>Get a Page Access Token for your Facebook Page</li>
-                    <li>Add the access token to the FACEBOOK_ACCESS_TOKEN environment variable</li>
-                  </ol>
-                </div>
+      {/* Gallery Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {galleryImages.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+              onClick={() => setSelectedImage(item.image)}
+            >
+              <div className="aspect-square overflow-hidden bg-gray-100">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
             </div>
-          </div>
-        )}
-
-        {!loading && !error && posts.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-gray-600 text-lg">No posts available at the moment.</p>
-          </div>
-        )}
-
-        {!loading && !error && posts.length > 0 && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => {
-              const imageUrl = getPostImage(post);
-              
-              return (
-                <div
-                  key={post.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-                >
-                  {imageUrl && (
-                    <div className="aspect-square overflow-hidden bg-gray-100">
-                      <img
-                        src={imageUrl}
-                        alt="Facebook post"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  )}
-                  
-                  <div className="p-4">
-                    {post.message && (
-                      <p className="text-gray-700 mb-3 line-clamp-4">
-                        {post.message}
-                      </p>
-                    )}
-                    
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{formatDate(post.created_time)}</span>
-                      </div>
-                      
-                      <a
-                        href={post.permalink_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-blue-600 hover:text-blue-700"
-                      >
-                        <span>View</span>
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+          ))}
+        </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-6xl max-h-full">
+            <img
+              src={selectedImage}
+              alt="Gallery view"
+              className="max-w-full max-h-[90vh] object-contain"
+            />
+            <button
+              className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75 transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-8 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; 2025 Dr. Radheshyam S. Gupta. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
