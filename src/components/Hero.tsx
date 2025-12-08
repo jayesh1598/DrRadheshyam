@@ -1,6 +1,6 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import profileImage from "figma:/asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png";
-import logo from "figma:/asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png";
+import profileImage from "figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png";
+import logo from "figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png";
 
 export function Hero() {
   return (
