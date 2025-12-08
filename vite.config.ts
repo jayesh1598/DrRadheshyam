@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
+
+  import { defineConfig } from 'vite';
+  import react from '@vitejs/plugin-react-swc';
+  import path from 'path';
 
   export default defineConfig({
     plugins: [react()],
@@ -34,7 +35,6 @@ import path from 'path';
         'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png': path.resolve(__dirname, './src/assets/0c25104b46225be8f6c90058d814171b8b129dab.png'),
         'figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png': path.resolve(__dirname, './src/assets/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png'),
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
-        'cmdk@1.1.1': 'cmdk',        'embla-carousel-react@8.6.0': 'embla-carousel-react',
         'cmdk@1.1.1': 'cmdk',
         'class-variance-authority@0.7.1': 'class-variance-authority',
         '@radix-ui/react-tooltip@1.1.8': '@radix-ui/react-tooltip',
@@ -69,10 +69,10 @@ import path from 'path';
     },
     build: {
       target: 'esnext',
-      outDir: 'dist',
+      outDir: 'build',
     },
     server: {
       port: 3000,
-      open: false,
+      open: true,
     },
   });
