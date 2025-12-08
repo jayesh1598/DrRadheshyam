@@ -1,37 +1,32 @@
 import { useState } from 'react';
 import { Navigation } from '../components/Navigation';
 import { Facebook, ExternalLink } from 'lucide-react';
-
-import gallery1 from 'figma:asset/2e59774886a10ef6a8eff35dc67de97be1d2f53f.png';
-import gallery2 from 'figma:asset/74c5306cf08d2dc570125917f167e65b2a0cbf96.png';
-import gallery3 from 'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png';
-import gallery4 from 'figma:asset/a576c49936a9762fc3ce642d8fd4ef5eb0da7a1e.png';
-import gallery5 from 'figma:asset/ca6c720a8effcb157096c63f651968dc671144d9.png';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 const galleryImages = [
   {
     id: 1,
-    image: gallery1,
+    image: 'figma:asset/2e59774886a10ef6a8eff35dc67de97be1d2f53f.png',
     alt: 'Temple Visit - Dr. Radheshyam S. Gupta with community members',
   },
   {
     id: 2,
-    image: gallery2,
+    image: 'figma:asset/74c5306cf08d2dc570125917f167e65b2a0cbf96.png',
     alt: 'Community Service - Dr. Radheshyam S. Gupta serving at temple',
   },
   {
     id: 3,
-    image: gallery3,
+    image: 'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png',
     alt: 'Food Distribution - Community service and food distribution event',
   },
   {
     id: 4,
-    image: gallery4,
+    image: 'figma:asset/a576c49936a9762fc3ce642d8fd4ef5eb0da7a1e.png',
     alt: 'Educational Event - School program with students and teachers',
   },
   {
     id: 5,
-    image: gallery5,
+    image: 'figma:asset/ca6c720a8effcb157096c63f651968dc671144d9.png',
     alt: 'Educational Program - Blackboard presentation at school event',
   },
 ];
@@ -77,7 +72,7 @@ export default function Gallery() {
               onClick={() => setSelectedImage(item.image)}
             >
               <div className="aspect-square overflow-hidden bg-gray-100">
-                <img
+                <ImageWithFallback
                   src={item.image}
                   alt={item.alt}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
@@ -95,7 +90,7 @@ export default function Gallery() {
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-w-6xl max-h-full">
-            <img
+            <ImageWithFallback
               src={selectedImage}
               alt="Gallery view"
               className="max-w-full max-h-[90vh] object-contain"

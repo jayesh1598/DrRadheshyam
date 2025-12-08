@@ -1,12 +1,6 @@
 import { Navigation } from '../components/Navigation';
-import { Calendar, ExternalLink } from 'lucide-react';
-
-import newsImage1 from 'figma:asset/f46cf8132aa06ba90a78f10bf40f233920a66b60.png';
-import newsImage2 from 'figma:asset/b74248734c89fc30b177ddd12a3139cc100e35e2.png';
-import newsImage3 from 'figma:asset/6f0b4657432398977b1ff8e63e88fdd6c82d2b0a.png';
-import newsImage4 from 'figma:asset/65aeb3f625463161c87c547aab331a9ab4a5d82e.png';
-import newsImage5 from 'figma:asset/266f83345b5407372661358259f08602f9877410.png';
-import newsImage6 from 'figma:asset/e4919ab478ae10e52c6ae5877047f88b58f5dabe.png';
+import { Calendar } from 'lucide-react';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 const newsArticles = [
   {
@@ -15,7 +9,7 @@ const newsArticles = [
     date: '2025-11-18',
     category: 'Political Event',
     excerpt: 'North Indian Conference organized successfully in Vidhan Sabha with the support of North Indian Forum. Mumbai BJP President and MLA Amit Satam along with North-West District President Gyan Moti Sharma were the chief guests.',
-    image: newsImage1,
+    image: 'figma:asset/f46cf8132aa06ba90a78f10bf40f233920a66b60.png',
     source: 'Navbharat ePaper, Mumbai',
   },
   {
@@ -24,7 +18,7 @@ const newsArticles = [
     date: '2025-10-22',
     category: 'Social Service',
     excerpt: 'Dr. Radheshyam Gupta organized a grand Chhath Puja celebration at the village ghat in Vikroli. After 66 hours of fasting, devotees offered Arghya to the rising sun, concluding the sacred festival with traditional rituals and community participation.',
-    image: newsImage2,
+    image: 'figma:asset/b74248734c89fc30b177ddd12a3139cc100e35e2.png',
     source: 'Lokmanya Bharat News, Vikroli',
   },
   {
@@ -33,7 +27,7 @@ const newsArticles = [
     date: '2025-10-22',
     category: 'Religious Event',
     excerpt: 'The grand Chhath festival concluded with devotees offering Arghya to the rising sun. Women devotees completed their fast after performing traditional rituals. The event witnessed massive participation from the community.',
-    image: newsImage3,
+    image: 'figma:asset/6f0b4657432398977b1ff8e63e88fdd6c82d2b0a.png',
     source: 'Aaj Mirajpur, Varanasi',
   },
   {
@@ -42,7 +36,7 @@ const newsArticles = [
     date: '2025-08-26',
     category: 'Education',
     excerpt: 'A special educational event was organized at the girls\' school during the month of Shravan. The event featured cultural programs, competitions, and educational activities for students, promoting learning through creative expression.',
-    image: newsImage4,
+    image: 'figma:asset/65aeb3f625463161c87c547aab331a9ab4a5d82e.png',
     source: 'Rashtramudra, Mumbai',
   },
   {
@@ -51,7 +45,7 @@ const newsArticles = [
     date: '2025-08-24',
     category: 'Education',
     excerpt: 'Educational materials and prizes were distributed to students at Juhu Yethil Upnagar Shikshan Mandal. The event was organized by Vidhanidhi Vrjalal Parekh High School with participation from honored guests and students.',
-    image: newsImage5,
+    image: 'figma:asset/266f83345b5407372661358259f08602f9877410.png',
     source: 'Lokmat, Mumbai',
   },
   {
@@ -60,7 +54,7 @@ const newsArticles = [
     date: '2025-08-25',
     category: 'Social Service',
     excerpt: 'On August 24th, educational materials were distributed to 110 tribal children from colonies near Mumbai as part of a special social service initiative. The event aimed to support underprivileged students with necessary learning resources.',
-    image: newsImage6,
+    image: 'figma:asset/e4919ab478ae10e52c6ae5877047f88b58f5dabe.png',
     source: 'Darphar ka Samna Hindi Samna, Mumbai',
   },
 ];
@@ -89,7 +83,7 @@ export default function News() {
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
               <div className="h-64 overflow-hidden">
-                <img
+                <ImageWithFallback
                   src={article.image}
                   alt={article.title}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
