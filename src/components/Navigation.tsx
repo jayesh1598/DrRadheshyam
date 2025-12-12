@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router';
 import { Home, User, ImageIcon, Newspaper, Award } from 'lucide-react';
-import logo from 'figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png';
+
+const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
 
 export function Navigation() {
   const location = useLocation();
-  
+
   const isActive = (path: string) => {
     return location.pathname === path;
   };
@@ -15,11 +16,10 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-3">
-              <img 
-                src={logo} 
-                alt="Dr. RSG Logo" 
+              <img
+                src={logoUrl}
+                alt="Dr. RSG Logo"
                 className="h-12 w-12 object-contain"
-                style={{ mixBlendMode: 'multiply' }}
               />
               <span className="text-xl text-gray-900">Dr. RSG</span>
             </Link>
