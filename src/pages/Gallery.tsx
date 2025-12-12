@@ -6,31 +6,6 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 const galleryImages = [
   {
     id: 1,
-    image: 'figma:asset/2e59774886a10ef6a8eff35dc67de97be1d2f53f.png',
-    alt: 'Temple Visit - Dr. Radheshyam S. Gupta with community members',
-  },
-  {
-    id: 2,
-    image: 'figma:asset/74c5306cf08d2dc570125917f167e65b2a0cbf96.png',
-    alt: 'Community Service - Dr. Radheshyam S. Gupta serving at temple',
-  },
-  {
-    id: 3,
-    image: 'figma:asset/0c25104b46225be8f6c90058d814171b8b129dab.png',
-    alt: 'Food Distribution - Community service and food distribution event',
-  },
-  {
-    id: 4,
-    image: 'figma:asset/a576c49936a9762fc3ce642d8fd4ef5eb0da7a1e.png',
-    alt: 'Educational Event - School program with students and teachers',
-  },
-  {
-    id: 5,
-    image: 'figma:asset/ca6c720a8effcb157096c63f651968dc671144d9.png',
-    alt: 'Educational Program - Blackboard presentation at school event',
-  },
-  {
-    id: 6,
     image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fe2fe855ce4ea43f9a58f778ca9ea3f20?format=webp&width=800',
     alt: 'Office meeting - Professional meeting with team members',
   },
