@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, RouteObject } from "react-router";
 import Landing from "../pages/Landing";
 import AboutUs from "../pages/AboutUs";
 import News from "../pages/News";
@@ -12,6 +12,15 @@ import CertificatesManager from "../pages/admin/CertificatesManager";
 import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+
+// Protected route wrapper component
+const AdminRoute = ({ Component }: { Component: React.ComponentType }) => {
+  return (
+    <ProtectedRoute>
+      <Component />
+    </ProtectedRoute>
+  );
+};
 
 export const router = createBrowserRouter([
   {
@@ -40,50 +49,26 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
-    element: (
-      <ProtectedRoute>
-        <AdminDashboard />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={AdminDashboard} />,
   },
   {
     path: "/admin/news",
-    element: (
-      <ProtectedRoute>
-        <NewsManager />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={NewsManager} />,
   },
   {
     path: "/admin/gallery",
-    element: (
-      <ProtectedRoute>
-        <GalleryManager />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={GalleryManager} />,
   },
   {
     path: "/admin/certificates",
-    element: (
-      <ProtectedRoute>
-        <CertificatesManager />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={CertificatesManager} />,
   },
   {
     path: "/admin/banners",
-    element: (
-      <ProtectedRoute>
-        <BannersManager />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={BannersManager} />,
   },
   {
     path: "/admin/about",
-    element: (
-      <ProtectedRoute>
-        <AboutManager />
-      </ProtectedRoute>
-    ),
+    Component: () => <AdminRoute Component={AboutManager} />,
   },
-]);
+] as RouteObject[]);
