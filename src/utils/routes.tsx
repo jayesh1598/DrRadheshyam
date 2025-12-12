@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router";
+import { createBrowserRouter } from "react-router";
 import Landing from "../pages/Landing";
 import AboutUs from "../pages/AboutUs";
 import News from "../pages/News";
@@ -12,15 +12,6 @@ import CertificatesManager from "../pages/admin/CertificatesManager";
 import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
-
-// Protected route wrapper component
-const AdminRoute = ({ Component }: { Component: React.ComponentType }) => {
-  return (
-    <ProtectedRoute>
-      <Component />
-    </ProtectedRoute>
-  );
-};
 
 export const router = createBrowserRouter([
   {
@@ -49,26 +40,50 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
-    Component: () => <AdminRoute Component={AdminDashboard} />,
+    Component: () => (
+      <ProtectedRoute>
+        <AdminDashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin/news",
-    Component: () => <AdminRoute Component={NewsManager} />,
+    Component: () => (
+      <ProtectedRoute>
+        <NewsManager />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin/gallery",
-    Component: () => <AdminRoute Component={GalleryManager} />,
+    Component: () => (
+      <ProtectedRoute>
+        <GalleryManager />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin/certificates",
-    Component: () => <AdminRoute Component={CertificatesManager} />,
+    Component: () => (
+      <ProtectedRoute>
+        <CertificatesManager />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin/banners",
-    Component: () => <AdminRoute Component={BannersManager} />,
+    Component: () => (
+      <ProtectedRoute>
+        <BannersManager />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/admin/about",
-    Component: () => <AdminRoute Component={AboutManager} />,
+    Component: () => (
+      <ProtectedRoute>
+        <AboutManager />
+      </ProtectedRoute>
+    ),
   },
-] as RouteObject[]);
+]);
