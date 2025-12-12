@@ -27,6 +27,11 @@ const bannerImages = [
     src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F8689b4f6f116466c99bc69361fd124de?format=webp&width=800',
     alt: 'Social Service',
   },
+  {
+    id: 6,
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F21288cf083e444b5803d8eff2ef39500?format=webp&width=800',
+    alt: 'Community Engagement Event',
+  },
 ];
 
 export function BannerSlider() {
