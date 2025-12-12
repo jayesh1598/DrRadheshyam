@@ -4,7 +4,6 @@ import { Education } from '../components/Education';
 import { Experience } from '../components/Experience';
 import { Awards } from '../components/Awards';
 import { SocialService } from '../components/SocialService';
-import { Contact } from '../components/Contact';
 
 export default function AboutUs() {
   return (
@@ -15,7 +14,6 @@ export default function AboutUs() {
       <Experience />
       <Awards />
       <SocialService />
-      <Contact />
     </div>
   );
 }
