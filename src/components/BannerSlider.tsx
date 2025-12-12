@@ -1,37 +1,31 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import bannerImage1 from 'figma:asset/c39f91be012f28a930d59ddfef67b01fed26e05d.png';
-import bannerImage2 from 'figma:asset/768c2fb46ec73b2e8f9e326258c66a621e4f53da.png';
-import bannerImage3 from 'figma:asset/f84c696c6e55bb2f8b05dddc10bd4f496c3dbfa4.png';
-import bannerImage4 from 'figma:asset/fabbcc2ddb4dcba8f9559b2c9e3586bccec643a7.png';
-import bannerImage5 from 'figma:asset/4b7df9ec1760a04b6038212f3aefebeaa831d329.png';
-
 const bannerImages = [
   {
     id: 1,
-    src: bannerImage1,
-    alt: 'Social Service - Yoga Event',
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F74c2b9fdf65c449da5054b128eae79eb?format=webp&width=800',
+    alt: 'Community Event',
   },
   {
     id: 2,
-    src: bannerImage2,
-    alt: 'Political Leadership Meeting',
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F2571d9bb0e46452eb1370ed4ac4e2039?format=webp&width=800',
+    alt: 'Public Event',
   },
   {
     id: 3,
-    src: bannerImage3,
-    alt: 'BJP Political Event',
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F422d095645af41b6a3607a71b2a084be?format=webp&width=800',
+    alt: 'Civic Engagement',
   },
   {
     id: 4,
-    src: bannerImage4,
-    alt: 'India Wins - Beach Celebration',
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F7776eae2564d4500a1b8662536b9bdb9?format=webp&width=800',
+    alt: 'Sports Event',
   },
   {
     id: 5,
-    src: bannerImage5,
-    alt: 'Lions Club Service Event',
+    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F8689b4f6f116466c99bc69361fd124de?format=webp&width=800',
+    alt: 'Social Service',
   },
 ];
 

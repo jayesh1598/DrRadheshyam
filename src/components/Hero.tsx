@@ -1,5 +1,7 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
+
 export function Hero() {
   return (
     <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white overflow-hidden">
@@ -14,26 +16,11 @@ export function Hero() {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
-        {/* Logo at top */}
-        <div className="flex justify-center mb-8">
-          <ImageWithFallback
-            src="figma:asset/00eb846c080a6aa0484c904a5f5228a8105e5f0a.png"
-            alt="Dr. RSG Logo"
-            className="h-20 w-20 object-contain"
-            style={{
-              mixBlendMode: "multiply",
-              backgroundColor: "white",
-              borderRadius: "50%",
-              padding: "8px",
-            }}
-          />
-        </div>
-
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl flex-shrink-0">
-            <ImageWithFallback
-              src="figma:asset/202d81ae4ed13be825c2cc852b8df7874df06955.png"
-              alt="Dr. Radheshyam S. Gupta"
+            <img
+              src={logoUrl}
+              alt="Dr. RSG Logo"
               className="w-full h-full object-cover"
             />
           </div>
