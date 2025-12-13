@@ -72,7 +72,7 @@ export default function AdminDashboard() {
               onClick={() => navigate(item.path)}
               className={`border rounded-xl p-6 bg-white text-center transition-all hover:shadow-lg ${colorClasses[item.color as keyof typeof colorClasses]}`}
             >
-              <Icon className={`w-10 h-10 mx-auto mb-4 ${iconColorClasses[item.color as keyof typeof iconColorClasses]}`} />
+              <Icon className={`w-9 h-9 mx-auto mb-4 ${iconColorClasses[item.color as keyof typeof iconColorClasses]}`} />
               <h2 className="text-xl font-semibold text-gray-900">{item.label}</h2>
             </button>
           );
