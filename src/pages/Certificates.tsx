@@ -135,7 +135,7 @@ export default function Certificates() {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h2 className="text-gray-900 mb-2">{selectedCertificate.title}</h2>
-                  <p className="text-gray-600">{selectedCertificate.issuer}</p>
+                  <p className="text-gray-600">{selectedCertificate.institution}</p>
                   <p className="text-blue-600 mt-1">{selectedCertificate.date}</p>
                 </div>
                 <button
@@ -145,10 +145,10 @@ export default function Certificates() {
                   ×
                 </button>
               </div>
-              
+
               <div className="mb-4">
                 <img
-                  src={selectedCertificate.image}
+                  src={selectedCertificate.image_url}
                   alt={selectedCertificate.title}
                   className="w-full rounded-lg"
                 />
