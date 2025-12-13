@@ -128,21 +128,7 @@ export default function Gallery() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Facebook className="w-12 h-12" />
-            <h1 className="text-center">Social Media Gallery</h1>
-          </div>
-          <p className="text-center text-orange-100 text-lg max-w-2xl mx-auto">
-            Latest updates and activities from Dr. Radheshyam S. Gupta
-          </p>
-          <div className="text-center mt-4">
-            <a 
-              href="https://www.facebook.com/dr.radheshyamguptaji" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-100 hover:text-white transition-colors"
-            >
-              <span>Follow on Facebook</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <h1 className="text-center">Gallery</h1>
           </div>
         </div>
       </div>
