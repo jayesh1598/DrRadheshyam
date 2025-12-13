@@ -25,8 +25,8 @@ export function About() {
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
-                <MapPin className="w-6 h-6 text-blue-700" />
+              <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                <MapPin className="w-6 h-6 text-orange-700" />
               </div>
               <div>
                 <h3 className="text-gray-900 mb-2">Office Address</h3>
@@ -47,21 +47,21 @@ export function About() {
               <div>
                 <h3 className="text-gray-900 mb-2">Contact Numbers</h3>
                 <p className="text-gray-600">
-                  <a href="tel:8693022000" className="hover:text-blue-600">8693022000</a>
+                  <a href="tel:8693022000" className="hover:text-orange-600">8693022000</a>
                   <br />
-                  <a href="tel:8419904009" className="hover:text-blue-600">8419904009</a>
+                  <a href="tel:8419904009" className="hover:text-orange-600">8419904009</a>
                 </p>
               </div>
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="bg-purple-100 p-3 rounded-lg flex-shrink-0">
-                <Mail className="w-6 h-6 text-purple-700" />
+              <div className="bg-green-100 p-3 rounded-lg flex-shrink-0">
+                <Mail className="w-6 h-6 text-green-700" />
               </div>
               <div>
                 <h3 className="text-gray-900 mb-2">Email</h3>
                 <p className="text-gray-600">
-                  <a href="mailto:rsg1507@gmail.com" className="hover:text-blue-600">
+                  <a href="mailto:rsg1507@gmail.com" className="hover:text-orange-600">
                     rsg1507@gmail.com
                   </a>
                 </p>

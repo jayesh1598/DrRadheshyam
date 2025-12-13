@@ -40,11 +40,11 @@ export function Awards() {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+    <section className="py-16 sm:py-20 bg-gradient-to-br from-orange-50 to-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-200 rounded-full mb-4">
-            <Trophy className="w-8 h-8 text-amber-700" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-200 rounded-full mb-4">
+            <Trophy className="w-8 h-8 text-orange-700" />
           </div>
           <h2 className="text-3xl sm:text-4xl text-gray-900">
             Awards & Recognition
@@ -58,14 +58,14 @@ export function Awards() {
               className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1"
             >
               <div className="flex items-start gap-4">
-                <div className="bg-amber-100 p-3 rounded-lg flex-shrink-0">
-                  <Star className="w-6 h-6 text-amber-600 fill-amber-600" />
+                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                  <Star className="w-6 h-6 text-orange-600 fill-orange-600" />
                 </div>
                 <div>
                   <h3 className="text-gray-900 mb-2">{award.title}</h3>
                   <p className="text-gray-600 text-sm mb-1">{award.organization}</p>
                   {(award.year || award.category) && (
-                    <p className="text-amber-600 text-sm">
+                    <p className="text-orange-600 text-sm">
                       {award.category || award.year}
                     </p>
                   )}
