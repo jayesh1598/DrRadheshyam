@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { ArrowLeft, Check } from 'lucide-react';
-import { AdminHeader } from '../../components/AdminHeader';
+import { Check } from 'lucide-react';
+import { AdminLayout } from '../../components/AdminLayout';
 
 interface SiteSetting {
   id: string;
@@ -102,29 +102,18 @@ export default function SiteSettingsManager() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminHeader title="Site Settings" />
+    <AdminLayout title="Site Settings">
+      {message && (
+        <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
+          <Check className="w-5 h-5" />
+          {message}
+        </div>
+      )}
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <button
-          onClick={() => navigate('/admin/dashboard')}
-          className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </button>
-
-        {message && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
-            <Check className="w-5 h-5" />
-            {message}
-          </div>
-        )}
-
-        {loading ? (
-          <p className="text-center py-8">Loading settings...</p>
-        ) : (
-          <div className="space-y-8">
+      {loading ? (
+        <p className="text-center py-8">Loading settings...</p>
+      ) : (
+        <div className="space-y-8">
             {/* Logo Section */}
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h2 className="text-2xl font-bold mb-6">Logo</h2>
@@ -204,9 +193,8 @@ export default function SiteSettingsManager() {
                 </button>
               </div>
             </div>
-          </div>
-        )}
-      </main>
-    </div>
+        </div>
+      )}
+    </AdminLayout>
   );
 }

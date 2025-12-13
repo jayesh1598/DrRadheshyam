@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Save, ArrowLeft } from 'lucide-react';
-import { AdminHeader } from '../../components/AdminHeader';
+import { Save } from 'lucide-react';
+import { AdminLayout } from '../../components/AdminLayout';
 
 interface AboutContent {
   id: string;
@@ -75,22 +75,11 @@ export default function AboutManager() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminHeader title="About Content Management" />
-
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <button
-          onClick={() => navigate('/admin/dashboard')}
-          className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </button>
-
-        {loading ? (
-          <p className="text-center py-8">Loading content...</p>
-        ) : (
-          <div className="space-y-8">
+    <AdminLayout title="About Content Management">
+      {loading ? (
+        <p className="text-center py-8">Loading content...</p>
+      ) : (
+        <div className="space-y-8">
             <AboutSection
               section="Overview"
               defaultContent={sections.find((s) => s.section === 'Overview')?.content || ''}
@@ -115,10 +104,9 @@ export default function AboutManager() {
               onUpdate={(content) => handleUpdate('Biography', content)}
               onEditChange={setEditing}
             />
-          </div>
-        )}
-      </main>
-    </div>
+        </div>
+      )}
+    </AdminLayout>
   );
 }
 
