@@ -15,42 +15,43 @@ export default function AdminLogin() {
     setError('');
     setLoading(true);
 
-    try {
-      const { data, error: authError } = await supabase.auth.signInWithPassword({
+    const { data, error: authError } =
+      await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (authError) {
-        setError(authError.message);
-        setLoading(false);
-        return;
-      }
-
-      if (data.user) {
-        // Store user session
-        localStorage.setItem('admin_user', JSON.stringify(data.user));
-        navigate('/admin/dashboard');
-      }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-      console.error(err);
-    } finally {
+    if (authError) {
+      setError(authError.message);
       setLoading(false);
+      return;
     }
+
+    // ✅ THIS IS THE IMPORTANT PART
+    if (data.session) {
+      navigate('/admin/dashboard', { replace: true });
+    } else {
+      setError('Session not created. Please try again.');
+    }
+
+    setLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-2xl p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Admin Panel</h1>
-          <p className="text-gray-600 text-center mb-8">Login to manage the website</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
+            Admin Panel
+          </h1>
+          <p className="text-gray-600 text-center mb-8">
+            Login to manage the website
+          </p>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
-                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
                 <p className="text-red-800 text-sm">{error}</p>
               </div>
             )}
@@ -63,8 +64,7 @@ export default function AdminLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
-                placeholder="admin@example.com"
+                className="w-full px-4 py-2 border rounded-lg"
                 required
               />
             </div>
@@ -77,8 +77,7 @@ export default function AdminLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
-                placeholder="••••••••"
+                className="w-full px-4 py-2 border rounded-lg"
                 required
               />
             </div>
@@ -86,7 +85,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
