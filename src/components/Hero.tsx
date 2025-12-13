@@ -4,7 +4,7 @@ const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a1
 
 export function Hero() {
   return (
-    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white overflow-hidden">
+    <div className="relative bg-gradient-to-br from-orange-600 via-orange-500 to-orange-600 text-white overflow-hidden">
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -29,16 +29,16 @@ export function Hero() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-4">
               Dr. RADHESHYAM S. GUPTA
             </h1>
-            <p className="text-xl sm:text-2xl text-blue-200 mb-6">
+            <p className="text-xl sm:text-2xl text-orange-100 mb-6">
               Businessman & Social Activist
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <p className="text-sm text-blue-200">Age</p>
+                <p className="text-sm text-orange-100">Age</p>
                 <p className="text-lg">56 Years</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <p className="text-sm text-blue-200">
+                <p className="text-sm text-orange-100">
                   Date of Birth
                 </p>
                 <p className="text-lg">15-07-1969</p>
