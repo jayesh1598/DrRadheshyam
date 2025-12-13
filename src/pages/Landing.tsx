@@ -3,11 +3,35 @@ import { BannerSlider } from '../components/BannerSlider';
 import { Link } from 'react-router';
 import { ArrowRight, Award, Briefcase, Heart, GraduationCap, Newspaper, ImageIcon, Calendar } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { useState, useEffect } from 'react';
+import { supabase } from '../utils/supabase/client';
 
-// Sample data for previews
-const newsPreview = [
+interface NewsArticle {
+  id: string;
+  title: string;
+  date: string;
+  category: string;
+  excerpt: string;
+  image: string;
+}
+
+interface Certificate {
+  id: string;
+  title: string;
+  date: string;
+  institution: string;
+  image_url: string;
+}
+
+interface GalleryImage {
+  id: string;
+  image_url: string;
+  alt_text: string;
+}
+
+const defaultNewsPreview: NewsArticle[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Kashimira Hanuman Temple 126th Bhandara Ceremony',
     date: '2025-08-23',
     category: 'Religious Event',
@@ -15,7 +39,7 @@ const newsPreview = [
     image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F5d6691c825b64befb51b7a9b019749e3?format=webp&width=800',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Educational Event at Girls School',
     date: '2025-08-26',
     category: 'Education',
@@ -23,7 +47,7 @@ const newsPreview = [
     image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F2baef58d167a45f6b05a2ddeb60a32e8?format=webp&width=800',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Vidyanidhi School Educational Program',
     date: '2025-08-26',
     category: 'Education',
@@ -32,67 +56,105 @@ const newsPreview = [
   },
 ];
 
-const certificatesPreview = [
+const defaultCertificatesPreview: Certificate[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Honorary Doctorate Degree',
-    issuer: 'Dr. Babasaheb Ambedkar University, Agra',
+    institution: 'Dr. Babasaheb Ambedkar University, Agra',
     date: '2023',
-    category: 'Education',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80',
+    image_url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Social Service Excellence Award',
-    issuer: 'Maharashtra State Government',
+    institution: 'Maharashtra State Government',
     date: '2022',
-    category: 'Award',
-    image: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80',
+    image_url: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Community Leadership Certificate',
-    issuer: 'Lions Club International',
+    institution: 'Lions Club International',
     date: '2022',
-    category: 'Leadership',
-    image: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&q=80',
+    image_url: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&q=80',
   },
 ];
 
-const galleryPreview = [
+const defaultGalleryPreview: GalleryImage[] = [
   {
-    id: 1,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fe2fe855ce4ea43f9a58f778ca9ea3f20?format=webp&width=800',
-    alt: 'Office meeting - Professional meeting with team members',
+    id: '1',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fe2fe855ce4ea43f9a58f778ca9ea3f20?format=webp&width=800',
+    alt_text: 'Office meeting - Professional meeting with team members',
   },
   {
-    id: 2,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F93a4084af2a54c91aeb8a259a8321039?format=webp&width=800',
-    alt: 'Meal time event - Community gathering and food service',
+    id: '2',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F93a4084af2a54c91aeb8a259a8321039?format=webp&width=800',
+    alt_text: 'Meal time event - Community gathering and food service',
   },
   {
-    id: 3,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fa2828de2c8dc46f8b3d9c63f610d9aee?format=webp&width=800',
-    alt: 'Temple entrance - Exterior view of the sacred temple complex',
+    id: '3',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fa2828de2c8dc46f8b3d9c63f610d9aee?format=webp&width=800',
+    alt_text: 'Temple entrance - Exterior view of the sacred temple complex',
   },
   {
-    id: 4,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F1c0efacc7a614653986963e3cd6eafc2?format=webp&width=800',
-    alt: 'Leadership presentation - Award ceremony and recognition',
+    id: '4',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F1c0efacc7a614653986963e3cd6eafc2?format=webp&width=800',
+    alt_text: 'Leadership presentation - Award ceremony and recognition',
   },
   {
-    id: 5,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fbc595b4994304122a2aabb77b33e636f?format=webp&width=800',
-    alt: 'Group event - Team members gathered for official photo',
+    id: '5',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fbc595b4994304122a2aabb77b33e636f?format=webp&width=800',
+    alt_text: 'Group event - Team members gathered for official photo',
   },
   {
-    id: 6,
-    image: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fe622aba7e64d4b82b06c905c16100422?format=webp&width=800',
-    alt: 'Yoga session - Beach community yoga and wellness event',
+    id: '6',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2Fe622aba7e64d4b82b06c905c16100422?format=webp&width=800',
+    alt_text: 'Yoga session - Beach community yoga and wellness event',
   },
 ];
 
 export default function Landing() {
+  const [newsPreview, setNewsPreview] = useState<NewsArticle[]>(defaultNewsPreview);
+  const [certificatesPreview, setCertificatesPreview] = useState<Certificate[]>(defaultCertificatesPreview);
+  const [galleryPreview, setGalleryPreview] = useState<GalleryImage[]>(defaultGalleryPreview);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [newsRes, certsRes, galleryRes] = await Promise.all([
+          supabase
+            .from('news_articles')
+            .select('id, title, date, category, excerpt, image')
+            .order('date', { ascending: false })
+            .limit(3),
+          supabase
+            .from('certificates')
+            .select('id, title, date, institution, image_url')
+            .order('date', { ascending: false })
+            .limit(3),
+          supabase
+            .from('gallery_images')
+            .select('id, image_url, alt_text')
+            .limit(6),
+        ]);
+
+        if (newsRes.data && newsRes.data.length > 0) {
+          setNewsPreview(newsRes.data);
+        }
+        if (certsRes.data && certsRes.data.length > 0) {
+          setCertificatesPreview(certsRes.data);
+        }
+        if (galleryRes.data && galleryRes.data.length > 0) {
+          setGalleryPreview(galleryRes.data);
+        }
+      } catch (err) {
+        console.error('Error loading landing page data:', err);
+      }
+    };
+
+    loadData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
