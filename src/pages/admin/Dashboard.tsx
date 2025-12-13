@@ -16,6 +16,12 @@ export default function AdminDashboard() {
 
   const menuItems = [
     {
+      icon: Settings,
+      label: 'Site Settings',
+      path: '/admin/settings',
+      color: 'indigo',
+    },
+    {
       icon: Newspaper,
       label: 'News Articles',
       path: '/admin/news',
