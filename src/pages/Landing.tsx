@@ -354,8 +354,8 @@ export default function Landing() {
               >
                 <div className="aspect-square overflow-hidden">
                   <ImageWithFallback
-                    src={item.image}
-                    alt={item.alt}
+                    src={item.image_url}
+                    alt={item.alt_text}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
