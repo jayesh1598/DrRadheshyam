@@ -113,7 +113,7 @@ export default function Landing() {
             <p className="text-gray-600 mb-4">
               Honorary Doctorate & pursuing BA LLB from Dr. Babasaheb Ambedkar University
             </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
+            <Link to="/about" className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1">
               <span>Learn more</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -127,7 +127,7 @@ export default function Landing() {
             <p className="text-gray-600 mb-4">
               Extensive leadership roles in political, social, and business organizations
             </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
+            <Link to="/about" className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1">
               <span>View experience</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -141,7 +141,7 @@ export default function Landing() {
             <p className="text-gray-600 mb-4">
               Multiple awards and honors for social service and community leadership
             </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
+            <Link to="/about" className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1">
               <span>See awards</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -155,7 +155,7 @@ export default function Landing() {
             <p className="text-gray-600 mb-4">
               Dedicated to helping communities including COVID-19 relief efforts
             </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
+            <Link to="/about" className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1">
               <span>Read more</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -168,12 +168,12 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-3">
-              <Newspaper className="w-8 h-8 text-blue-600" />
+              <Newspaper className="w-8 h-8 text-orange-600" />
               <h2 className="text-gray-900">Latest News & Updates</h2>
             </div>
             <Link
               to="/news"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1 text-sm sm:text-base"
             >
               <span>View more</span>
               <ArrowRight className="w-4 h-4" />
@@ -196,7 +196,7 @@ export default function Landing() {
 
                 <div className="p-5 sm:p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    <span className="inline-block px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">
                       {article.category}
                     </span>
                     <div className="flex items-center gap-1 text-gray-500 text-xs sm:text-sm">
@@ -224,12 +224,12 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-3">
-              <Award className="w-8 h-8 text-yellow-600" />
+              <Award className="w-8 h-8 text-orange-600" />
               <h2 className="text-gray-900">Certificates & Recognition</h2>
             </div>
             <Link
               to="/certificates"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1 text-sm sm:text-base"
             >
               <span>View more</span>
               <ArrowRight className="w-4 h-4" />
@@ -251,7 +251,7 @@ export default function Landing() {
                 </div>
 
                 <div className="p-5 sm:p-6">
-                  <span className="text-xs sm:text-sm text-blue-600">{cert.date}</span>
+                  <span className="text-xs sm:text-sm text-orange-600">{cert.date}</span>
 
                   <h3 className="text-gray-900 mb-2 line-clamp-2 text-sm sm:text-base">
                     {cert.title}
@@ -272,12 +272,12 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-3">
-              <ImageIcon className="w-8 h-8 text-blue-600" />
+              <ImageIcon className="w-8 h-8 text-orange-600" />
               <h2 className="text-gray-900">Social Media Gallery</h2>
             </div>
             <Link
               to="/gallery"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="text-orange-600 hover:text-orange-700 inline-flex items-center gap-1 text-sm sm:text-base"
             >
               <span>View more</span>
               <ArrowRight className="w-4 h-4" />
@@ -304,15 +304,15 @@ export default function Landing() {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-16 sm:py-20">
+      <div className="bg-gradient-to-r from-orange-500 to-orange-600 py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-white mb-6">Get in Touch</h2>
-          <p className="text-blue-100 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-orange-100 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
             Connect with me to discuss collaborations, social initiatives, or business opportunities
           </p>
           <Link
             to="/about"
-            className="inline-flex items-center gap-2 bg-white text-blue-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
+            className="inline-flex items-center gap-2 bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-orange-50 transition-colors shadow-lg text-sm sm:text-base"
           >
             <span>Contact Information</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
