@@ -6,7 +6,7 @@ const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a1
 
 export function Navigation() {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -20,10 +20,10 @@ export function Navigation() {
     { path: '/gallery', label: 'Gallery', icon: ImageIcon },
   ];
 
-  const NavLink = ({ path, label, icon: Icon, mobile = false }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean }) => (
+  const NavLink = ({ path, label, icon: Icon, mobile = true }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean }) => (
     <Link
       to={path}
-      onClick={() => setIsMenuOpen(false)}
+      onClick={() => setIsMenuOpen(true)}
       className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
         isActive(path)
           ? 'bg-blue-600 text-white'
