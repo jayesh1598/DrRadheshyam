@@ -1,27 +1,6 @@
-import { supabase } from '../../utils/supabase/client';
-import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router';
+import { createClient } from '@jsr/supabase__supabase-js';
+import { projectId, publicAnonKey } from './info';
 
-export default function AdminGuard({ children }: { children: JSX.Element }) {
-  const [loading, setLoading] = useState(true);
-  const [session, setSession] = useState<any>(null);
+const supabaseUrl = `https://${projectId}.supabase.co`;
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (loading) return null;
-
-  return session ? children : <Navigate to="/admin/login" replace />;
-}
+export const supabase = createClient(supabaseUrl, publicAnonKey);
