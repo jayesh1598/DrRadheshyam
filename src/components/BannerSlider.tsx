@@ -1,41 +1,80 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { supabase } from '../utils/supabase/client';
 
-const bannerImages = [
+interface BannerSlide {
+  id: string;
+  image_url: string;
+  alt_text: string;
+  display_order: number;
+}
+
+const defaultBanners: BannerSlide[] = [
   {
-    id: 1,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F74c2b9fdf65c449da5054b128eae79eb?format=webp&width=800',
-    alt: 'Community Event',
+    id: '1',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F74c2b9fdf65c449da5054b128eae79eb?format=webp&width=800',
+    alt_text: 'Community Event',
+    display_order: 0,
   },
   {
-    id: 2,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F2571d9bb0e46452eb1370ed4ac4e2039?format=webp&width=800',
-    alt: 'Public Event',
+    id: '2',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F2571d9bb0e46452eb1370ed4ac4e2039?format=webp&width=800',
+    alt_text: 'Public Event',
+    display_order: 1,
   },
   {
-    id: 3,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F422d095645af41b6a3607a71b2a084be?format=webp&width=800',
-    alt: 'Civic Engagement',
+    id: '3',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F422d095645af41b6a3607a71b2a084be?format=webp&width=800',
+    alt_text: 'Civic Engagement',
+    display_order: 2,
   },
   {
-    id: 4,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F7776eae2564d4500a1b8662536b9bdb9?format=webp&width=800',
-    alt: 'Sports Event',
+    id: '4',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F7776eae2564d4500a1b8662536b9bdb9?format=webp&width=800',
+    alt_text: 'Sports Event',
+    display_order: 3,
   },
   {
-    id: 5,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F8689b4f6f116466c99bc69361fd124de?format=webp&width=800',
-    alt: 'Social Service',
+    id: '5',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F8689b4f6f116466c99bc69361fd124de?format=webp&width=800',
+    alt_text: 'Social Service',
+    display_order: 4,
   },
   {
-    id: 6,
-    src: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F21288cf083e444b5803d8eff2ef39500?format=webp&width=800',
-    alt: 'Community Engagement Event',
+    id: '6',
+    image_url: 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F21288cf083e444b5803d8eff2ef39500?format=webp&width=800',
+    alt_text: 'Community Engagement Event',
+    display_order: 5,
   },
 ];
 
 export function BannerSlider() {
+  const [bannerImages, setBannerImages] = useState<BannerSlide[]>(defaultBanners);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const loadBanners = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('banner_slides')
+          .select('*')
+          .order('display_order', { ascending: true });
+
+        if (error) {
+          console.error('Error loading banners:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setBannerImages(data);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
+
+    loadBanners();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,7 +82,7 @@ export function BannerSlider() {
     }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerImages.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -69,8 +108,8 @@ export function BannerSlider() {
             }`}
           >
             <img
-              src={banner.src}
-              alt={banner.alt}
+              src={banner.image_url}
+              alt={banner.alt_text}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

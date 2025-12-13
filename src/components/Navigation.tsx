@@ -1,12 +1,39 @@
 import { Link, useLocation } from 'react-router';
 import { Home, User, ImageIcon, Newspaper, Award, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../utils/supabase/client';
 
-const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
+const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
 
 export function Navigation() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoUrl, setLogoUrl] = useState(defaultLogoUrl);
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('site_settings')
+          .select('setting_value')
+          .eq('setting_key', 'logo')
+          .single();
+
+        if (error && error.code !== 'PGRST116') {
+          console.error('Error loading logo:', error);
+          return;
+        }
+
+        if (data?.setting_value) {
+          setLogoUrl(data.setting_value);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
+
+    loadLogo();
+  }, []);
 
   const isActive = (path: string) => {
     return location.pathname === path;
