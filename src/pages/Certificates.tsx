@@ -73,53 +73,52 @@ export default function Certificates() {
 
       {/* Certificates Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {certificates.map((certificate) => (
-            <div 
-              key={certificate.id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-            >
-              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
-                <img
-                  src={certificate.image}
-                  alt={certificate.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 right-3">
-                  <span className="inline-block px-3 py-1 bg-white/90 text-blue-800 text-sm rounded-full">
-                    {certificate.category}
-                  </span>
+        {loading ? (
+          <p className="text-center py-12">Loading certificates...</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {certificates.map((certificate) => (
+              <div
+                key={certificate.id}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
+                  <img
+                    src={certificate.image_url}
+                    alt={certificate.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="p-5">
+                  <div className="mb-2">
+                    <span className="text-sm text-blue-600">{certificate.date}</span>
+                  </div>
+
+                  <h3 className="text-gray-900 mb-2 line-clamp-2">
+                    {certificate.title}
+                  </h3>
+
+                  <p className="text-sm text-gray-600 mb-3">
+                    {certificate.institution}
+                  </p>
+
+                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                    {certificate.description}
+                  </p>
+
+                  <button
+                    onClick={() => setSelectedCertificate(certificate)}
+                    className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                  >
+                    <Eye className="w-4 h-4" />
+                    <span>View</span>
+                  </button>
                 </div>
               </div>
-              
-              <div className="p-5">
-                <div className="mb-2">
-                  <span className="text-sm text-blue-600">{certificate.date}</span>
-                </div>
-                
-                <h3 className="text-gray-900 mb-2 line-clamp-2">
-                  {certificate.title}
-                </h3>
-                
-                <p className="text-sm text-gray-600 mb-3">
-                  {certificate.issuer}
-                </p>
-                
-                <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-                  {certificate.description}
-                </p>
-                
-                <button
-                  onClick={() => setSelectedCertificate(certificate)}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                >
-                  <Eye className="w-4 h-4" />
-                  <span>View</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Certificate Modal */}
