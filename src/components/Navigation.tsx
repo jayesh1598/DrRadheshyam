@@ -60,7 +60,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-md transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
