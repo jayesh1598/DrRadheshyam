@@ -53,12 +53,36 @@ export function BannerSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    const loadBanners = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('banner_slides')
+          .select('*')
+          .order('display_order', { ascending: true });
+
+        if (error) {
+          console.error('Error loading banners:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setBannerImages(data);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
+
+    loadBanners();
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % bannerImages.length);
     }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerImages.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
