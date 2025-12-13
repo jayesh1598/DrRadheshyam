@@ -73,23 +73,27 @@ export default function Gallery() {
 
       {/* Gallery Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
-              onClick={() => setSelectedImage(item.image)}
-            >
-              <div className="aspect-square overflow-hidden bg-gray-100">
-                <ImageWithFallback
-                  src={item.image}
-                  alt={item.alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+        {loading ? (
+          <p className="text-center py-12">Loading gallery images...</p>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryImages.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+                onClick={() => setSelectedImage(item.image_url)}
+              >
+                <div className="aspect-square overflow-hidden bg-gray-100">
+                  <ImageWithFallback
+                    src={item.image_url}
+                    alt={item.alt_text}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}
