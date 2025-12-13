@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 import { Home, User, ImageIcon, Newspaper, Award, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -7,6 +7,7 @@ const logoUrl =
 
 export function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
@@ -30,17 +31,19 @@ export function Navigation() {
     icon: React.ComponentType<{ className?: string }>;
     mobile?: boolean;
   }) => (
-    <Link
-      to={path}
-      onClick={() => setIsMenuOpen(false)}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors
+    <button
+      onClick={() => {
+        navigate(path);
+        setIsMenuOpen(false);
+      }}
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors w-full
         ${isActive(path) ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}
-        ${mobile ? 'w-full' : ''}
+        ${mobile ? 'justify-start' : ''}
       `}
     >
       <Icon className="w-4 h-4" />
       {label}
-    </Link>
+    </button>
   );
 
   return (
@@ -48,10 +51,15 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logoUrl} alt="Logo" className="h-10 w-10 object-contain" />
-            <span className="hidden sm:block text-xl font-semibold">Dr. RSG</span>
-          </Link>
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-3"
+          >
+            <img src={logoUrl} alt="Logo" className="h-10 w-10" />
+            <span className="hidden sm:block text-xl font-semibold">
+              Dr. RSG
+            </span>
+          </button>
 
           {/* Desktop Tabs */}
           <div className="hidden lg:flex gap-2">
