@@ -74,6 +74,17 @@ CREATE TABLE about_content (
 );
 ```
 
+### 6. Site Settings Table
+```sql
+CREATE TABLE site_settings (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  setting_key text NOT NULL UNIQUE,
+  setting_value text,
+  created_at timestamp DEFAULT now(),
+  updated_at timestamp DEFAULT now()
+);
+```
+
 ## Steps to Create Tables
 
 1. Go to your Supabase Dashboard
