@@ -87,4 +87,12 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/admin/settings",
+    Component: () => (
+      <ProtectedRoute>
+        <SiteSettingsManager />
+      </ProtectedRoute>
+    ),
+  },
 ]);
