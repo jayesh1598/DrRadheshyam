@@ -11,8 +11,8 @@ export function About() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
-                <MapPin className="w-6 h-6 text-blue-700" />
+              <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                <MapPin className="w-6 h-6 text-orange-700" />
               </div>
               <div>
                 <h3 className="text-gray-900 mb-2">Residential Address</h3>
