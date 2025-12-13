@@ -10,6 +10,31 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState(defaultLogoUrl);
 
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('site_settings')
+          .select('setting_value')
+          .eq('setting_key', 'logo')
+          .single();
+
+        if (error && error.code !== 'PGRST116') {
+          console.error('Error loading logo:', error);
+          return;
+        }
+
+        if (data?.setting_value) {
+          setLogoUrl(data.setting_value);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
+
+    loadLogo();
+  }, []);
+
   const isActive = (path: string) => {
     return location.pathname === path;
   };
