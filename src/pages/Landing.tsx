@@ -106,8 +106,8 @@ export default function Landing() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-              <GraduationCap className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+              <GraduationCap className="w-8 h-8 text-orange-600" />
             </div>
             <h3 className="text-gray-900 mb-3">Education</h3>
             <p className="text-gray-600 mb-4">
