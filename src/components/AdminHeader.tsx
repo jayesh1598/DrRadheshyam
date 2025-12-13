@@ -13,15 +13,24 @@ export function AdminHeader({ title }: AdminHeaderProps) {
 
   const handleLogout = async () => {
     setLoading(true);
-    await supabase.auth.signOut();
-    localStorage.removeItem('admin_user');
-    navigate('/admin/login');
+
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error('Logout error:', error.message);
+      setLoading(false);
+      return;
+    }
+
+    // ✅ Supabase session cleared properly
+    navigate('/admin/login', { replace: true });
   };
 
   return (
     <header className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+
         <button
           onClick={handleLogout}
           disabled={loading}
