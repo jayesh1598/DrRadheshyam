@@ -26,7 +26,7 @@ export function Navigation() {
       onClick={() => setIsMenuOpen(false)}
       className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
         isActive(path)
-          ? 'bg-blue-600 text-white'
+          ? 'bg-orange-600 text-white'
           : 'text-gray-700 hover:bg-gray-100'
       } ${mobile ? 'w-full justify-start' : ''}`}
     >
