@@ -306,7 +306,7 @@ export default function Landing() {
               >
                 <div className="h-40 sm:h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
                   <img
-                    src={cert.image}
+                    src={cert.image_url}
                     alt={cert.title}
                     className="w-full h-full object-cover"
                   />
@@ -320,7 +320,7 @@ export default function Landing() {
                   </h3>
 
                   <p className="text-xs sm:text-sm text-gray-600">
-                    {cert.issuer}
+                    {cert.institution}
                   </p>
                 </div>
               </div>
