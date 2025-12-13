@@ -163,7 +163,7 @@ export default function Certificates() {
                 <div>
                   <h2 className="text-gray-900 mb-2">{selectedCertificate.title}</h2>
                   <p className="text-gray-600">{selectedCertificate.issuer}</p>
-                  <p className="text-blue-600 mt-1">{selectedCertificate.date}</p>
+                  <p className="text-orange-600 mt-1">{selectedCertificate.date}</p>
                 </div>
                 <button
                   onClick={() => setSelectedCertificate(null)}
