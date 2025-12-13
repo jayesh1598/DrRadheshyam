@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Plus, Edit, Trash2, ArrowLeft } from 'lucide-react';
-import { AdminHeader } from '../../components/AdminHeader';
+import { Plus, Edit, Trash2 } from 'lucide-react';
+import { AdminLayout } from '../../components/AdminLayout';
 
 interface Certificate {
   id: string;
@@ -114,36 +114,26 @@ export default function CertificatesManager() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminHeader title="Certificates Management" />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => navigate('/admin/dashboard')}
-            className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </button>
-          <button
-            onClick={() => {
-              setShowForm(true);
-              setEditingId(null);
-              setFormData({
-                title: '',
-                date: new Date().toISOString().split('T')[0],
-                institution: '',
-                description: '',
-                image_url: '',
-              });
-            }}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-          >
-            <Plus className="w-4 h-4" />
-            Add Certificate
-          </button>
-        </div>
+    <AdminLayout title="Certificates Management">
+      <div className="flex gap-4 mb-8">
+        <button
+          onClick={() => {
+            setShowForm(true);
+            setEditingId(null);
+            setFormData({
+              title: '',
+              date: new Date().toISOString().split('T')[0],
+              institution: '',
+              description: '',
+              image_url: '',
+            });
+          }}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+        >
+          <Plus className="w-4 h-4" />
+          Add Certificate
+        </button>
+      </div>
 
         {showForm && (
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
@@ -274,7 +264,6 @@ export default function CertificatesManager() {
             )}
           </div>
         )}
-      </main>
-    </div>
+    </AdminLayout>
   );
 }
