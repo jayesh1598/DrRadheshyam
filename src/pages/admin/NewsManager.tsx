@@ -117,37 +117,27 @@ export default function NewsManager() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminHeader title="News Articles" />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => navigate('/admin/dashboard')}
-            className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </button>
-          <button
-            onClick={() => {
-              setShowForm(true);
-              setEditingId(null);
-              setFormData({
-                title: '',
-                date: new Date().toISOString().split('T')[0],
-                category: '',
-                excerpt: '',
-                image: '',
-                source: '',
-              });
-            }}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-          >
-            <Plus className="w-4 h-4" />
-            Add News Article
-          </button>
-        </div>
+    <AdminLayout title="News Articles">
+      <div className="flex gap-4 mb-8">
+        <button
+          onClick={() => {
+            setShowForm(true);
+            setEditingId(null);
+            setFormData({
+              title: '',
+              date: new Date().toISOString().split('T')[0],
+              category: '',
+              excerpt: '',
+              image: '',
+              source: '',
+            });
+          }}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+        >
+          <Plus className="w-4 h-4" />
+          Add News Article
+        </button>
+      </div>
 
         {showForm && (
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
@@ -292,7 +282,6 @@ export default function NewsManager() {
             )}
           </div>
         )}
-      </main>
-    </div>
+    </AdminLayout>
   );
 }
