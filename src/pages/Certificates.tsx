@@ -1,84 +1,58 @@
 import { Navigation } from '../components/Navigation';
 import { Award, Eye } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../utils/supabase/client';
 
-const certificates = [
+interface Certificate {
+  id: string;
+  title: string;
+  institution: string;
+  date: string;
+  description: string;
+  image_url: string;
+}
+
+const defaultCertificates: Certificate[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Honorary Doctorate Degree',
-    issuer: 'Dr. Babasaheb Ambedkar University, Agra',
+    institution: 'Dr. Babasaheb Ambedkar University, Agra',
     date: '2023',
-    category: 'Education',
     description: 'Conferred for outstanding contributions to social service and community development',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80',
-  },
-  {
-    id: 2,
-    title: 'Social Service Excellence Award',
-    issuer: 'Maharashtra State Government',
-    date: '2022',
-    category: 'Award',
-    description: 'Recognition for exemplary social service during COVID-19 pandemic',
-    image: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80',
-  },
-  {
-    id: 3,
-    title: 'Community Leadership Certificate',
-    issuer: 'Lions Club International',
-    date: '2022',
-    category: 'Leadership',
-    description: 'Awarded for outstanding leadership in community service initiatives',
-    image: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&q=80',
-  },
-  {
-    id: 4,
-    title: 'Political Achievement Award',
-    issuer: 'Bharatiya Janata Party (BJP)',
-    date: '2021',
-    category: 'Politics',
-    description: 'Recognition for dedicated service and contribution to party activities',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
-  },
-  {
-    id: 5,
-    title: 'COVID-19 Relief Warrior Certificate',
-    issuer: 'Mumbai Municipal Corporation',
-    date: '2020',
-    category: 'Social Service',
-    description: 'Honored for tireless efforts in food distribution and relief work during pandemic',
-    image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
-  },
-  {
-    id: 6,
-    title: 'Business Excellence Award',
-    issuer: 'Maharashtra Chamber of Commerce',
-    date: '2020',
-    category: 'Business',
-    description: 'Recognition for business leadership and entrepreneurial excellence',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',
-  },
-  {
-    id: 7,
-    title: 'Youth Empowerment Certificate',
-    issuer: 'Yuva Bharti Foundation',
-    date: '2019',
-    category: 'Social Work',
-    description: 'Awarded for initiatives supporting youth development and skill training',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
-  },
-  {
-    id: 8,
-    title: 'Humanitarian Service Award',
-    issuer: 'Rotary Club of Mumbai',
-    date: '2019',
-    category: 'Award',
-    description: 'Recognition for humanitarian efforts and charitable contributions',
-    image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=800&q=80',
+    image_url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80',
   },
 ];
 
 export default function Certificates() {
-  const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
+  const [certificates, setCertificates] = useState<Certificate[]>(defaultCertificates);
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCertificates = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('certificates')
+          .select('*')
+          .order('date', { ascending: false });
+
+        if (error) {
+          console.error('Error loading certificates:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setCertificates(data);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCertificates();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
