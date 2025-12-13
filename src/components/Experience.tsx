@@ -88,7 +88,7 @@ export function Experience() {
         
         <div className="relative">
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200" />
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-orange-200" />
           
           <div className="space-y-8">
             {experiences.map((exp, index) => (
@@ -102,8 +102,8 @@ export function Experience() {
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                   <div className="bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
                     <div className="flex items-center gap-2 mb-2 justify-start md:justify-end">
-                      <Calendar className="w-4 h-4 text-blue-600" />
-                      <span className="text-blue-600">{exp.year}</span>
+                      <Calendar className="w-4 h-4 text-orange-600" />
+                      <span className="text-orange-600">{exp.year}</span>
                     </div>
                     <h3 className="text-gray-900 mb-2">{exp.role}</h3>
                     <p className="text-gray-600">{exp.organization}</p>
@@ -111,7 +111,7 @@ export function Experience() {
                 </div>
                 
                 {/* Center dot */}
-                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow" />
+                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-600 border-4 border-white shadow" />
                 
                 {/* Spacer for alternating layout */}
                 <div className="hidden md:block flex-1" />
@@ -125,8 +125,8 @@ export function Experience() {
           {experiences.map((exp, index) => (
             <div key={index} className="bg-gray-50 p-6 rounded-xl shadow-md">
               <div className="flex items-center gap-2 mb-2">
-                <Calendar className="w-4 h-4 text-blue-600" />
-                <span className="text-blue-600">{exp.year}</span>
+                <Calendar className="w-4 h-4 text-orange-600" />
+                <span className="text-orange-600">{exp.year}</span>
               </div>
               <h3 className="text-gray-900 mb-2">{exp.role}</h3>
               <p className="text-gray-600">{exp.organization}</p>
