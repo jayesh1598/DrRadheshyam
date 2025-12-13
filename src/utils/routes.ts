@@ -14,7 +14,7 @@ import AboutManager from "../pages/admin/AboutManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 
 // Protected route wrapper component
-const AdminRoute = ({ Component }: { Component: React.ComponentType }) => {
+const AdminRoute = ({ Component }: { Component: React.ComponentType<{}> }) => {
   return (
     <ProtectedRoute>
       <Component />
