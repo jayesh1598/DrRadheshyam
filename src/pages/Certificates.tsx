@@ -85,13 +85,13 @@ export default function Certificates() {
       <Navigation />
       
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Award className="w-12 h-12" />
             <h1 className="text-center">Certificates & Recognition</h1>
           </div>
-          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-orange-100 text-lg max-w-2xl mx-auto">
             A collection of awards, certificates, and recognitions received for contributions to society, business, and public service
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function Certificates() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 right-3">
-                  <span className="inline-block px-3 py-1 bg-white/90 text-blue-800 text-sm rounded-full">
+                  <span className="inline-block px-3 py-1 bg-white/90 text-orange-800 text-sm rounded-full">
                     {certificate.category}
                   </span>
                 </div>
@@ -120,7 +120,7 @@ export default function Certificates() {
               
               <div className="p-5">
                 <div className="mb-2">
-                  <span className="text-sm text-blue-600">{certificate.date}</span>
+                  <span className="text-sm text-orange-600">{certificate.date}</span>
                 </div>
                 
                 <h3 className="text-gray-900 mb-2 line-clamp-2">
@@ -135,9 +135,9 @@ export default function Certificates() {
                   {certificate.description}
                 </p>
                 
-                <button 
+                <button
                   onClick={() => setSelectedCertificate(certificate)}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm"
                 >
                   <Eye className="w-4 h-4" />
                   <span>View</span>
@@ -185,9 +185,9 @@ export default function Certificates() {
                 {selectedCertificate.description}
               </p>
               
-              <button 
+              <button
                 onClick={() => setSelectedCertificate(null)}
-                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="w-full px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
               >
                 Close
               </button>

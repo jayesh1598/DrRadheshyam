@@ -124,13 +124,13 @@ export default function Gallery() {
       <Navigation />
       
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Facebook className="w-12 h-12" />
             <h1 className="text-center">Social Media Gallery</h1>
           </div>
-          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-orange-100 text-lg max-w-2xl mx-auto">
             Latest updates and activities from Dr. Radheshyam S. Gupta
           </p>
           <div className="text-center mt-4">
