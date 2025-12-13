@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Plus, Edit, Trash2, ArrowLeft } from 'lucide-react';
-import { AdminHeader } from '../../components/AdminHeader';
+import { Plus, Edit, Trash2 } from 'lucide-react';
+import { AdminLayout } from '../../components/AdminLayout';
 
 interface NewsArticle {
   id: string;
