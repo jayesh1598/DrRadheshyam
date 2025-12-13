@@ -36,6 +36,7 @@ export default function AdminLogin() {
 
     setLoading(false);
   };
+console.log('SESSION:', data.session);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center px-4">
