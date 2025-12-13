@@ -8,6 +8,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -15,28 +16,33 @@ export default function AdminLogin() {
     setError('');
     setLoading(true);
 
-    const { data, error: authError } =
-      await supabase.auth.signInWithPassword({
+    try {
+      const response = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-    if (authError) {
-      setError(authError.message);
+      const { data, error: authError } = response;
+
+      if (authError) {
+        setError(authError.message);
+        setLoading(false);
+        return;
+      }
+
+      // ✅ ONLY use data HERE
+      if (data && data.session) {
+        navigate('/admin/dashboard', { replace: true });
+      } else {
+        setError('Login failed. Session not created.');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Unexpected error occurred.');
+    } finally {
       setLoading(false);
-      return;
     }
-
-    // ✅ THIS IS THE IMPORTANT PART
-    if (data.session) {
-      navigate('/admin/dashboard', { replace: true });
-    } else {
-      setError('Session not created. Please try again.');
-    }
-
-    setLoading(false);
   };
-console.log('SESSION:', data.session);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center px-4">
