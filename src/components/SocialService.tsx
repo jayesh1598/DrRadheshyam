@@ -6,8 +6,8 @@ export function SocialService() {
     <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-            <Heart className="w-8 h-8 text-green-700 fill-green-700" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <Heart className="w-8 h-8 text-red-600 fill-red-600" />
           </div>
           <h2 className="text-3xl sm:text-4xl text-gray-900">
             Social Service & Community Work
@@ -39,10 +39,10 @@ export function SocialService() {
         </div>
         
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-orange-200 p-2 rounded-lg">
-                <Users className="w-5 h-5 text-orange-700" />
+              <div className="bg-blue-200 p-2 rounded-lg">
+                <Users className="w-5 h-5 text-blue-700" />
               </div>
               <h3 className="text-gray-900">Corona Relief Work</h3>
             </div>
@@ -76,9 +76,9 @@ export function SocialService() {
           </div>
         </div>
         
-        <div className="mt-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white p-8 rounded-2xl text-center">
+        <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-2xl text-center">
           <h3 className="text-2xl mb-4">Making a Difference in the Community</h3>
-          <p className="text-orange-100 max-w-3xl mx-auto">
+          <p className="text-blue-100 max-w-3xl mx-auto">
             Through various initiatives and organizations, Dr. Radheshyam S. Gupta continues to serve society 
             with unwavering dedication, bringing positive change to countless lives in Mumbai.
           </p>

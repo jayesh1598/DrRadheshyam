@@ -92,10 +92,10 @@ export default function News() {
       <Navigation />
       
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white py-16">
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-center mb-4">Latest News & Updates</h1>
-          <p className="text-center text-orange-100 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
             Stay informed about recent activities, initiatives, and achievements
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function News() {
               
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 text-sm rounded-full">
+                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
                     {article.category}
                   </span>
                   <div className="flex items-center gap-1 text-gray-500 text-sm">

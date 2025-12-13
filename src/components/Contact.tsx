@@ -70,7 +70,7 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   placeholder="Your name"
                 />
               </div>
@@ -86,7 +86,7 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   placeholder="your@email.com"
                 />
               </div>
@@ -102,7 +102,7 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="Your phone number"
               />
             </div>
@@ -118,7 +118,7 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 placeholder="What is this about?"
               />
             </div>
@@ -134,14 +134,14 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition resize-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none"
                 placeholder="Your message..."
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-orange-600 text-white font-medium py-3 rounded-lg hover:bg-orange-700 transition-colors"
+              className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Submit Enquiry
             </button>
