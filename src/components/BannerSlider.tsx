@@ -108,8 +108,8 @@ export function BannerSlider() {
             }`}
           >
             <img
-              src={banner.src}
-              alt={banner.alt}
+              src={banner.image_url}
+              alt={banner.alt_text}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
