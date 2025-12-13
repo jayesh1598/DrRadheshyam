@@ -11,6 +11,7 @@ import GalleryManager from "../pages/admin/GalleryManager";
 import CertificatesManager from "../pages/admin/CertificatesManager";
 import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
+import SiteSettingsManager from "../pages/admin/SiteSettingsManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 
 export const router = createBrowserRouter([
