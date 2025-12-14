@@ -148,6 +148,7 @@ const defaultGalleryPreview: GalleryImage[] = [
 ];
 
 export default function Landing() {
+  const [overviewItems, setOverviewItems] = useState<OverviewItem[]>(defaultOverviewItems);
   const [newsPreview, setNewsPreview] = useState<NewsArticle[]>(defaultNewsPreview);
   const [certificatesPreview, setCertificatesPreview] = useState<Certificate[]>(defaultCertificatesPreview);
   const [galleryPreview, setGalleryPreview] = useState<GalleryImage[]>(defaultGalleryPreview);
@@ -155,7 +156,11 @@ export default function Landing() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [newsRes, certsRes, galleryRes] = await Promise.all([
+        const [overviewRes, newsRes, certsRes, galleryRes] = await Promise.all([
+          supabase
+            .from('overview_items')
+            .select('id, title, description, display_order')
+            .order('display_order', { ascending: true }),
           supabase
             .from('news_articles')
             .select('id, title, date, category, excerpt, image')
@@ -172,6 +177,9 @@ export default function Landing() {
             .limit(6),
         ]);
 
+        if (overviewRes.data && overviewRes.data.length > 0) {
+          setOverviewItems(overviewRes.data);
+        }
         if (newsRes.data && newsRes.data.length > 0) {
           setNewsPreview(newsRes.data);
         }
