@@ -6,6 +6,13 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
+interface OverviewItem {
+  id: string;
+  title: string;
+  description: string;
+  display_order: number;
+}
+
 interface NewsArticle {
   id: string;
   title: string;
@@ -28,6 +35,33 @@ interface GalleryImage {
   image_url: string;
   alt_text: string;
 }
+
+const defaultOverviewItems: OverviewItem[] = [
+  {
+    id: '1',
+    title: 'Education',
+    description: 'Honorary Doctorate & pursuing BA LLB from Dr. Babasaheb Ambedkar University',
+    display_order: 1,
+  },
+  {
+    id: '2',
+    title: 'Experience',
+    description: 'Extensive leadership roles in political, social, and business organizations',
+    display_order: 2,
+  },
+  {
+    id: '3',
+    title: 'Recognition',
+    description: 'Multiple awards and honors for social service and community leadership',
+    display_order: 3,
+  },
+  {
+    id: '4',
+    title: 'Social Service',
+    description: 'Dedicated to helping communities including COVID-19 relief efforts',
+    display_order: 4,
+  },
+];
 
 const defaultNewsPreview: NewsArticle[] = [
   {
@@ -114,6 +148,7 @@ const defaultGalleryPreview: GalleryImage[] = [
 ];
 
 export default function Landing() {
+  const [overviewItems, setOverviewItems] = useState<OverviewItem[]>(defaultOverviewItems);
   const [newsPreview, setNewsPreview] = useState<NewsArticle[]>(defaultNewsPreview);
   const [certificatesPreview, setCertificatesPreview] = useState<Certificate[]>(defaultCertificatesPreview);
   const [galleryPreview, setGalleryPreview] = useState<GalleryImage[]>(defaultGalleryPreview);
@@ -121,7 +156,11 @@ export default function Landing() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [newsRes, certsRes, galleryRes] = await Promise.all([
+        const [overviewRes, newsRes, certsRes, galleryRes] = await Promise.all([
+          supabase
+            .from('overview_items')
+            .select('id, title, description, display_order')
+            .order('display_order', { ascending: true }),
           supabase
             .from('news_articles')
             .select('id, title, date, category, excerpt, image')
@@ -138,6 +177,9 @@ export default function Landing() {
             .limit(6),
         ]);
 
+        if (overviewRes.data && overviewRes.data.length > 0) {
+          setOverviewItems(overviewRes.data);
+        }
         if (newsRes.data && newsRes.data.length > 0) {
           setNewsPreview(newsRes.data);
         }
@@ -167,61 +209,53 @@ export default function Landing() {
         <h2 className="text-center text-gray-900 mb-12">At a Glance</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-              <GraduationCap className="w-8 h-8 text-blue-600" />
-            </div>
-            <h3 className="text-gray-900 mb-3">Education</h3>
-            <p className="text-gray-600 mb-4">
-              Honorary Doctorate & pursuing BA LLB from Dr. Babasaheb Ambedkar University
-            </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
-              <span>Learn more</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          {overviewItems.map((item, index) => {
+            const iconColors = ['blue', 'green', 'yellow', 'red'];
+            const colorClass = iconColors[index % iconColors.length];
+            const bgColorMap: Record<string, string> = {
+              blue: 'bg-blue-100',
+              green: 'bg-green-100',
+              yellow: 'bg-yellow-100',
+              red: 'bg-red-100',
+            };
+            const textColorMap: Record<string, string> = {
+              blue: 'text-blue-600',
+              green: 'text-green-600',
+              yellow: 'text-yellow-600',
+              red: 'text-red-600',
+            };
+            const linkColorMap: Record<string, string> = {
+              blue: 'text-blue-600 hover:text-blue-700',
+              green: 'text-green-600 hover:text-green-700',
+              yellow: 'text-yellow-600 hover:text-yellow-700',
+              red: 'text-red-600 hover:text-red-700',
+            };
 
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
-              <Briefcase className="w-8 h-8 text-green-600" />
-            </div>
-            <h3 className="text-gray-900 mb-3">Experience</h3>
-            <p className="text-gray-600 mb-4">
-              Extensive leadership roles in political, social, and business organizations
-            </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
-              <span>View experience</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            const IconMap: Record<number, React.ComponentType<{ className?: string }>> = {
+              0: GraduationCap,
+              1: Briefcase,
+              2: Award,
+              3: Heart,
+            };
 
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
-              <Award className="w-8 h-8 text-yellow-600" />
-            </div>
-            <h3 className="text-gray-900 mb-3">Recognition</h3>
-            <p className="text-gray-600 mb-4">
-              Multiple awards and honors for social service and community leadership
-            </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
-              <span>See awards</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            const Icon = IconMap[index % 4];
 
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
-              <Heart className="w-8 h-8 text-red-600" />
-            </div>
-            <h3 className="text-gray-900 mb-3">Social Service</h3>
-            <p className="text-gray-600 mb-4">
-              Dedicated to helping communities including COVID-19 relief efforts
-            </p>
-            <Link to="/about" className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
-              <span>Read more</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            return (
+              <div key={item.id} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className={`w-16 h-16 ${bgColorMap[colorClass]} rounded-full flex items-center justify-center mb-6`}>
+                  <Icon className={`w-8 h-8 ${textColorMap[colorClass]}`} />
+                </div>
+                <h3 className="text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 mb-4">
+                  {item.description}
+                </p>
+                <Link to="/about" className={`inline-flex items-center gap-1 ${linkColorMap[colorClass]}`}>
+                  <span>Learn more</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
 

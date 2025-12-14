@@ -1,74 +1,139 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import {
-  LayoutDashboard,
-  Settings,
-  Newspaper,
-  Image,
-  Award,
-  Layers,
-  FileText,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Sparkles } from 'lucide-react';
 import { supabase } from '../utils/supabase/client';
+import { Button } from './ui/button';
 
-export function AdminLayout({ children, title }: any) {
+interface AdminLayoutProps {
+  children: JSX.Element;
+  title: string;
+}
+
+export function AdminLayout({ children, title }: AdminLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [collapsed, setCollapsed] = useState(false);
+  const handleLogout = async () => {
+    setLoading(true);
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Logout error:', error.message);
+      setLoading(false);
+      return;
+    }
+    navigate('/admin/login', { replace: true });
+  };
 
   const menuItems = [
     { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
     { label: 'Site Settings', path: '/admin/settings', icon: Settings },
-    { label: 'News', path: '/admin/news', icon: Newspaper },
-    { label: 'Gallery', path: '/admin/gallery', icon: Image },
+    { label: 'Overview', path: '/admin/overview', icon: Sparkles },
+    { label: 'News Articles', path: '/admin/news', icon: FileText },
+    { label: 'Gallery', path: '/admin/gallery', icon: Images },
     { label: 'Certificates', path: '/admin/certificates', icon: Award },
-    { label: 'Banners', path: '/admin/banners', icon: Layers },
-    { label: 'About', path: '/admin/about', icon: FileText },
+    { label: 'Banner Slides', path: '/admin/banners', icon: Image },
+    { label: 'About Content', path: '/admin/about', icon: BookOpen },
   ];
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* SIDEBAR */}
-      <aside
-        className={`${
-          collapsed ? 'w-20' : 'w-64'
-        } transition-all duration-300 bg-gradient-to-b from-indigo-700 to-purple-700 text-white flex flex-col`}
+    <div className="min-h-screen bg-background flex">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="md:hidden fixed top-4 left-4 z-50 bg-card p-2 rounded-lg shadow"
       >
-        {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-4">
-          {!collapsed && <span className="font-bold text-lg">Admin</span>}
-          <button onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? <ChevronRight /> : <ChevronLeft />}
-          </button>
+        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+
+      {/* Sidebar Overlay for Mobile */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 md:hidden z-30"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-40 w-64 flex flex-col ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}
+      >
+        <div className="px-6 py-6 border-b">
+          <h2 className="text-xl font-bold text-foreground">Admin Panel</h2>
+          <p className="text-muted-foreground text-sm mt-1">Dr. Gupta's Profile</p>
         </div>
 
-        {/* Menu */}
-        <nav className="flex-1 mt-4 space-y-1">
+        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const active = location.pathname === item.path;
-
+            const active = isActive(item.path);
             return (
               <button
                 key={item.path}
-                onClick={() => navigate(item.path)}
-                className={`flex items-center gap-4 px-4 py-3 w-full transition
-                ${active ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => {
+                  navigate(item.path);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-3 ${
+                  active
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                }`}
               >
-                <Icon className="w-5 h-5" />
-                {!collapsed && <span>{item.label}</span>}
+                <Icon className="w-5 h-5 flex-shrink-0" />
+                <span className="font-medium">{item.label}</span>
               </button>
             );
           })}
         </nav>
+
+        <div className="p-4 border-t">
+          <Button
+            onClick={handleLogout}
+            disabled={loading}
+            variant="destructive"
+            className="w-full"
+            size="sm"
+          >
+            <LogOut className="w-4 h-4" />
+            {loading ? 'Logging out...' : 'Logout'}
+          </Button>
+        </div>
       </aside>
 
-      {/* CONTENT */}
-      <div className="flex-1 flex flex-col">
-        {children}
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col w-full">
+        {/* Header */}
+        <header className="bg-card border-b sticky top-0 z-20">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{title}</h1>
+            </div>
+            {/* Mobile Logout - shown only on small screens */}
+            <Button
+              onClick={handleLogout}
+              disabled={loading}
+              variant="destructive"
+              size="sm"
+              className="md:hidden"
+            >
+              <LogOut className="w-4 h-4" />
+              {loading ? '...' : 'Logout'}
+            </Button>
+          </div>
+        </header>
+
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-auto">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );
