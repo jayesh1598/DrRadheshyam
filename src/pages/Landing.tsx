@@ -6,6 +6,13 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
+interface OverviewItem {
+  id: string;
+  title: string;
+  description: string;
+  display_order: number;
+}
+
 interface NewsArticle {
   id: string;
   title: string;
