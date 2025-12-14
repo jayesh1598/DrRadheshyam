@@ -36,6 +36,33 @@ interface GalleryImage {
   alt_text: string;
 }
 
+const defaultOverviewItems: OverviewItem[] = [
+  {
+    id: '1',
+    title: 'Education',
+    description: 'Honorary Doctorate & pursuing BA LLB from Dr. Babasaheb Ambedkar University',
+    display_order: 1,
+  },
+  {
+    id: '2',
+    title: 'Experience',
+    description: 'Extensive leadership roles in political, social, and business organizations',
+    display_order: 2,
+  },
+  {
+    id: '3',
+    title: 'Recognition',
+    description: 'Multiple awards and honors for social service and community leadership',
+    display_order: 3,
+  },
+  {
+    id: '4',
+    title: 'Social Service',
+    description: 'Dedicated to helping communities including COVID-19 relief efforts',
+    display_order: 4,
+  },
+];
+
 const defaultNewsPreview: NewsArticle[] = [
   {
     id: '1',
