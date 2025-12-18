@@ -86,7 +86,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Tab Style */}
-          <div className="hidden sm:flex items-center flex-1 justify-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5 mx-4">
+          <div className="flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5 mx-4 flex-1">
             {navLinks.map((link) => (
               <NavLink key={link.path} {...link} isDesktopTab />
             ))}
@@ -95,7 +95,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
+            className="hidden p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -108,7 +108,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="sm:hidden pb-4 border-t border-gray-200">
+          <div className="hidden pb-4 border-t border-gray-200">
             <div className="flex flex-col gap-2 mt-2">
               {navLinks.map((link) => (
                 <NavLink key={link.path} {...link} mobile />
