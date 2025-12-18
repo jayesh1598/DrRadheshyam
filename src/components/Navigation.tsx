@@ -54,10 +54,10 @@ export function Navigation() {
       onClick={() => setIsMenuOpen(false)}
       className={`flex items-center gap-2 transition-all duration-200 ${
         isDesktopTab
-          ? `px-4 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap ${
+          ? `px-3 py-2 rounded-full font-medium text-sm whitespace-nowrap ${
               isActive(path)
                 ? 'bg-white text-orange-600 shadow-sm'
-                : 'text-gray-700 hover:text-gray-900'
+                : 'text-white hover:bg-white hover:bg-opacity-10'
             }`
           : `px-4 py-2 rounded-lg ${
               isActive(path)
@@ -86,7 +86,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Tab Style */}
-          <div className="flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5 mx-4 flex-1">
+          <div className="hidden sm:flex items-center justify-center bg-orange-500 rounded-full p-2 gap-1 mx-4 flex-1">
             {navLinks.map((link) => (
               <NavLink key={link.path} {...link} isDesktopTab />
             ))}
@@ -95,7 +95,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="hidden p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
+            className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -108,7 +108,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="hidden pb-4 border-t border-gray-200">
+          <div className="sm:hidden pb-4 border-t border-gray-200">
             <div className="flex flex-col gap-2 mt-2">
               {navLinks.map((link) => (
                 <NavLink key={link.path} {...link} mobile />
