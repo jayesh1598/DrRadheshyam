@@ -98,6 +98,11 @@ export default function VideoGallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {loading ? (
           <p className="text-center py-12 text-gray-600">Loading videos...</p>
+        ) : error ? (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-center">
+            <p className="font-semibold">Unable to load videos</p>
+            <p className="text-sm mt-1">{error}</p>
+          </div>
         ) : videos.length === 0 ? (
           <p className="text-center py-12 text-gray-600 text-lg">No videos available yet.</p>
         ) : (
