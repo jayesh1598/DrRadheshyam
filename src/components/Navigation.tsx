@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { Home, User, ImageIcon, Newspaper, Award, Menu, X } from 'lucide-react';
+import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
@@ -45,6 +45,7 @@ export function Navigation() {
     { path: '/news', label: 'News', icon: Newspaper },
     { path: '/certificates', label: 'Certificates', icon: Award },
     { path: '/gallery', label: 'Gallery', icon: ImageIcon },
+    { path: '/videos', label: 'Videos', icon: Play },
   ];
 
   const NavLink = ({ path, label, icon: Icon, mobile = false }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean }) => (
