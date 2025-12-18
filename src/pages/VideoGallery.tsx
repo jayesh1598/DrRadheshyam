@@ -47,6 +47,7 @@ export default function VideoGallery() {
   const [videos, setVideos] = useState<Video[]>(defaultVideos);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadVideos = async () => {
@@ -57,15 +58,20 @@ export default function VideoGallery() {
           .order('created_at', { ascending: false });
 
         if (error) {
-          console.error('Error loading videos:', error.message || error);
+          const errorMsg = error.message || JSON.stringify(error);
+          console.error('Error loading videos:', errorMsg);
+          setError(`Failed to load videos: ${errorMsg}`);
           return;
         }
 
         if (data && data.length > 0) {
           setVideos(data);
         }
+        setError(null);
       } catch (err) {
-        console.error('Error:', err);
+        const errorMsg = err instanceof Error ? err.message : String(err);
+        console.error('Error:', errorMsg);
+        setError(`An unexpected error occurred: ${errorMsg}`);
       } finally {
         setLoading(false);
       }
