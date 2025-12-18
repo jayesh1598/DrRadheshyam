@@ -52,19 +52,19 @@ export function Navigation() {
     <Link
       to={path}
       onClick={() => setIsMenuOpen(false)}
-      className={`transition-all duration-200 ${
+      className={`transition-all duration-200 whitespace-nowrap ${
         mobile
-          ? `flex items-center gap-2 w-full px-4 py-2 rounded-lg ${
+          ? `flex items-center gap-2 w-full px-4 py-3 rounded-lg text-base ${
               isActive(path)
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`
-          : `px-3 py-2 text-gray-700 hover:text-blue-600 font-medium ${
-              isActive(path) ? 'text-blue-600 border-b-2 border-blue-600' : ''
+          : `px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold text-sm ${
+              isActive(path) ? 'text-blue-600 border-b-3 border-blue-600' : ''
             }`
       }`}
     >
-      {mobile && <Icon className="w-4 h-4" />}
+      {mobile && <Icon className="w-4 h-4 flex-shrink-0" />}
       <span>{label}</span>
     </Link>
   );
