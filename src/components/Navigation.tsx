@@ -52,12 +52,12 @@ export function Navigation() {
     <Link
       to={path}
       onClick={() => setIsMenuOpen(false)}
-      className={`flex items-center gap-2 transition-colors ${
+      className={`flex items-center gap-2 transition-all duration-200 ${
         isDesktopTab
-          ? `px-5 py-2.5 rounded-full font-medium ${
+          ? `px-4 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap ${
               isActive(path)
-                ? 'bg-orange-100 text-orange-700'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-orange-600 shadow-sm'
+                : 'text-gray-700 hover:text-gray-900'
             }`
           : `px-4 py-2 rounded-lg ${
               isActive(path)
@@ -86,7 +86,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Tab Style */}
-          <div className="hidden sm:flex items-center bg-gray-100 rounded-full p-2 gap-1">
+          <div className="hidden sm:flex items-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5">
             {navLinks.map((link) => (
               <NavLink key={link.path} {...link} isDesktopTab />
             ))}
