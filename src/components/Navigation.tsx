@@ -103,14 +103,14 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Center */}
-          <div className="hidden md:flex items-center gap-6 flex-1 justify-center">
+          <div className="hidden sm:flex items-center gap-4 lg:gap-6 flex-1 justify-center px-4">
             {navLinks.map((link) => (
               <NavLink key={link.path} {...link} />
             ))}
           </div>
 
           {/* Desktop Social Icons - Right */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-4">
             {socialLinks.map((social) => (
               <SocialIcon key={social.label} {...social} />
             ))}
@@ -119,7 +119,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -132,7 +132,7 @@ export function Navigation() {
 
         {/* Mobile & Tablet Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4 border-t border-gray-200">
+          <div className="sm:hidden pb-4 border-t border-gray-200">
             <div className="flex flex-col gap-2 mt-4">
               {navLinks.map((link) => (
                 <NavLink key={link.path} {...link} mobile />
