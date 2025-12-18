@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play } from 'lucide-react';
+import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play, Facebook, Instagram, Twitter } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
@@ -48,27 +48,37 @@ export function Navigation() {
     { path: '/videos', label: 'Videos', icon: Play },
   ];
 
-  const NavLink = ({ path, label, icon: Icon, mobile = false, isDesktopTab = false }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean; isDesktopTab?: boolean }) => (
+  const NavLink = ({ path, label, icon: Icon, mobile = false }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean }) => (
     <Link
       to={path}
       onClick={() => setIsMenuOpen(false)}
-      className={`flex items-center gap-2 transition-all duration-200 ${
-        isDesktopTab
-          ? `px-3 py-2 rounded-full font-medium text-sm whitespace-nowrap ${
-              isActive(path)
-                ? 'bg-white text-orange-600 shadow-sm'
-                : 'text-white hover:bg-white hover:bg-opacity-10'
-            }`
-          : `px-4 py-2 rounded-lg ${
+      className={`transition-all duration-200 ${
+        mobile
+          ? `flex items-center gap-2 w-full px-4 py-2 rounded-lg ${
               isActive(path)
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`
-      } ${mobile ? 'w-full justify-start' : ''}`}
+          : `px-3 py-2 text-gray-700 hover:text-blue-600 font-medium ${
+              isActive(path) ? 'text-blue-600 border-b-2 border-blue-600' : ''
+            }`
+      }`}
     >
-      {!isDesktopTab && <Icon className="w-4 h-4" />}
+      {mobile && <Icon className="w-4 h-4" />}
       <span>{label}</span>
     </Link>
+  );
+
+  const SocialIcon = ({ icon: Icon, href, label }: { icon: React.ComponentType<{ className: string }>; href: string; label: string }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="text-gray-600 hover:text-blue-600 transition-colors"
+    >
+      <Icon className="w-5 h-5" />
+    </a>
   );
 
   return (
