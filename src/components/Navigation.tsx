@@ -74,7 +74,7 @@ export function Navigation() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 lg:h-16">
+        <div className="flex justify-between items-center h-20 sm:h-16 gap-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <img
@@ -86,7 +86,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Tab Style */}
-          <div className="hidden sm:flex items-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5">
+          <div className="hidden sm:flex items-center flex-1 justify-center bg-gradient-to-r from-orange-500 to-orange-600 rounded-full p-1.5 gap-0.5 mx-4">
             {navLinks.map((link) => (
               <NavLink key={link.path} {...link} isDesktopTab />
             ))}
@@ -95,7 +95,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
