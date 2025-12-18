@@ -57,7 +57,7 @@ export default function VideoGallery() {
           .order('created_at', { ascending: false });
 
         if (error) {
-          console.error('Error loading videos:', error);
+          console.error('Error loading videos:', error.message || error);
           return;
         }
 

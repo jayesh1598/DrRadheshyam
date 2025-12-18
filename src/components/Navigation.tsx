@@ -20,7 +20,7 @@ export function Navigation() {
           .single();
 
         if (error && error.code !== 'PGRST116') {
-          console.error('Error loading logo:', error);
+          console.error('Error loading logo:', error.message || error);
           return;
         }
 
