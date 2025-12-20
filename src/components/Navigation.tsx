@@ -90,8 +90,8 @@ export function Navigation() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Desktop Header */}
-        <div className="flex justify-between items-center h-20 gap-8">
+        {/* Header */}
+        <div className="flex justify-between items-center h-20 gap-4">
           {/* Logo - Left */}
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <img
@@ -102,24 +102,29 @@ export function Navigation() {
             <span className="text-lg font-semibold text-gray-900 hidden sm:inline">Dr. RSG</span>
           </Link>
 
-          {/* Desktop Navigation - Center */}
-          <div className="hidden md:flex items-center justify-center gap-2">
-            {navLinks.map((link) => (
-              <NavLink key={link.path} {...link} />
-            ))}
-          </div>
+          {/* Desktop Navigation - Center (visible on medium screens and up) */}
+          {!isMenuOpen && (
+            <div style={{ display: window.innerWidth >= 768 ? 'flex' : 'none' }} className="items-center justify-center gap-2 flex-1">
+              {navLinks.map((link) => (
+                <NavLink key={link.path} {...link} />
+              ))}
+            </div>
+          )}
 
-          {/* Desktop Social Icons - Right */}
-          <div className="hidden md:flex items-center gap-5 flex-shrink-0">
-            {socialLinks.map((social) => (
-              <SocialIcon key={social.label} {...social} />
-            ))}
-          </div>
+          {/* Desktop Social Icons - Right (visible on medium screens and up) */}
+          {!isMenuOpen && (
+            <div style={{ display: window.innerWidth >= 768 ? 'flex' : 'none' }} className="items-center gap-5 flex-shrink-0">
+              {socialLinks.map((social) => (
+                <SocialIcon key={social.label} {...social} />
+              ))}
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors ml-auto"
+            style={{ display: window.innerWidth < 768 ? 'block' : 'none' }}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -132,7 +137,7 @@ export function Navigation() {
 
         {/* Mobile & Tablet Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4 border-t border-gray-200">
+          <div className="pb-4 border-t border-gray-200">
             <div className="flex flex-col gap-2 mt-4">
               {navLinks.map((link) => (
                 <NavLink key={link.path} {...link} mobile />
