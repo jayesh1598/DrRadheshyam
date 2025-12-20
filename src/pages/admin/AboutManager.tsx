@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Save } from 'lucide-react';
+import { Save, Trash2 } from 'lucide-react';
 import { AdminLayout } from '../../components/AdminLayout';
 
 interface AboutContent {
@@ -74,6 +74,22 @@ export default function AboutManager() {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this section? This cannot be undone.')) return;
+
+    try {
+      const { error } = await supabase
+        .from('about_content')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+      loadContent();
+    } catch (err) {
+      alert('Error deleting content: ' + (err as Error).message);
+    }
+  };
+
   return (
     <AdminLayout title="About Content Management">
       {loading ? (
@@ -82,26 +98,34 @@ export default function AboutManager() {
         <div className="space-y-8">
             <AboutSection
               section="Overview"
+              id={sections.find((s) => s.section === 'Overview')?.id}
               defaultContent={sections.find((s) => s.section === 'Overview')?.content || ''}
               onUpdate={(content) => handleUpdate('Overview', content)}
+              onDelete={handleDelete}
               onEditChange={setEditing}
             />
             <AboutSection
               section="Mission"
+              id={sections.find((s) => s.section === 'Mission')?.id}
               defaultContent={sections.find((s) => s.section === 'Mission')?.content || ''}
               onUpdate={(content) => handleUpdate('Mission', content)}
+              onDelete={handleDelete}
               onEditChange={setEditing}
             />
             <AboutSection
               section="Achievements"
+              id={sections.find((s) => s.section === 'Achievements')?.id}
               defaultContent={sections.find((s) => s.section === 'Achievements')?.content || ''}
               onUpdate={(content) => handleUpdate('Achievements', content)}
+              onDelete={handleDelete}
               onEditChange={setEditing}
             />
             <AboutSection
               section="Biography"
+              id={sections.find((s) => s.section === 'Biography')?.id}
               defaultContent={sections.find((s) => s.section === 'Biography')?.content || ''}
               onUpdate={(content) => handleUpdate('Biography', content)}
+              onDelete={handleDelete}
               onEditChange={setEditing}
             />
         </div>
@@ -112,12 +136,14 @@ export default function AboutManager() {
 
 interface AboutSectionProps {
   section: string;
+  id?: string;
   defaultContent: string;
   onUpdate: (content: string) => void;
+  onDelete: (id: string) => void;
   onEditChange: (editing: boolean) => void;
 }
 
-function AboutSection({ section, defaultContent, onUpdate, onEditChange }: AboutSectionProps) {
+function AboutSection({ section, id, defaultContent, onUpdate, onDelete, onEditChange }: AboutSectionProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(defaultContent);
 
@@ -134,7 +160,18 @@ function AboutSection({ section, defaultContent, onUpdate, onEditChange }: About
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8">
-      <h2 className="text-2xl font-bold mb-6">{section}</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">{section}</h2>
+        {id && !isEditing && (
+          <button
+            onClick={() => onDelete(id)}
+            className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition"
+            title="Delete this section"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        )}
+      </div>
 
       {isEditing ? (
         <div className="space-y-4">

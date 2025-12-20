@@ -46,11 +46,8 @@ export default function AdminDashboard() {
 
   return (  
         
-    {/* <AdminLayout title="Dashboard"> */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> */}
-  <AdminLayout>
-      <div className="p-6">
-        <div className="flex justify-between items-center mb-6">
+    <AdminLayout title="Dashboard">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const colorClasses = {
@@ -81,7 +78,6 @@ export default function AdminDashboard() {
             </button>
           );
         })}
-      </div>
       </div>
     </AdminLayout>
   );
