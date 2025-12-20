@@ -4,10 +4,12 @@ import AboutUs from "../pages/AboutUs";
 import News from "../pages/News";
 import Certificates from "../pages/Certificates";
 import Gallery from "../pages/Gallery";
+import VideoGallery from "../pages/VideoGallery";
 import AdminLogin from "../pages/admin/Login";
 import AdminDashboard from "../pages/admin/Dashboard";
 import NewsManager from "../pages/admin/NewsManager";
 import GalleryManager from "../pages/admin/GalleryManager";
+import VideoManager from "../pages/admin/VideoManager";
 import CertificatesManager from "../pages/admin/CertificatesManager";
 import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
     Component: Gallery,
   },
   {
+    path: "/videos",
+    Component: VideoGallery,
+  },
+  {
     path: "/admin/login",
     Component: AdminLogin,
   },
@@ -60,6 +66,14 @@ export const router = createBrowserRouter([
     Component: () => (
       <ProtectedRoute>
         <GalleryManager />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/videos",
+    Component: () => (
+      <ProtectedRoute>
+        <VideoManager />
       </ProtectedRoute>
     ),
   },
