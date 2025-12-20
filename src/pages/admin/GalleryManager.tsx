@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Edit } from 'lucide-react';
 import { AdminLayout } from '../../components/AdminLayout';
 
 interface GalleryImage {
@@ -15,6 +15,7 @@ export default function GalleryManager() {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     image_url: '',
     alt_text: '',
@@ -54,18 +55,37 @@ export default function GalleryManager() {
     }
 
     try {
-      const { error } = await supabase
-        .from('gallery_images')
-        .insert([formData]);
+      if (editingId) {
+        const { error } = await supabase
+          .from('gallery_images')
+          .update(formData)
+          .eq('id', editingId);
 
-      if (error) throw error;
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('gallery_images')
+          .insert([formData]);
+
+        if (error) throw error;
+      }
 
       setFormData({ image_url: '', alt_text: '' });
+      setEditingId(null);
       setShowForm(false);
       loadImages();
     } catch (err) {
-      alert('Error adding image: ' + (err as Error).message);
+      alert('Error saving image: ' + (err as Error).message);
     }
+  };
+
+  const handleEdit = (image: GalleryImage) => {
+    setFormData({
+      image_url: image.image_url,
+      alt_text: image.alt_text,
+    });
+    setEditingId(image.id);
+    setShowForm(true);
   };
 
   const handleDelete = async (id: string) => {
@@ -88,7 +108,11 @@ export default function GalleryManager() {
     <AdminLayout title="Gallery Management">
       <div className="flex gap-4 mb-8">
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            setShowForm(!showForm);
+            setEditingId(null);
+            setFormData({ image_url: '', alt_text: '' });
+          }}
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
         >
           <Plus className="w-4 h-4" />
@@ -98,7 +122,7 @@ export default function GalleryManager() {
 
         {showForm && (
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold mb-6">Add Gallery Image</h2>
+            <h2 className="text-2xl font-bold mb-6">{editingId ? 'Edit Gallery Image' : 'Add Gallery Image'}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -133,11 +157,15 @@ export default function GalleryManager() {
                   type="submit"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
                 >
-                  Add Image
+                  {editingId ? 'Update Image' : 'Add Image'}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false);
+                    setEditingId(null);
+                    setFormData({ image_url: '', alt_text: '' });
+                  }}
                   className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition"
                 >
                   Cancel
@@ -163,13 +191,22 @@ export default function GalleryManager() {
                   />
                   <div className="p-4">
                     <p className="text-sm text-gray-700 line-clamp-2 mb-4">{image.alt_text}</p>
-                    <button
-                      onClick={() => handleDelete(image.id)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition"
-                    >
-                      <Trash2 className="w-4 h-4 inline mr-2" />
-                      Delete
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleEdit(image)}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition flex items-center justify-center gap-2"
+                      >
+                        <Edit className="w-4 h-4" />
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(image.id)}
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition flex items-center justify-center gap-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))
