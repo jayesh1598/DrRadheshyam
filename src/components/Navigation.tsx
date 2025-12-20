@@ -113,8 +113,8 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation - Center (visible on medium screens and up) */}
-          {!isMenuOpen && (
-            <div style={{ display: window.innerWidth >= 768 ? 'flex' : 'none' }} className="items-center justify-center gap-2 flex-1">
+          {isDesktop && (
+            <div className="flex items-center justify-center gap-2 flex-1">
               {navLinks.map((link) => (
                 <NavLink key={link.path} {...link} />
               ))}
@@ -122,8 +122,8 @@ export function Navigation() {
           )}
 
           {/* Desktop Social Icons - Right (visible on medium screens and up) */}
-          {!isMenuOpen && (
-            <div style={{ display: window.innerWidth >= 768 ? 'flex' : 'none' }} className="items-center gap-5 flex-shrink-0">
+          {isDesktop && (
+            <div className="flex items-center gap-5 flex-shrink-0">
               {socialLinks.map((social) => (
                 <SocialIcon key={social.label} {...social} />
               ))}
@@ -131,18 +131,19 @@ export function Navigation() {
           )}
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            style={{ display: window.innerWidth < 768 ? 'block' : 'none' }}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
-          </button>
+          {!isDesktop && (
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors ml-auto"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-gray-700" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-700" />
+              )}
+            </button>
+          )}
         </div>
 
         {/* Mobile & Tablet Navigation */}
