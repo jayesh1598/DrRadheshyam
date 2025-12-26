@@ -15,7 +15,7 @@ export function Overview() {
 
           <div className="max-w-4xl mx-auto space-y-6">
             <div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 text-center">
                 Business Leader | Social Reformer | Doctorate in Social Work
               </h3>
               <p className="text-gray-600 leading-relaxed">
