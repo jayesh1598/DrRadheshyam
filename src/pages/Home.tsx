@@ -1,5 +1,6 @@
 import { Navigation } from '../components/Navigation';
 import { Hero } from '../components/Hero';
+import { Overview } from '../components/Overview';
 import { About } from '../components/About';
 import { Education } from '../components/Education';
 import { Experience } from '../components/Experience';
@@ -12,6 +13,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       <Hero />
+      <Overview />
       <About />
       <Education />
       <Experience />
