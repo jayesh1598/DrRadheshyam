@@ -88,7 +88,7 @@ export function Overview() {
           {/* Mission */}
           <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 sm:p-10 rounded-xl shadow-md">
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-green-600 p-3 rounded-lg">
+              <div className="bg-blue-600 p-3 rounded-lg">
                 <Target className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900">Mission</h3>
