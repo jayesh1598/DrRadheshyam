@@ -30,20 +30,9 @@ export function Hero() {
               Dr. RADHESHYAM S. GUPTA
             </h1>
             <p className="text-xl sm:text-2xl text-blue-200 mb-6">
-              Businessman & Social Activist
+             Business Leader | Social Reformer | Doctorate in Social Work
             </p>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <p className="text-sm text-blue-200">Age</p>
-                <p className="text-lg">56 Years</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <p className="text-sm text-blue-200">
-                  Date of Birth
-                </p>
-                <p className="text-lg">15-07-1969</p>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>
