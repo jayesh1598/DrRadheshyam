@@ -198,91 +198,110 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
       {/* Banner Slider */}
       <BannerSlider />
 
-      {/* Quick Highlights */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <h2 className="text-center text-gray-900 mb-12">At a Glance</h2>
+      {/* Quick Highlights Section */}
+      <section className="py-16 sm:py-28 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 text-center mb-4">
+              At a Glance
+            </h2>
+            <p className="text-center text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+              Explore key areas of expertise and achievements in leadership, education, and community service
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {overviewItems.map((item, index) => {
-            const iconColors = ['blue', 'green', 'yellow', 'red'];
-            const colorClass = iconColors[index % iconColors.length];
-            const bgColorMap: Record<string, string> = {
-              blue: 'bg-blue-100',
-              green: 'bg-green-100',
-              yellow: 'bg-yellow-100',
-              red: 'bg-red-100',
-            };
-            const textColorMap: Record<string, string> = {
-              blue: 'text-blue-600',
-              green: 'text-green-600',
-              yellow: 'text-yellow-600',
-              red: 'text-red-600',
-            };
-            const linkColorMap: Record<string, string> = {
-              blue: 'text-blue-600 hover:text-blue-700',
-              green: 'text-green-600 hover:text-green-700',
-              yellow: 'text-yellow-600 hover:text-yellow-700',
-              red: 'text-red-600 hover:text-red-700',
-            };
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {overviewItems.map((item, index) => {
+              const iconColors = ['blue', 'green', 'teal', 'emerald'];
+              const colorClass = iconColors[index % iconColors.length];
+              const bgColorMap: Record<string, string> = {
+                blue: 'bg-blue-100',
+                green: 'bg-green-100',
+                teal: 'bg-teal-100',
+                emerald: 'bg-emerald-100',
+              };
+              const textColorMap: Record<string, string> = {
+                blue: 'text-blue-600',
+                green: 'text-green-600',
+                teal: 'text-teal-600',
+                emerald: 'text-emerald-600',
+              };
+              const linkColorMap: Record<string, string> = {
+                blue: 'text-blue-600 hover:text-blue-700',
+                green: 'text-green-600 hover:text-green-700',
+                teal: 'text-teal-600 hover:text-teal-700',
+                emerald: 'text-emerald-600 hover:text-emerald-700',
+              };
 
-            const IconMap: Record<number, React.ComponentType<{ className?: string }>> = {
-              0: GraduationCap,
-              1: Briefcase,
-              2: Award,
-              3: Heart,
-            };
+              const IconMap: Record<number, React.ComponentType<{ className?: string }>> = {
+                0: GraduationCap,
+                1: Briefcase,
+                2: Award,
+                3: Heart,
+              };
 
-            const Icon = IconMap[index % 4];
+              const Icon = IconMap[index % 4];
 
-            return (
-              <div key={item.id} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <div className={`w-16 h-16 ${bgColorMap[colorClass]} rounded-full flex items-center justify-center mb-6`}>
-                  <Icon className={`w-8 h-8 ${textColorMap[colorClass]}`} />
+              return (
+                <div
+                  key={item.id}
+                  className="bg-white p-6 sm:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className={`w-16 h-16 ${bgColorMap[colorClass]} rounded-full flex items-center justify-center mb-6`}>
+                    <Icon className={`w-8 h-8 ${textColorMap[colorClass]}`} />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+                  <Link to="/about" className={`inline-flex items-center gap-2 font-semibold transition-colors ${linkColorMap[colorClass]}`}>
+                    <span>Learn more</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-                <h3 className="text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 mb-4">
-                  {item.description}
-                </p>
-                <Link to="/about" className={`inline-flex items-center gap-1 ${linkColorMap[colorClass]}`}>
-                  <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Latest News Section */}
-      <div className="bg-white py-16 sm:py-24">
+      <section className="py-16 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <div className="flex items-center gap-3">
-              <Newspaper className="w-8 h-8 text-blue-600" />
-              <h2 className="text-gray-900">Latest News & Updates</h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 sm:mb-16 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Newspaper className="w-8 h-8 text-blue-600" />
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+                  Latest News & Updates
+                </h2>
+              </div>
+              <p className="text-gray-600 text-sm sm:text-base ml-11">
+                Stay informed about recent events and developments
+              </p>
             </div>
             <Link
               to="/news"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg whitespace-nowrap"
             >
-              <span>View more</span>
+              <span>View all News</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {newsPreview.map((article) => (
               <div
                 key={article.id}
-                className="bg-gray-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:translate-y--2"
               >
-                <div className="h-48 sm:h-56 overflow-hidden">
+                <div className="h-48 sm:h-56 overflow-hidden bg-gray-200">
                   <ImageWithFallback
                     src={article.image}
                     alt={article.title}
@@ -291,69 +310,84 @@ export default function Landing() {
                 </div>
 
                 <div className="p-5 sm:p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
                       {article.category}
                     </span>
-                    <div className="flex items-center gap-1 text-gray-500 text-xs sm:text-sm">
+                    <div className="flex items-center gap-1 text-gray-500 text-xs font-medium">
                       <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                       <span>{new Date(article.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-gray-900 mb-2 line-clamp-2 text-sm sm:text-base">
+                  <h3 className="text-gray-900 mb-3 line-clamp-2 text-base sm:text-lg font-semibold">
                     {article.title}
                   </h3>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2 text-xs sm:text-sm">
+                  <p className="text-gray-600 mb-4 line-clamp-2 text-sm leading-relaxed">
                     {article.excerpt}
                   </p>
+
+                  <Link
+                    to="/news"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors"
+                  >
+                    <span>Read more</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Certificates & Recognition Section */}
-      <div className="bg-gray-50 py-16 sm:py-24">
+      <section className="py-16 sm:py-28 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <div className="flex items-center gap-3">
-              <Award className="w-8 h-8 text-yellow-600" />
-              <h2 className="text-gray-900">Certificates & Recognition</h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 sm:mb-16 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Award className="w-8 h-8 text-amber-600" />
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+                  Certificates & Recognition
+                </h2>
+              </div>
+              <p className="text-gray-600 text-sm sm:text-base ml-11">
+                Awards and accolades from prestigious institutions
+              </p>
             </div>
             <Link
               to="/certificates"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg whitespace-nowrap"
             >
-              <span>View more</span>
+              <span>View all Certificates</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {certificatesPreview.map((cert) => (
               <div
                 key={cert.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:translate-y--2"
               >
                 <div className="h-40 sm:h-48 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
                   <img
                     src={cert.image_url}
                     alt={cert.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 
                 <div className="p-5 sm:p-6">
-                  <span className="text-xs sm:text-sm text-blue-600">{cert.date}</span>
+                  <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">{cert.date}</span>
 
-                  <h3 className="text-gray-900 mb-2 line-clamp-2 text-sm sm:text-base">
+                  <h3 className="text-gray-900 mb-3 line-clamp-2 text-base sm:text-lg font-semibold mt-2">
                     {cert.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 font-medium">
                     {cert.institution}
                   </p>
                 </div>
@@ -361,21 +395,28 @@ export default function Landing() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Gallery Preview Section */}
-      <div className="bg-white py-16 sm:py-24">
+      <section className="py-16 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <div className="flex items-center gap-3">
-              <ImageIcon className="w-8 h-8 text-blue-600" />
-              <h2 className="text-gray-900">Social Media Gallery</h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 sm:mb-16 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <ImageIcon className="w-8 h-8 text-teal-600" />
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+                  Gallery
+                </h2>
+              </div>
+              <p className="text-gray-600 text-sm sm:text-base ml-11">
+                Moments from events, gatherings, and community initiatives
+              </p>
             </div>
             <Link
               to="/gallery"
-              className="text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg whitespace-nowrap"
             >
-              <span>View more</span>
+              <span>View all Images</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -384,42 +425,53 @@ export default function Landing() {
             {galleryPreview.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-gray-100 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
               >
                 <div className="aspect-square overflow-hidden">
                   <ImageWithFallback
                     src={item.image_url}
                     alt={item.alt_text}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Call to Action */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-white mb-6">Get in Touch</h2>
-          <p className="text-blue-100 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Connect with me to discuss collaborations, social initiatives, or business opportunities
+      {/* Call to Action Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 sm:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+            Ready to Connect?
+          </h2>
+          <p className="text-blue-100 text-base sm:text-lg mb-8 sm:mb-12 leading-relaxed max-w-2xl mx-auto">
+            Have questions or want to discuss collaborations, social initiatives, or business opportunities? Get in touch today.
           </p>
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-2 bg-white text-blue-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
-          >
-            <span>Contact Information</span>
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold text-base sm:text-lg transform hover:scale-105"
+            >
+              <span>Book Appointment</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-white/10 transition-colors font-semibold text-base sm:text-lg"
+            >
+              <span>Learn More</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8">
+      <footer className="bg-gray-900 text-gray-400 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 Dr. Radheshyam S. Gupta. All rights reserved.</p>
+          <p className="text-sm sm:text-base">&copy; 2025 Dr. Radheshyam S. Gupta. All rights reserved.</p>
         </div>
       </footer>
     </div>
