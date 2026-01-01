@@ -144,7 +144,7 @@ export function Navigation() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="text-gray-500 hover:text-blue-600 transition-colors duration-200 hover:scale-110"
+      className="text-gray-500 hover:text-orange-600 transition-colors duration-200 hover:scale-110"
     >
       <Icon className="w-5 h-5" />
     </a>
