@@ -1,5 +1,7 @@
 import { Navigation } from '../components/Navigation';
 import { BannerSlider } from '../components/BannerSlider';
+import { Footer } from '../components/Footer';
+import { EnquiryModal } from '../components/Contact';
 import { Link } from 'react-router';
 import { ArrowRight, Award, Briefcase, Heart, GraduationCap, Newspaper, ImageIcon, Calendar } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
