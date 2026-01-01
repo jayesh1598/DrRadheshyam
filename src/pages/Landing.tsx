@@ -453,13 +453,13 @@ export default function Landing() {
             Have questions or want to discuss collaborations, social initiatives, or business opportunities? Get in touch today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold text-base sm:text-lg transform hover:scale-105"
+            <button
+              onClick={() => setIsEnquiryOpen(true)}
+              className="inline-flex items-center gap-2 bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-orange-50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold text-base sm:text-lg transform hover:scale-105 cursor-pointer"
             >
               <span>Get in Touch</span>
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </button>
             <Link
               to="/about"
               className="inline-flex items-center gap-2 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-white/10 transition-colors font-semibold text-base sm:text-lg"
