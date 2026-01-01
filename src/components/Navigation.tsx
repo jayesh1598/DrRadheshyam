@@ -216,14 +216,18 @@ export function Navigation() {
               <div className="relative">
                 <button
                   onClick={() => setIsPortfolioOpen(!isPortfolioOpen)}
-                  className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-bold transition-colors ${
+                    isPortfolioOpen
+                      ? 'bg-orange-500 text-white'
+                      : 'text-gray-700 hover:bg-orange-100 hover:text-orange-600'
+                  }`}
                 >
                   <Newspaper className="w-4 h-4 flex-shrink-0" />
                   <span>Portfolio</span>
                   <ChevronDown className={`w-4 h-4 ml-auto transition-transform duration-200 ${isPortfolioOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isPortfolioOpen && (
-                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-blue-600 pl-4">
+                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-orange-600 pl-4">
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
@@ -232,10 +236,10 @@ export function Navigation() {
                           setIsMenuOpen(false);
                           setIsPortfolioOpen(false);
                         }}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
                           isActive(link.path)
-                            ? 'bg-blue-100 text-blue-600'
-                            : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                            ? 'bg-orange-100 text-orange-600'
+                            : 'text-gray-600 hover:bg-orange-100 hover:text-orange-600'
                         }`}
                       >
                         <link.icon className="w-4 h-4" />
