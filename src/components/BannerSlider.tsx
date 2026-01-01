@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { supabase } from '../utils/supabase/client';
 
 interface BannerSlide {
@@ -112,15 +113,34 @@ export function BannerSlider() {
               alt={banner.alt_text}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
           </div>
         ))}
+      </div>
+
+      {/* Hero Content Overlay */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg">
+            Dr. Radheshyam S. Gupta
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 sm:mb-12 drop-shadow-md max-w-3xl mx-auto leading-relaxed">
+            Leadership, Social Service & Community Development
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:scale-105 text-base sm:text-lg font-semibold"
+          >
+            <span>Book Appointment</span>
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
       </div>
 
       {/* Previous Button */}
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-gray-900" />
@@ -129,22 +149,22 @@ export function BannerSlider() {
       {/* Next Button */}
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-gray-900" />
       </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-3">
+      {/* Dots Navigation */}
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2 sm:gap-3">
         {bannerImages.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`transition-all duration-300 rounded-full ${
               index === currentSlide
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/75'
+                ? 'bg-white w-8 h-3'
+                : 'bg-white/50 hover:bg-white/75 w-3 h-3'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
