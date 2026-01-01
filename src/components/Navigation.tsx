@@ -82,13 +82,13 @@ export function Navigation() {
       }}
       className={`transition-all duration-200 whitespace-nowrap ${
         mobile
-          ? `flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-medium ${
+          ? `flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-bold ${
               isActive(path)
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                ? 'bg-orange-500 text-white'
+                : 'text-gray-700 hover:bg-orange-100 hover:text-orange-600'
             }`
-          : `px-3 py-2 text-gray-700 font-medium text-sm transition-colors ${
-              isActive(path) ? 'text-blue-600' : 'hover:text-blue-600'
+          : `px-3 py-2 text-gray-700 font-bold text-sm transition-all ${
+              isActive(path) ? 'bg-orange-500 text-white rounded-lg' : 'hover:bg-orange-100 hover:text-orange-600'
             }`
       }`}
     >
