@@ -71,7 +71,6 @@ export function Navigation() {
   const portfolioLinks = [
     { path: '/gallery', label: 'Gallery', icon: ImageIcon },
     { path: '/videos', label: 'Videos', icon: Play },
-    { path: '/contact', label: 'Book Appointment', icon: Calendar },
   ];
 
   const NavLink = ({ path, label, icon: Icon, mobile = false }: { path: string; label: string; icon: React.ComponentType<{ className: string }>; mobile?: boolean }) => (
