@@ -53,7 +53,7 @@ const defaultBanners: BannerSlide[] = [
   },
 ];
 
-export function BannerSlider() {
+export function BannerSlider({ onOpenForm }: BannerSliderProps) {
   const [bannerImages, setBannerImages] = useState<BannerSlide[]>(defaultBanners);
   const [currentSlide, setCurrentSlide] = useState(0);
 
