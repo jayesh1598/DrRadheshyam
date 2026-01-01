@@ -104,7 +104,11 @@ export function Navigation() {
           e.stopPropagation();
           setIsPortfolioOpen(!isPortfolioOpen);
         }}
-        className="flex items-center gap-1 px-3 py-2 text-gray-700 font-medium text-sm transition-colors hover:text-blue-600 group-hover:text-blue-600"
+        className={`flex items-center gap-1 px-3 py-2 text-gray-700 font-bold text-sm transition-all ${
+          isPortfolioOpen
+            ? 'bg-orange-500 text-white rounded-lg'
+            : 'hover:bg-orange-100 hover:text-orange-600'
+        }`}
       >
         <span>Portfolio</span>
         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isPortfolioOpen ? 'rotate-180' : ''}`} />
@@ -119,10 +123,10 @@ export function Navigation() {
               onClick={() => {
                 setIsPortfolioOpen(false);
               }}
-              className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors ${
                 isActive(link.path)
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                  ? 'bg-orange-100 text-orange-600'
+                  : 'text-gray-700 hover:bg-orange-100 hover:text-orange-600'
               }`}
             >
               <link.icon className="w-4 h-4" />
