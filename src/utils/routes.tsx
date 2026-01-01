@@ -14,6 +14,7 @@ import CertificatesManager from "../pages/admin/CertificatesManager";
 import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
 import SiteSettingsManager from "../pages/admin/SiteSettingsManager";
+import ServicesManager from "../pages/admin/ServicesManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 
 export const router = createBrowserRouter([
@@ -106,6 +107,14 @@ export const router = createBrowserRouter([
     Component: () => (
       <ProtectedRoute>
         <SiteSettingsManager />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/services",
+    Component: () => (
+      <ProtectedRoute>
+        <ServicesManager />
       </ProtectedRoute>
     ),
   },
