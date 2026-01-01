@@ -451,10 +451,10 @@ export default function Landing() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             <Link
-              to="/contact"
+              to="/about"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold text-base sm:text-lg transform hover:scale-105"
             >
-              <span>Book Appointment</span>
+              <span>Get in Touch</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
