@@ -154,6 +154,7 @@ export default function Landing() {
   const [newsPreview, setNewsPreview] = useState<NewsArticle[]>(defaultNewsPreview);
   const [certificatesPreview, setCertificatesPreview] = useState<Certificate[]>(defaultCertificatesPreview);
   const [galleryPreview, setGalleryPreview] = useState<GalleryImage[]>(defaultGalleryPreview);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
