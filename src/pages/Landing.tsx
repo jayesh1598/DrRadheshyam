@@ -299,7 +299,7 @@ export default function Landing() {
             {newsPreview.map((article) => (
               <div
                 key={article.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:translate-y--2"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="h-48 sm:h-56 overflow-hidden bg-gray-200">
                   <ImageWithFallback
