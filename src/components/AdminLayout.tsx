@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Sparkles, Play } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Sparkles, Play, Zap } from 'lucide-react';
 import { supabase } from '../utils/supabase/client';
 import { Button } from './ui/button';
 
@@ -30,6 +30,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
     { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
     { label: 'Site Settings', path: '/admin/settings', icon: Settings },
     { label: 'Overview', path: '/admin/overview', icon: Sparkles },
+    { label: 'Services', path: '/admin/services', icon: Zap },
     { label: 'News Articles', path: '/admin/news', icon: FileText },
     { label: 'Gallery', path: '/admin/gallery', icon: Images },
     { label: 'Videos', path: '/admin/videos', icon: Play },

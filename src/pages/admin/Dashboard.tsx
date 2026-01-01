@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { FileText, Images, Award, Newspaper, Home, Settings } from 'lucide-react';
+import { FileText, Images, Award, Newspaper, Home, Settings, Zap } from 'lucide-react';
 import { AdminLayout } from '../../components/AdminLayout';
 
 export default function AdminDashboard() {
@@ -11,6 +11,12 @@ export default function AdminDashboard() {
       label: 'Site Settings',
       path: '/admin/settings',
       color: 'indigo',
+    },
+    {
+      icon: Zap,
+      label: 'Services',
+      path: '/admin/services',
+      color: 'yellow',
     },
     {
       icon: Newspaper,
@@ -57,6 +63,7 @@ export default function AdminDashboard() {
             green: 'bg-green-50 border-green-200 hover:bg-green-100',
             orange: 'bg-orange-50 border-orange-200 hover:bg-orange-100',
             red: 'bg-red-50 border-red-200 hover:bg-red-100',
+            yellow: 'bg-yellow-50 border-yellow-200 hover:bg-yellow-100',
           };
           const iconColorClasses = {
             indigo: 'text-indigo-600',
@@ -65,6 +72,7 @@ export default function AdminDashboard() {
             green: 'text-green-600',
             orange: 'text-orange-600',
             red: 'text-red-600',
+            yellow: 'text-yellow-600',
           };
 
           return (
