@@ -128,10 +128,10 @@ export function BannerSlider() {
             Leadership, Social Service & Community Development
           </p>
           <Link
-            to="/contact"
+            to="/about"
             className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:scale-105 text-base sm:text-lg font-semibold"
           >
-            <span>Book Appointment</span>
+            <span>Get in Touch</span>
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
