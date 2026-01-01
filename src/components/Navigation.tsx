@@ -168,7 +168,7 @@ export function Navigation() {
               alt="Dr. RSG Logo"
               className="h-12 w-12 object-contain"
             />
-            <span className="text-lg font-bold text-gray-900 hidden sm:inline bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Dr. RSG</span>
+            <span className="text-lg font-bold text-gray-900 hidden sm:inline bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">Dr. RSG</span>
           </Link>
 
           {/* Desktop Navigation - Center (visible on medium screens and up) */}
