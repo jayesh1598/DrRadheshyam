@@ -10,6 +10,10 @@ interface BannerSlide {
   display_order: number;
 }
 
+interface BannerSliderProps {
+  onOpenForm?: () => void;
+}
+
 const defaultBanners: BannerSlide[] = [
   {
     id: '1',
