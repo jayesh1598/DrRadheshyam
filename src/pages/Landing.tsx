@@ -205,7 +205,7 @@ export default function Landing() {
       <Navigation />
 
       {/* Banner Slider */}
-      <BannerSlider />
+      <BannerSlider onOpenForm={() => setIsEnquiryOpen(true)} />
 
       {/* Quick Highlights Section */}
       <section className="py-16 sm:py-28 bg-gray-50">
