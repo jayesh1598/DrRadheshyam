@@ -1,4 +1,5 @@
 import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 import { Calendar } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
@@ -119,11 +120,7 @@ export default function News() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 Dr. Radheshyam S. Gupta. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
