@@ -186,9 +186,9 @@ export function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-4 py-2 rounded text-sm font-bold uppercase transition-colors ${
                     isActive(link.path)
-                      ? 'bg-orange-500 text-white'
-                      : 'text-white hover:bg-blue-700'
-                  }`}
+                      ? 'text-white'
+                      : 'text-white'
+                  }`} style={isActive(link.path) ? { backgroundColor: '#d45a1f' } : { backgroundColor: 'transparent' }} onMouseEnter={(e) => !isActive(link.path) && (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.1)')} onMouseLeave={(e) => !isActive(link.path) && (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
                   {link.label}
                 </Link>
