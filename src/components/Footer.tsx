@@ -159,31 +159,20 @@ export function Footer() {
         <div className="border-t border-gray-800 my-8 sm:my-12"></div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-8">
-          {/* Copyright */}
-          <div className="text-center sm:text-left">
-            <p className="text-gray-400 text-sm flex items-center justify-center sm:justify-start gap-2">
-              &copy; {currentYear} Dr. Radheshyam S. Gupta
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline">All rights reserved</span>
-            </p>
-            <p className="text-gray-500 text-xs mt-2 sm:mt-1">
-              Made with <Heart className="w-3 h-3 inline text-orange-500" /> for community excellence
-            </p>
-          </div>
-
-          {/* Footer Links */}
-          <nav className="flex gap-6 sm:gap-8 flex-wrap justify-center">
-            <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm font-medium">
-              Privacy Policy
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-1 flex-wrap">
+          {/* Copyright and Credit */}
+          <p className="text-gray-400 text-sm text-center">
+            &copy; {currentYear} Dr. Radheshyam S. Gupta &nbsp;&nbsp;
+            <span className="text-gray-400">Made By </span>
+            <a
+              href="https://softcofrnds.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-500 hover:text-orange-400 transition-colors font-semibold"
+            >
+              SoftCofrnds IT Solutions
             </a>
-            <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm font-medium">
-              Terms of Service
-            </a>
-            <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm font-medium">
-              Sitemap
-            </a>
-          </nav>
+          </p>
         </div>
       </div>
     </footer>
