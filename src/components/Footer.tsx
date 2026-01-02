@@ -135,21 +135,8 @@ export function Footer() {
                 </div>
                 <div className="flex-grow">
                   <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">Email</p>
-                  <a href="mailto:contact@example.com" className="text-orange-500 text-sm font-bold hover:text-orange-400 transition-colors block">
-                    contact@example.com
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex gap-3 group">
-                <div className="flex-shrink-0 pt-0.5">
-                  <Phone className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
-                </div>
-                <div className="flex-grow">
-                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">Phone</p>
-                  <a href="tel:+919876543210" className="text-orange-500 text-sm font-bold hover:text-orange-400 transition-colors block">
-                    +91 98765 43210
+                  <a href="mailto:info@radheshyamgupta.com" className="text-orange-500 text-sm font-bold hover:text-orange-400 transition-colors block">
+                    info@radheshyamgupta.com
                   </a>
                 </div>
               </div>
