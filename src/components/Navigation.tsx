@@ -11,6 +11,7 @@ export function Navigation() {
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState(defaultLogoUrl);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+  const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const loadLogo = async () => {
