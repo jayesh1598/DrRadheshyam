@@ -106,7 +106,7 @@ export function Navigation() {
         }}
         className={`flex items-center gap-1 px-3 py-2 text-gray-700 font-bold text-sm transition-all ${
           isPortfolioOpen
-            ? 'bg-orange-500 text-white rounded-lg'
+            ? 'text-orange-600 bg-orange-50 rounded-lg border-b-3 border-orange-600'
             : 'hover:bg-orange-100 hover:text-orange-600'
         }`}
       >
