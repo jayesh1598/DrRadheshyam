@@ -86,12 +86,12 @@ export default function VideoGallery() {
       <Navigation />
 
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
+      <div className="text-white py-16" style={{ backgroundImage: 'linear-gradient(to right, #c55a1b, #a04a16)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <h1 className="text-center text-3xl sm:text-4xl font-bold">Video Gallery</h1>
           </div>
-          <p className="text-center text-blue-100 text-lg">Watch our latest videos and updates</p>
+          <p className="text-center text-lg" style={{ color: '#f5e6d3' }}>Watch our latest videos and updates</p>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ export default function VideoGallery() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                    <div className="bg-blue-600 rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: '#e76c2c' }}>
                       <Play className="w-6 h-6 text-white fill-white" />
                     </div>
                   </div>
