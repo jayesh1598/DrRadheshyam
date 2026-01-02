@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 import { Facebook, ExternalLink } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { supabase } from '../utils/supabase/client';
@@ -119,11 +120,7 @@ export default function Gallery() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 Dr. Radheshyam S. Gupta. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
