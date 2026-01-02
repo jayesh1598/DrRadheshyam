@@ -47,15 +47,16 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = () => {
-      setIsPortfolioOpen(false);
-    };
+    // Close dropdown when not on desktop (mobile/tablet)
+    if (!isDesktop && isPortfolioOpen) {
+      const handleClickOutside = () => {
+        setIsPortfolioOpen(false);
+      };
 
-    if (isPortfolioOpen) {
       window.addEventListener('click', handleClickOutside);
       return () => window.removeEventListener('click', handleClickOutside);
     }
-  }, [isPortfolioOpen]);
+  }, [isPortfolioOpen, isDesktop]);
 
   const isActive = (path: string) => {
     return location.pathname === path;
