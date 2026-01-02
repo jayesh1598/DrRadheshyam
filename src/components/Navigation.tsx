@@ -208,7 +208,7 @@ export function Navigation() {
                   />
                 </button>
                 {isPortfolioOpen && (
-                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-orange-500 pl-4">
+                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 pl-4" style={{ borderColor: 'rgb(231, 108, 44)' }}>
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
@@ -219,8 +219,8 @@ export function Navigation() {
                         }}
                         className={`block px-3 py-2 text-sm font-bold transition-colors ${
                           isActive(link.path)
-                            ? 'text-orange-300'
-                            : 'text-white hover:text-orange-300'
+                            ? 'text-white'
+                            : 'text-white hover:opacity-80'
                         }`}
                       >
                         {link.label}
