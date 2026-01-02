@@ -1,4 +1,5 @@
 import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 import { Calendar } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
