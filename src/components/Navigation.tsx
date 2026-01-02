@@ -131,7 +131,7 @@ export function Navigation() {
 
                 {/* Dropdown Menu */}
                 {hoveredDropdown === 'portfolio' && (
-                  <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-40 flex flex-col">
+                  <div className="absolute top-full left-0 mt-0 w-48 rounded-b-lg shadow-xl py-2 z-40 flex flex-col" style={{ backgroundColor: 'rgb(231, 108, 44)', borderColor: 'rgb(231, 108, 44)' }}>
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
@@ -139,8 +139,8 @@ export function Navigation() {
                         onClick={() => setHoveredDropdown(null)}
                         className={`block px-4 py-3 text-sm font-bold transition-colors w-full ${
                           isActive(link.path)
-                            ? 'bg-orange-100 text-orange-600'
-                            : 'text-gray-700 hover:bg-gray-100'
+                            ? 'text-white'
+                            : 'text-white hover:opacity-80'
                         }`}
                       >
                         {link.label}
