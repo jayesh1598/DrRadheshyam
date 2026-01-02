@@ -3,7 +3,7 @@ import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play, Facebook, Insta
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
-const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
+const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2Fff7e0f6cbece4e34b27d90501cd35dc5%2F3ed9089c1fac4466a4c6f81962785f69?format=webp&width=800';
 
 export function Navigation() {
   const location = useLocation();
@@ -77,7 +77,7 @@ export function Navigation() {
 
 
   return (
-    <nav className="bg-blue-600 sticky top-0 z-50 shadow-lg">
+    <nav className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#e76c2c' }}>
       <div className="max-w-full px-6 lg:px-12">
         <div className="flex justify-between items-center h-24">
           {/* Logo - Left */}
@@ -162,7 +162,7 @@ export function Navigation() {
             {!isDesktop && (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 hover:bg-blue-700 rounded-lg transition-colors"
+                className="p-2 rounded-lg transition-colors" style={{ color: 'inherit' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.1)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
@@ -177,7 +177,7 @@ export function Navigation() {
 
         {/* Mobile & Tablet Navigation */}
         {isMenuOpen && !isDesktop && (
-          <div className="pb-4 border-t border-blue-500">
+          <div className="pb-4" style={{ borderTopColor: 'rgba(255,255,255,0.2)', borderTopWidth: '1px' }}>
             <div className="flex flex-col gap-2 mt-4">
               {mainNavLinks.map((link) => (
                 <Link
