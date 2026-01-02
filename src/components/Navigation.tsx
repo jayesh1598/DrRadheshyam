@@ -131,13 +131,13 @@ export function Navigation() {
 
                 {/* Dropdown Menu */}
                 {hoveredDropdown === 'portfolio' && (
-                  <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-40">
+                  <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-40 flex flex-col">
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
                         to={link.path}
                         onClick={() => setHoveredDropdown(null)}
-                        className={`block px-4 py-3 text-sm font-bold transition-colors ${
+                        className={`block px-4 py-3 text-sm font-bold transition-colors w-full ${
                           isActive(link.path)
                             ? 'bg-orange-100 text-orange-600'
                             : 'text-gray-700 hover:bg-gray-100'
