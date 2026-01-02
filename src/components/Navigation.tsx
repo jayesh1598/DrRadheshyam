@@ -165,77 +165,138 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex justify-between items-center h-20 gap-4">
+    <nav className="bg-blue-600 sticky top-0 z-50 shadow-lg">
+      <div className="max-w-full px-6 lg:px-12">
+        <div className="flex justify-between items-center h-24">
           {/* Logo - Left */}
-          <Link to="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
+          <Link to="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
             <img
               src={logoUrl}
               alt="Dr. RSG Logo"
-              className="h-12 w-12 object-contain"
+              className="h-20 w-20 object-contain"
+              style={{ maxWidth: '150px', maxHeight: '150px' }}
             />
-            <span className="text-lg font-bold text-gray-900 hidden sm:inline bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">Dr. RSG</span>
           </Link>
 
-          {/* Desktop Navigation - Center (visible on medium screens and up) */}
+          {/* Desktop Navigation - Center */}
           {isDesktop && (
-            <div className="flex items-center justify-center gap-1 flex-1">
+            <div className="flex items-center justify-center gap-8 flex-1 ml-8">
               {mainNavLinks.map((link) => (
-                <NavLink key={link.path} {...link} />
+                <div key={link.path} className="relative group">
+                  <Link
+                    to={link.path}
+                    className={`text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
+                      isActive(link.path)
+                        ? 'text-white bg-orange-500 px-4 py-2 rounded'
+                        : 'text-white hover:text-orange-300'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </div>
               ))}
-              <PortfolioButton />
+
+              {/* Portfolio Dropdown */}
+              <div
+                className="relative group"
+                onMouseEnter={() => setHoveredDropdown('portfolio')}
+                onMouseLeave={() => setHoveredDropdown(null)}
+              >
+                <button
+                  className={`flex items-center gap-1 text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
+                    hoveredDropdown === 'portfolio'
+                      ? 'text-white bg-orange-500 px-4 py-2 rounded'
+                      : 'text-white hover:text-orange-300'
+                  }`}
+                >
+                  <span>Portfolio</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      hoveredDropdown === 'portfolio' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {hoveredDropdown === 'portfolio' && (
+                  <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-40">
+                    {portfolioLinks.map((link) => (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setHoveredDropdown(null)}
+                        className={`block px-4 py-3 text-sm font-bold transition-colors ${
+                          isActive(link.path)
+                            ? 'bg-orange-100 text-orange-600'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
-          {/* Desktop Social Icons - Right (visible on medium screens and up) */}
-          {isDesktop && (
-            <div className="flex items-center gap-6 flex-shrink-0">
-              {socialLinks.map((social) => (
-                <SocialIcon key={social.label} {...social} />
-              ))}
-            </div>
-          )}
-
-          {/* Mobile Menu Button */}
-          {!isDesktop && (
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 hover:bg-blue-50 rounded-lg transition-colors ml-auto"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6 text-gray-700" />
-              ) : (
-                <Menu className="w-6 h-6 text-gray-700" />
-              )}
+          {/* Action Button - Right */}
+          <div className="flex items-center gap-4 flex-shrink-0">
+            <button className="hidden sm:block px-6 py-2 bg-orange-500 text-white text-sm font-bold uppercase rounded hover:bg-orange-600 transition-colors">
+              Book a Table
             </button>
-          )}
+
+            {/* Mobile Menu Button */}
+            {!isDesktop && (
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 hover:bg-blue-700 rounded-lg transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6 text-white" />
+                ) : (
+                  <Menu className="w-6 h-6 text-white" />
+                )}
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Mobile & Tablet Navigation */}
-        {isMenuOpen && (
-          <div className="pb-4 border-t border-gray-100">
-            <div className="flex flex-col gap-1 mt-4">
+        {isMenuOpen && !isDesktop && (
+          <div className="pb-4 border-t border-blue-500">
+            <div className="flex flex-col gap-2 mt-4">
               {mainNavLinks.map((link) => (
-                <NavLink key={link.path} {...link} mobile />
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-4 py-2 rounded text-sm font-bold uppercase transition-colors ${
+                    isActive(link.path)
+                      ? 'bg-orange-500 text-white'
+                      : 'text-white hover:bg-blue-700'
+                  }`}
+                >
+                  {link.label}
+                </Link>
               ))}
+
+              {/* Mobile Portfolio */}
               <div className="relative">
                 <button
                   onClick={() => setIsPortfolioOpen(!isPortfolioOpen)}
-                  className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-bold transition-colors ${
-                    isPortfolioOpen
-                      ? 'bg-orange-500 text-white'
-                      : 'text-gray-700 hover:bg-orange-100 hover:text-orange-600'
-                  }`}
+                  className="w-full flex items-center gap-2 px-4 py-2 rounded text-sm font-bold uppercase text-white hover:bg-blue-700 transition-colors"
                 >
-                  <Newspaper className="w-4 h-4 flex-shrink-0" />
                   <span>Portfolio</span>
-                  <ChevronDown className={`w-4 h-4 ml-auto transition-transform duration-200 ${isPortfolioOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isPortfolioOpen ? 'rotate-180' : ''
+                    }`}
+                  />
                 </button>
                 {isPortfolioOpen && (
-                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-orange-600 pl-4">
+                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-orange-500 pl-4">
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
@@ -244,25 +305,18 @@ export function Navigation() {
                           setIsMenuOpen(false);
                           setIsPortfolioOpen(false);
                         }}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
+                        className={`block px-3 py-2 text-sm font-bold transition-colors ${
                           isActive(link.path)
-                            ? 'bg-orange-100 text-orange-600'
-                            : 'text-gray-600 hover:bg-orange-100 hover:text-orange-600'
+                            ? 'text-orange-300'
+                            : 'text-white hover:text-orange-300'
                         }`}
                       >
-                        <link.icon className="w-4 h-4" />
-                        <span>{link.label}</span>
+                        {link.label}
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
-            </div>
-            {/* Mobile Social Icons */}
-            <div className="flex items-center gap-6 mt-6 pt-4 border-t border-gray-100">
-              {socialLinks.map((social) => (
-                <SocialIcon key={social.label} {...social} />
-              ))}
             </div>
           </div>
         )}
