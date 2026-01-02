@@ -271,7 +271,7 @@ export default function VideoManager() {
                         href={video.youtube_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline break-all"
+                        style={{ color: '#e76c2c', textDecoration: 'none' }} onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'} onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
                       >
                         {video.youtube_url.substring(0, 40)}...
                       </a>
@@ -279,7 +279,8 @@ export default function VideoManager() {
                     <td className="px-6 py-4 text-sm flex justify-center gap-2">
                       <button
                         onClick={() => handleEdit(video)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        className="p-2 rounded-lg transition-colors"
+                        style={{ color: '#e76c2c', backgroundColor: 'transparent' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ffe6d5'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                         title="Edit video"
                       >
                         <Edit2 className="w-5 h-5" />

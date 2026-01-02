@@ -58,7 +58,7 @@ export default function AdminDashboard() {
           const Icon = item.icon;
           const colorClasses = {
             indigo: 'bg-indigo-50 border-indigo-200 hover:bg-indigo-100',
-            blue: 'bg-blue-50 border-blue-200 hover:bg-blue-100',
+            blue: 'bg-orange-50 border-orange-200 hover:bg-orange-100',
             purple: 'bg-purple-50 border-purple-200 hover:bg-purple-100',
             green: 'bg-green-50 border-green-200 hover:bg-green-100',
             orange: 'bg-orange-50 border-orange-200 hover:bg-orange-100',
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
           };
           const iconColorClasses = {
             indigo: 'text-indigo-600',
-            blue: 'text-blue-600',
+            blue: 'text-orange-600',
             purple: 'text-purple-600',
             green: 'text-green-600',
             orange: 'text-orange-600',
