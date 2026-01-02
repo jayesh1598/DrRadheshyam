@@ -45,11 +45,11 @@ export function Education() {
                 }`}
               >
                 <div className={`inline-flex p-3 rounded-lg mb-4 ${
-                  item.highlight ? 'bg-amber-200' : 'bg-blue-100'
-                }`}>
+                  item.highlight ? 'bg-amber-200' : ''
+                }`} style={!item.highlight ? { backgroundColor: '#ffe6d5' } : {}}>
                   <Icon className={`w-6 h-6 ${
-                    item.highlight ? 'text-amber-700' : 'text-blue-700'
-                  }`} />
+                    item.highlight ? 'text-amber-700' : ''
+                  }`} style={!item.highlight ? { color: '#c55a1b' } : {}} />
                 </div>
                 <h3 className="text-gray-900 mb-2">{item.degree}</h3>
                 <p className="text-gray-600 text-sm">{item.institution}</p>

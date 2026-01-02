@@ -80,7 +80,7 @@
     --color-blue-100: oklch(.932 .032 255.585);
     --color-blue-200: oklch(.882 .059 254.128);
     --color-blue-500: oklch(.623 .214 259.815);
-    --color-blue-600: oklch(.546 .245 262.881);
+    --color-blue-600: oklch(0.67 0.17 44.71);
     --color-blue-700: oklch(.488 .243 264.376);
     --color-blue-800: oklch(.424 .199 265.638);
     --color-blue-900: oklch(.379 .146 265.522);
@@ -2076,4 +2076,9 @@ html {
   syntax: "*";
   inherits: false;
   initial-value: 1;
+}
+
+/* Custom styles for active navigation links */
+a.text-sm.font-bold.uppercase.tracking-wide.transition-colors.duration-200.text-white.bg-orange-500.px-4.py-2.rounded:active {
+  background-color: var(--color-gray-900);
 }

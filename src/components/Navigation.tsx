@@ -3,7 +3,7 @@ import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play, Facebook, Insta
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
-const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
+const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2Fff7e0f6cbece4e34b27d90501cd35dc5%2F3ed9089c1fac4466a4c6f81962785f69?format=webp&width=800';
 
 export function Navigation() {
   const location = useLocation();
@@ -77,7 +77,7 @@ export function Navigation() {
 
 
   return (
-    <nav className="bg-blue-600 sticky top-0 z-50 shadow-lg">
+    <nav className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#e76c2c' }}>
       <div className="max-w-full px-6 lg:px-12">
         <div className="flex justify-between items-center h-24">
           {/* Logo - Left */}
@@ -131,16 +131,16 @@ export function Navigation() {
 
                 {/* Dropdown Menu */}
                 {hoveredDropdown === 'portfolio' && (
-                  <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-b-lg shadow-xl border border-gray-200 py-2 z-40">
+                  <div className="absolute top-full left-0 mt-0 w-48 rounded-b-lg shadow-xl py-2 z-40 flex flex-col" style={{ backgroundColor: 'rgb(231, 108, 44)', borderColor: 'rgb(231, 108, 44)' }}>
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
                         to={link.path}
                         onClick={() => setHoveredDropdown(null)}
-                        className={`block px-4 py-3 text-sm font-bold transition-colors ${
+                        className={`block px-4 py-3 text-sm font-bold transition-colors w-full ${
                           isActive(link.path)
-                            ? 'bg-orange-100 text-orange-600'
-                            : 'text-gray-700 hover:bg-gray-100'
+                            ? 'text-white'
+                            : 'text-white hover:opacity-80'
                         }`}
                       >
                         {link.label}
@@ -162,7 +162,7 @@ export function Navigation() {
             {!isDesktop && (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 hover:bg-blue-700 rounded-lg transition-colors"
+                className="p-2 rounded-lg transition-colors" style={{ color: 'inherit' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.1)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
@@ -177,7 +177,7 @@ export function Navigation() {
 
         {/* Mobile & Tablet Navigation */}
         {isMenuOpen && !isDesktop && (
-          <div className="pb-4 border-t border-blue-500">
+          <div className="pb-4" style={{ borderTopColor: 'rgba(255,255,255,0.2)', borderTopWidth: '1px' }}>
             <div className="flex flex-col gap-2 mt-4">
               {mainNavLinks.map((link) => (
                 <Link
@@ -186,9 +186,9 @@ export function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-4 py-2 rounded text-sm font-bold uppercase transition-colors ${
                     isActive(link.path)
-                      ? 'bg-orange-500 text-white'
-                      : 'text-white hover:bg-blue-700'
-                  }`}
+                      ? 'text-white'
+                      : 'text-white'
+                  }`} style={isActive(link.path) ? { backgroundColor: '#d45a1f' } : { backgroundColor: 'transparent' }} onMouseEnter={(e) => !isActive(link.path) && (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.1)')} onMouseLeave={(e) => !isActive(link.path) && (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
                   {link.label}
                 </Link>
@@ -208,7 +208,7 @@ export function Navigation() {
                   />
                 </button>
                 {isPortfolioOpen && (
-                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 border-orange-500 pl-4">
+                  <div className="mt-2 ml-4 flex flex-col gap-1 border-l-2 pl-4" style={{ borderColor: 'rgb(231, 108, 44)' }}>
                     {portfolioLinks.map((link) => (
                       <Link
                         key={link.path}
@@ -219,8 +219,8 @@ export function Navigation() {
                         }}
                         className={`block px-3 py-2 text-sm font-bold transition-colors ${
                           isActive(link.path)
-                            ? 'text-orange-300'
-                            : 'text-white hover:text-orange-300'
+                            ? 'text-white'
+                            : 'text-white hover:opacity-80'
                         }`}
                       >
                         {link.label}

@@ -60,13 +60,13 @@ export default function Certificates() {
       <Navigation />
       
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      <div className="text-white py-16" style={{ backgroundImage: 'linear-gradient(to right, #c55a1b, #a04a16)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Award className="w-12 h-12" />
             <h1 className="text-center">Certificates & Recognition</h1>
           </div>
-          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-lg max-w-2xl mx-auto" style={{ color: '#f5e6d3' }}>
             A collection of awards, certificates, and recognitions received for contributions to society, business, and public service
           </p>
         </div>
@@ -83,7 +83,7 @@ export default function Certificates() {
                 key={certificate.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
               >
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
+                <div className="relative h-64 overflow-hidden" style={{ backgroundImage: 'linear-gradient(to bottom right, #ffe6d5, #ffd4b3)' }}>
                   <img
                     src={certificate.image_url}
                     alt={certificate.title}
@@ -93,7 +93,7 @@ export default function Certificates() {
 
                 <div className="p-5">
                   <div className="mb-2">
-                    <span className="text-sm text-blue-600">{certificate.date}</span>
+                    <span className="text-sm" style={{ color: '#e76c2c' }}>{certificate.date}</span>
                   </div>
 
                   <h3 className="text-gray-900 mb-2 line-clamp-2">
@@ -110,7 +110,8 @@ export default function Certificates() {
 
                   <button
                     onClick={() => setSelectedCertificate(certificate)}
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-white rounded-lg transition-colors text-sm"
+                    style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
                   >
                     <Eye className="w-4 h-4" />
                     <span>View</span>
@@ -137,7 +138,7 @@ export default function Certificates() {
                 <div>
                   <h2 className="text-gray-900 mb-2">{selectedCertificate.title}</h2>
                   <p className="text-gray-600">{selectedCertificate.institution}</p>
-                  <p className="text-blue-600 mt-1">{selectedCertificate.date}</p>
+                  <p className="mt-1" style={{ color: '#e76c2c' }}>{selectedCertificate.date}</p>
                 </div>
                 <button
                   onClick={() => setSelectedCertificate(null)}
@@ -161,7 +162,8 @@ export default function Certificates() {
               
               <button
                 onClick={() => setSelectedCertificate(null)}
-                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="w-full px-6 py-3 text-white rounded-lg transition-colors"
+                style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
               >
                 Close
               </button>

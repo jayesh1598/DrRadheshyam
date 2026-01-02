@@ -62,10 +62,10 @@ export default function News() {
       <Navigation />
       
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      <div className="text-white py-16" style={{ backgroundImage: 'linear-gradient(to right, #c55a1b, #a04a16)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-center mb-4">Latest News & Updates</h1>
-          <p className="text-center text-blue-100 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-lg max-w-2xl mx-auto" style={{ color: '#f5e6d3' }}>
             Stay informed about recent activities, initiatives, and achievements
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function News() {
               
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
+                  <span className="inline-block px-3 py-1 text-sm rounded-full" style={{ backgroundColor: '#ffe6d5', color: '#c55a1b' }}>
                     {article.category}
                   </span>
                   <div className="flex items-center gap-1 text-gray-500 text-sm">

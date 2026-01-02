@@ -221,25 +221,49 @@ export default function Landing() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {overviewItems.map((item, index) => {
-              const iconColors = ['blue', 'green', 'teal', 'emerald'];
+              const iconColors = ['orange', 'green', 'teal', 'emerald'];
               const colorClass = iconColors[index % iconColors.length];
               const bgColorMap: Record<string, string> = {
-                blue: 'bg-blue-100',
+                orange: '',
                 green: 'bg-green-100',
                 teal: 'bg-teal-100',
                 emerald: 'bg-emerald-100',
               };
+              const bgColorStyles: Record<string, React.CSSProperties> = {
+                orange: { backgroundColor: '#ffe6d5' },
+                green: {},
+                teal: {},
+                emerald: {},
+              };
               const textColorMap: Record<string, string> = {
-                blue: 'text-blue-600',
+                orange: '',
                 green: 'text-green-600',
                 teal: 'text-teal-600',
                 emerald: 'text-emerald-600',
               };
+              const textColorStyles: Record<string, React.CSSProperties> = {
+                orange: { color: '#e76c2c' },
+                green: {},
+                teal: {},
+                emerald: {},
+              };
               const linkColorMap: Record<string, string> = {
-                blue: 'text-blue-600 hover:text-blue-700',
+                orange: '',
                 green: 'text-green-600 hover:text-green-700',
                 teal: 'text-teal-600 hover:text-teal-700',
                 emerald: 'text-emerald-600 hover:text-emerald-700',
+              };
+              const linkColorStyles: Record<string, React.CSSProperties> = {
+                orange: { color: '#e76c2c' },
+                green: {},
+                teal: {},
+                emerald: {},
+              };
+              const linkHoverColorStyles: Record<string, React.CSSProperties> = {
+                orange: { color: '#c55a1b' },
+                green: {},
+                teal: {},
+                emerald: {},
               };
 
               const IconMap: Record<number, React.ComponentType<{ className?: string }>> = {
@@ -256,14 +280,14 @@ export default function Landing() {
                   key={item.id}
                   className="bg-white p-6 sm:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <div className={`w-16 h-16 ${bgColorMap[colorClass]} rounded-full flex items-center justify-center mb-6`}>
-                    <Icon className={`w-8 h-8 ${textColorMap[colorClass]}`} />
+                  <div className={`w-16 h-16 ${bgColorMap[colorClass]} rounded-full flex items-center justify-center mb-6`} style={bgColorStyles[colorClass]}>
+                    <Icon className={`w-8 h-8 ${textColorMap[colorClass]}`} style={textColorStyles[colorClass]} />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
                     {item.description}
                   </p>
-                  <Link to="/about" className={`inline-flex items-center gap-2 font-semibold transition-colors ${linkColorMap[colorClass]}`}>
+                  <Link to="/about" className={`inline-flex items-center gap-2 font-semibold transition-colors ${linkColorMap[colorClass]}`} style={linkColorStyles[colorClass]} onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverColorStyles[colorClass])} onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkColorStyles[colorClass])}>
                     <span>Learn more</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -280,7 +304,7 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 sm:mb-16 gap-6">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Newspaper className="w-8 h-8 text-blue-600" />
+                <Newspaper className="w-8 h-8" style={{ color: '#e76c2c' }} />
                 <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
                   Latest News & Updates
                 </h2>

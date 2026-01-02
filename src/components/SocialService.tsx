@@ -39,10 +39,10 @@ export function SocialService() {
         </div>
         
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
+          <div className="p-6 rounded-xl" style={{ backgroundImage: 'linear-gradient(to bottom right, #ffe6d5, #ffd4b3)' }}>
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-blue-200 p-2 rounded-lg">
-                <Users className="w-5 h-5 text-blue-700" />
+              <div className="p-2 rounded-lg" style={{ backgroundColor: '#ffc9a3' }}>
+                <Users className="w-5 h-5" style={{ color: '#c55a1b' }} />
               </div>
               <h3 className="text-gray-900">Corona Relief Work</h3>
             </div>
@@ -76,9 +76,9 @@ export function SocialService() {
           </div>
         </div>
         
-        <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-2xl text-center">
+        <div className="mt-12 text-white p-8 rounded-2xl text-center" style={{ backgroundImage: 'linear-gradient(to right, #c55a1b, #a04a16)' }}>
           <h3 className="text-2xl mb-4">Making a Difference in the Community</h3>
-          <p className="text-blue-100 max-w-3xl mx-auto">
+          <p className="max-w-3xl mx-auto" style={{ color: '#f5e6d3' }}>
             Through various initiatives and organizations, Dr. Radheshyam S. Gupta continues to serve society 
             with unwavering dedication, bringing positive change to countless lives in Mumbai.
           </p>

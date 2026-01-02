@@ -53,7 +53,8 @@ export function Overview() {
 
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mt-4 transition-colors"
+              className="inline-flex items-center gap-2 font-semibold mt-4 transition-colors"
+              style={{ color: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.color = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.color = '#e76c2c'}
             >
               {isExpanded ? (
                 <>
@@ -73,9 +74,9 @@ export function Overview() {
         {/* Vision and Mission Section */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Vision */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 sm:p-10 rounded-xl shadow-md">
+          <div className="p-8 sm:p-10 rounded-xl shadow-md" style={{ backgroundImage: 'linear-gradient(to bottom right, #ffe6d5, #ffd4b3)' }}>
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-blue-600 p-3 rounded-lg">
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#e76c2c' }}>
                 <Eye className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900">Vision</h3>
@@ -88,7 +89,7 @@ export function Overview() {
           {/* Mission */}
           <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 sm:p-10 rounded-xl shadow-md">
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-blue-600 p-3 rounded-lg">
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#e76c2c' }}>
                 <Target className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900">Mission</h3>
