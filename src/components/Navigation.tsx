@@ -98,11 +98,17 @@ export function Navigation() {
   );
 
   const PortfolioButton = () => (
-    <div className="relative group">
+    <div
+      className="relative group"
+      onMouseEnter={() => isDesktop && setIsPortfolioOpen(true)}
+      onMouseLeave={() => isDesktop && setIsPortfolioOpen(false)}
+    >
       <button
         onClick={(e) => {
-          e.stopPropagation();
-          setIsPortfolioOpen(!isPortfolioOpen);
+          if (!isDesktop) {
+            e.stopPropagation();
+            setIsPortfolioOpen(!isPortfolioOpen);
+          }
         }}
         className={`flex items-center gap-1 px-3 py-2 text-gray-700 font-bold text-sm transition-all ${
           isPortfolioOpen
