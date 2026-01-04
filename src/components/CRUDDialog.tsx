@@ -193,13 +193,13 @@ export function CRUDDialog({
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4 pt-6 border-t border-gray-200 sticky bottom-0 bg-white">
+          <div className="flex gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200 sticky bottom-0 bg-white">
             <Button
               type="submit"
               disabled={isSubmitting || loading}
               variant="default"
-              size="default"
-              className="flex-1"
+              size="sm"
+              className="flex-1 text-xs sm:text-sm"
             >
               {isSubmitting || loading ? 'Saving...' : submitButtonLabel}
             </Button>
@@ -208,8 +208,8 @@ export function CRUDDialog({
               onClick={onClose}
               disabled={isSubmitting || loading}
               variant="outline"
-              size="default"
-              className="flex-1"
+              size="sm"
+              className="flex-1 text-xs sm:text-sm"
             >
               Cancel
             </Button>
