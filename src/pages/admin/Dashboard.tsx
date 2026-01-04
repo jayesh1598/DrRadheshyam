@@ -207,7 +207,7 @@ export default function AdminDashboard() {
                   onClick={() => navigate(item.path)}
                   className={`border-2 rounded-xl p-6 text-left transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
                 >
-                  <div className={`w-12 h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4 mb-4`}>
+                  <div className={`w-12 h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="font-semibold text-gray-900 mb-1">{item.label}</h4>
