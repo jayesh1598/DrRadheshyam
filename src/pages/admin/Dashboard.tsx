@@ -172,18 +172,18 @@ export default function AdminDashboard() {
                 <button
                   key={card.path}
                   onClick={() => navigate(card.path)}
-                  className={`border-2 rounded-xl p-6 transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
+                  className={`border-2 rounded-xl p-4 sm:p-6 transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
                 >
-                  <div className={`w-12 h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className="w-6 h-6" />
+                  <div className={`w-10 sm:w-12 h-10 sm:h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className="w-5 sm:w-6 h-5 sm:h-6" />
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{card.label}</p>
-                  <p className="text-3xl font-bold text-gray-900">
+                  <p className="text-xs sm:text-sm text-gray-600 mb-2">{card.label}</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-gray-900">
                     {loading ? '-' : card.count}
                   </p>
-                  <div className="flex items-center gap-1 text-sm text-gray-600 mt-4">
+                  <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 mt-4">
                     <span>Manage</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4" />
                   </div>
                 </button>
               );
