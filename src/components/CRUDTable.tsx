@@ -265,28 +265,30 @@ export function CRUDTable<T extends { id: string }>({
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       {onEdit && (
-                        <button
+                        <Button
                           onClick={() => onEdit(item)}
-                          className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors text-xs font-medium"
+                          variant="default"
+                          size="sm"
                           title="Edit"
                         >
                           <Edit2 className="w-3 h-3" />
                           Edit
-                        </button>
+                        </Button>
                       )}
                       {onDelete && (
-                        <button
+                        <Button
                           onClick={() => {
                             if (confirm('Are you sure you want to delete this item?')) {
                               onDelete(item);
                             }
                           }}
-                          className="inline-flex items-center gap-1 bg-red-700 hover:bg-red-800 text-white px-3 py-1 rounded transition-colors text-xs font-medium border border-red-800"
+                          variant="destructive"
+                          size="sm"
                           title="Delete"
                         >
                           <Trash2 className="w-3 h-3" />
                           Delete
-                        </button>
+                        </Button>
                       )}
                     </div>
                   </td>
