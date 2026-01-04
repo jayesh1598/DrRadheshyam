@@ -227,20 +227,20 @@ export function CRUDTable<T extends { id: string }>({
             <p className="text-gray-500">{emptyMessage}</p>
           </div>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="px-6 py-3 text-left font-semibold text-gray-900 w-12">#</th>
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 w-8 sm:w-12">#</th>
                 {columns.map((col) => (
                   <th
                     key={col.key}
-                    className={`px-6 py-3 text-left font-semibold text-gray-900 ${
+                    className={`px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 ${
                       col.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
                     }`}
                     onClick={() => col.sortable && handleSort(col.key)}
                     style={{ width: col.width }}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <span>{col.label}</span>
                       {col.sortable && sortKey === col.key && (
                         <span className="text-xs">
@@ -250,20 +250,20 @@ export function CRUDTable<T extends { id: string }>({
                     </div>
                   </th>
                 ))}
-                <th className="px-6 py-3 text-left font-semibold text-gray-900 w-24">Action</th>
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 w-16 sm:w-24">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {paginatedData.map((item, index) => (
                 <tr key={item.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 text-gray-600 font-medium">{startIndex + index + 1}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-4 text-gray-600 font-medium text-xs sm:text-sm">{startIndex + index + 1}</td>
                   {columns.map((col) => (
-                    <td key={`${item.id}-${col.key}`} className="px-6 py-4 text-gray-700">
+                    <td key={`${item.id}-${col.key}`} className="px-2 sm:px-4 py-2 sm:py-4 text-gray-700 text-xs sm:text-sm">
                       {col.render ? col.render(item[col.key as keyof T], item) : String(item[col.key as keyof T] || '-')}
                     </td>
                   ))}
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2">
+                  <td className="px-2 sm:px-4 py-2 sm:py-4">
+                    <div className="flex gap-1 sm:gap-2 flex-wrap">
                       {onEdit && (
                         <Button
                           onClick={() => onEdit(item)}
