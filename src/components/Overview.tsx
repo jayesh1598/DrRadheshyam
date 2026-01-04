@@ -15,7 +15,7 @@ export function Overview() {
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 text-center" style={{ backgroundImage: 'linear-gradient(to right, #e76c2c, #c55a1b, #e76c2c)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <h3 className="text-xl sm:text-2xl font-bold text-center" style={{ backgroundImage: 'linear-gradient(to right, #e76c2c, #c55a1b, #e76c2c)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginTop: '0px', marginBottom: '10px' }}>
                 Business Leader | Social Reformer | Doctorate in Social Work
               </h3>
               <p className="text-gray-600 leading-relaxed text-justify">
