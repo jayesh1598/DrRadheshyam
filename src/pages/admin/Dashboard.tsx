@@ -223,7 +223,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Getting Started</h3>
           <ul className="space-y-3">
             <li className="flex gap-3 items-start">
