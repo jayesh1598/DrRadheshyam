@@ -13,12 +13,12 @@ export function Overview() {
             About Dr. Radheshyam Gupta
           </h2>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="space-y-6">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 text-center">
                 Business Leader | Social Reformer | Doctorate in Social Work
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-justify">
                 Dr. Radheshyam Gupta is a distinguished businessman, social reformer, and community leader, known for his unwavering commitment to social welfare, ethical leadership, and inclusive development. With a Doctorate in Social Work, he has dedicated his life to serving society while maintaining excellence in business and professional endeavors.
               </p>
             </div>
@@ -26,25 +26,25 @@ export function Overview() {
             {isExpanded && (
               <div className="space-y-6 animate-in fade-in duration-300">
                 <div>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-justify">
                     With extensive experience in property, finance, and entrepreneurship, Dr. Gupta is respected for his strategic vision, integrity, and people-oriented approach. His professional journey reflects a rare balance of commercial success and social responsibility.
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-justify">
                     Dr. Gupta holds several prominent leadership positions. He is the President of Arise Juhu Citizen Foundation and President of World Social Work, actively working towards civic engagement, community empowerment, and social justice. As a Trustee of Sankat Mochan Shri Hanuman Temple, he promotes spiritual values, cultural harmony, and service to humanity. He is also associated with the media as the Managing Editor of SAHU SAVERA, using journalism as a tool for awareness and positive social transformation.
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-justify">
                     A strong believer in discipline, fitness, and spirituality, Dr. Gupta actively participates in yoga and wellness initiatives, encouraging a healthy and balanced lifestyle. His life philosophy is rooted in positivity, hard work, and selfless service.
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-justify">
                     Dr. Radheshyam Gupta continues to inspire and lead by example, striving to build a society based on values, unity, and sustainable progress.
                   </p>
                 </div>
