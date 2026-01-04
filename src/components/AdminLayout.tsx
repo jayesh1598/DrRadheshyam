@@ -61,7 +61,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-64 flex flex-col ${
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-auto flex flex-col ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
