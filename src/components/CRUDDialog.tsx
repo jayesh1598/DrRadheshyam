@@ -111,7 +111,7 @@ export function CRUDDialog({
           )}
 
           {/* Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {fields.map((field) => {
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
