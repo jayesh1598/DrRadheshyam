@@ -175,10 +175,11 @@ export function CRUDTable<T extends { id: string }>({
             onClick={onAdd}
             variant="default"
             size="sm"
-            className="gap-2"
+            className="gap-1 sm:gap-2 text-xs sm:text-sm"
           >
-            <span className="text-lg leading-none">+</span>
-            {addButtonLabel}
+            <span className="text-base sm:text-lg leading-none">+</span>
+            <span className="hidden xs:inline">{addButtonLabel}</span>
+            <span className="xs:hidden">Add</span>
           </Button>
         </div>
       )}
