@@ -171,13 +171,15 @@ export function CRUDTable<T extends { id: string }>({
       {/* Header with Add Button */}
       {onAdd && (
         <div className="flex justify-end">
-          <button
+          <Button
             onClick={onAdd}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm"
+            variant="default"
+            size="sm"
+            className="gap-2"
           >
             <span className="text-lg leading-none">+</span>
             {addButtonLabel}
-          </button>
+          </Button>
         </div>
       )}
 
