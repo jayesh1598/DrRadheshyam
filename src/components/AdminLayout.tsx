@@ -109,11 +109,11 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="bg-card border-b sticky top-0 z-20">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
-            <div>
+        <header className="bg-card border-b sticky top-0 z-20 md:top-0">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center min-h-fit">
+            <div className="pl-12 md:pl-0">
               <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{title}</h1>
             </div>
             {/* Mobile Logout - shown only on small screens */}
