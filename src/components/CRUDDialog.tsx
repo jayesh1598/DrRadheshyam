@@ -194,21 +194,25 @@ export function CRUDDialog({
 
           {/* Actions */}
           <div className="flex gap-4 pt-6 border-t border-gray-200 sticky bottom-0 bg-white">
-            <button
+            <Button
               type="submit"
               disabled={isSubmitting || loading}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-2 rounded-lg transition-colors"
+              variant="default"
+              size="default"
+              className="flex-1"
             >
               {isSubmitting || loading ? 'Saving...' : submitButtonLabel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={onClose}
               disabled={isSubmitting || loading}
-              className="flex-1 bg-gray-300 hover:bg-gray-400 disabled:bg-gray-200 text-gray-900 font-medium py-2 rounded-lg transition-colors"
+              variant="outline"
+              size="default"
+              className="flex-1"
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>
