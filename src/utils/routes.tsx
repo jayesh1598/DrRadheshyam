@@ -16,35 +16,43 @@ import AboutManager from "../pages/admin/AboutManager";
 import SiteSettingsManager from "../pages/admin/SiteSettingsManager";
 import ServicesManager from "../pages/admin/ServicesManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: Landing,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/about",
     Component: AboutUs,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/news",
     Component: News,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/certificates",
     Component: Certificates,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/gallery",
     Component: Gallery,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/videos",
     Component: VideoGallery,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/login",
     Component: AdminLogin,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/dashboard",
@@ -53,6 +61,7 @@ export const router = createBrowserRouter([
         <AdminDashboard />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/news",
@@ -61,6 +70,7 @@ export const router = createBrowserRouter([
         <NewsManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/gallery",
@@ -69,6 +79,7 @@ export const router = createBrowserRouter([
         <GalleryManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/videos",
@@ -77,6 +88,7 @@ export const router = createBrowserRouter([
         <VideoManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/certificates",
@@ -85,6 +97,7 @@ export const router = createBrowserRouter([
         <CertificatesManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/banners",
@@ -93,6 +106,7 @@ export const router = createBrowserRouter([
         <BannersManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/about",
@@ -101,6 +115,7 @@ export const router = createBrowserRouter([
         <AboutManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/settings",
@@ -109,6 +124,7 @@ export const router = createBrowserRouter([
         <SiteSettingsManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/admin/services",
@@ -117,5 +133,6 @@ export const router = createBrowserRouter([
         <ServicesManager />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorBoundary />,
   },
 ]);

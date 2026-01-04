@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Check } from 'lucide-react';
 import { AdminLayout } from '../../components/AdminLayout';
+import { Save, AlertCircle, CheckCircle } from 'lucide-react';
 
 interface SiteSetting {
   id: string;
@@ -11,45 +10,43 @@ interface SiteSetting {
 }
 
 export default function SiteSettingsManager() {
-  const navigate = useNavigate();
   const [logo, setLogo] = useState('');
   const [favicon, setFavicon] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState<'success' | 'error'>('success');
 
   useEffect(() => {
     loadSettings();
   }, []);
 
   const loadSettings = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('site_settings')
         .select('*')
         .in('setting_key', ['logo', 'favicon']);
 
-      if (error) {
-        console.error('Error loading settings:', error);
-        return;
-      }
+      if (error) throw error;
 
       const settings = data || [];
-      const logoSetting = settings.find(s => s.setting_key === 'logo');
-      const faviconSetting = settings.find(s => s.setting_key === 'favicon');
+      const logoSetting = settings.find((s) => s.setting_key === 'logo');
+      const faviconSetting = settings.find((s) => s.setting_key === 'favicon');
 
       if (logoSetting) setLogo(logoSetting.setting_value || '');
       if (faviconSetting) setFavicon(faviconSetting.setting_value || '');
-    } catch (err) {
-      console.error('Error:', err);
+    } catch (error) {
+      console.error('Error loading settings:', error);
+      setMessage('Error loading settings');
+      setMessageType('error');
     } finally {
       setLoading(false);
     }
   };
 
   const saveSetting = async (key: string, value: string) => {
-    setSaving(true);
     try {
       const { data: existing, error: fetchError } = await supabase
         .from('site_settings')
@@ -69,132 +66,166 @@ export default function SiteSettingsManager() {
 
         if (error) throw error;
       } else {
-        const { error } = await supabase
-          .from('site_settings')
-          .insert([{ setting_key: key, setting_value: value }]);
+        const { error } = await supabase.from('site_settings').insert([
+          {
+            setting_key: key,
+            setting_value: value,
+          },
+        ]);
 
         if (error) throw error;
       }
+    } catch (error) {
+      throw error;
+    }
+  };
 
-      setMessage(`${key.charAt(0).toUpperCase() + key.slice(1)} updated successfully!`);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await Promise.all([saveSetting('logo', logo), saveSetting('favicon', favicon)]);
+
+      setMessage('Settings saved successfully!');
+      setMessageType('success');
       setTimeout(() => setMessage(''), 3000);
-    } catch (err) {
-      setMessage(`Error saving ${key}: ${(err as Error).message}`);
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      setMessage('Error saving settings');
+      setMessageType('error');
     } finally {
       setSaving(false);
     }
   };
 
-  const handleSaveLogo = async () => {
-    if (!logo) {
-      alert('Please enter a logo URL');
-      return;
-    }
-    await saveSetting('logo', logo);
-  };
-
-  const handleSaveFavicon = async () => {
-    if (!favicon) {
-      alert('Please enter a favicon URL');
-      return;
-    }
-    await saveSetting('favicon', favicon);
-  };
+  if (loading) {
+    return (
+      <AdminLayout title="Site Settings">
+        <div className="flex justify-center items-center h-64">
+          <p className="text-gray-600">Loading settings...</p>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout title="Site Settings">
-      {message && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
-          <Check className="w-5 h-5" />
-          {message}
-        </div>
-      )}
+      <div className="max-w-4xl">
+        {/* Message Alert */}
+        {message && (
+          <div
+            className={`mb-6 p-4 rounded-lg flex items-start gap-3 ${
+              messageType === 'success'
+                ? 'bg-green-50 border border-green-200'
+                : 'bg-red-50 border border-red-200'
+            }`}
+          >
+            {messageType === 'success' ? (
+              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            )}
+            <span
+              className={messageType === 'success' ? 'text-green-800' : 'text-red-800'}
+            >
+              {message}
+            </span>
+          </div>
+        )}
 
-      {loading ? (
-        <p className="text-center py-8">Loading settings...</p>
-      ) : (
-        <div className="space-y-8">
-            {/* Logo Section */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Logo</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Logo URL
-                  </label>
-                  <input
-                    type="url"
-                    value={logo}
-                    onChange={(e) => setLogo(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                    placeholder="https://example.com/logo.png"
-                  />
-                  <p className="text-xs text-gray-500 mt-2">Recommended size: 200x60 pixels or larger. Keep aspect ratio 3:1</p>
-                </div>
+        {/* Logo Setting */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Logo</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            Upload your site logo. This will be displayed in the navigation header.
+          </p>
 
-                {logo && (
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-medium text-gray-700 mb-2">Preview:</p>
-                    <img
-                      src={logo}
-                      alt="Logo preview"
-                      className="max-h-16 object-contain bg-white p-2 rounded"
-                    />
-                  </div>
-                )}
-
-                <button
-                  onClick={handleSaveLogo}
-                  disabled={saving}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-2 rounded-lg transition flex items-center gap-2"
-                >
-                  <Check className="w-4 h-4" />
-                  {saving ? 'Saving...' : 'Save Logo'}
-                </button>
+          <div className="space-y-4">
+            {logo && (
+              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <p className="text-sm text-gray-600 mb-2">Current Logo:</p>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="h-20 w-auto object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://via.placeholder.com/150x60?text=Logo+Error';
+                  }}
+                />
               </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Logo URL
+              </label>
+              <input
+                type="url"
+                value={logo}
+                onChange={(e) => setLogo(e.target.value)}
+                placeholder="https://example.com/logo.png"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Enter the full URL to your logo image
+              </p>
             </div>
-
-            {/* Favicon Section */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Favicon</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Favicon URL
-                  </label>
-                  <input
-                    type="url"
-                    value={favicon}
-                    onChange={(e) => setFavicon(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                    placeholder="https://example.com/favicon.ico"
-                  />
-                  <p className="text-xs text-gray-500 mt-2">Recommended: .ico, .png, or .svg file. Size: 32x32 pixels or 64x64 pixels</p>
-                </div>
-
-                {favicon && (
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-medium text-gray-700 mb-2">Preview:</p>
-                    <img
-                      src={favicon}
-                      alt="Favicon preview"
-                      className="w-8 h-8 object-contain"
-                    />
-                  </div>
-                )}
-
-                <button
-                  onClick={handleSaveFavicon}
-                  disabled={saving}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-2 rounded-lg transition flex items-center gap-2"
-                >
-                  <Check className="w-4 h-4" />
-                  {saving ? 'Saving...' : 'Save Favicon'}
-                </button>
-              </div>
-            </div>
+          </div>
         </div>
-      )}
+
+        {/* Favicon Setting */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Favicon</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            Upload your site favicon (the small icon shown in browser tabs).
+          </p>
+
+          <div className="space-y-4">
+            {favicon && (
+              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <p className="text-sm text-gray-600 mb-2">Current Favicon:</p>
+                <img
+                  src={favicon}
+                  alt="Favicon"
+                  className="h-8 w-8 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://via.placeholder.com/32x32?text=Favicon';
+                  }}
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Favicon URL
+              </label>
+              <input
+                type="url"
+                value={favicon}
+                onChange={(e) => setFavicon(e.target.value)}
+                placeholder="https://example.com/favicon.ico"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Use .ico, .png, or .jpg format. Recommended size: 32x32 or 64x64 pixels
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Save Button */}
+        <div className="flex gap-3">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+          >
+            <Save className="w-5 h-5" />
+            {saving ? 'Saving...' : 'Save Settings'}
+          </button>
+        </div>
+      </div>
     </AdminLayout>
   );
 }

@@ -54,14 +54,14 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       {/* Sidebar Overlay for Mobile */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden z-30"
+          className="fixed inset-0 bg-black/50 md:hidden z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-40 w-64 flex flex-col ${
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-64 flex flex-col ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
@@ -109,11 +109,11 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="bg-card border-b sticky top-0 z-20">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
-            <div>
+        <header className="bg-card border-b sticky top-0 z-20 md:top-0">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center min-h-fit">
+            <div className="pl-12 md:pl-0">
               <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{title}</h1>
             </div>
             {/* Mobile Logout - shown only on small screens */}

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { supabase } from '../../utils/supabase/client';
-import { Plus, Edit, Trash2 } from 'lucide-react';
 import { AdminLayout } from '../../components/AdminLayout';
+import { CRUDTable, TableColumn } from '../../components/CRUDTable';
+import { CRUDDialog, FormField } from '../../components/CRUDDialog';
 
 interface Certificate {
   id: string;
@@ -13,257 +13,182 @@ interface Certificate {
   image_url: string;
 }
 
+const columns: TableColumn[] = [
+  {
+    key: 'title',
+    label: 'Title',
+    sortable: true,
+  },
+  {
+    key: 'institution',
+    label: 'Institution',
+    sortable: true,
+  },
+  {
+    key: 'date',
+    label: 'Date',
+    sortable: true,
+    render: (value) => new Date(value).toLocaleDateString(),
+  },
+  {
+    key: 'image_url',
+    label: 'Image',
+    render: (value) => (
+      <img
+        src={value}
+        alt="Certificate"
+        className="h-10 w-16 object-cover rounded"
+        onError={(e) => {
+          e.currentTarget.src =
+            'https://via.placeholder.com/64x40?text=No+Image';
+        }}
+      />
+    ),
+  },
+];
+
+const formFields: FormField[] = [
+  {
+    name: 'title',
+    label: 'Certificate Title',
+    type: 'text',
+    placeholder: 'e.g., Honorary Doctorate Degree',
+    required: true,
+  },
+  {
+    name: 'date',
+    label: 'Date Awarded',
+    type: 'date',
+    required: true,
+  },
+  {
+    name: 'institution',
+    label: 'Institution/Organization',
+    type: 'text',
+    placeholder: 'e.g., Dr. Babasaheb Ambedkar University',
+    required: true,
+  },
+  {
+    name: 'image_url',
+    label: 'Certificate Image URL',
+    type: 'url',
+    placeholder: 'https://example.com/certificate.jpg',
+    required: true,
+  },
+  {
+    name: 'description',
+    label: 'Description',
+    type: 'textarea',
+    placeholder: 'Describe this certificate',
+    rows: 4,
+  },
+];
+
 export default function CertificatesManager() {
-  const navigate = useNavigate();
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Partial<Certificate>>({
-    title: '',
-    date: new Date().toISOString().split('T')[0],
-    institution: '',
-    description: '',
-    image_url: '',
-  });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingCert, setEditingCert] = useState<Certificate | null>(null);
+  const [formData, setFormData] = useState<Record<string, any>>({});
 
   useEffect(() => {
     loadCertificates();
   }, []);
 
   const loadCertificates = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('certificates')
         .select('*')
         .order('date', { ascending: false });
 
-      if (error) {
-        console.error('Error loading certificates:', error);
-        return;
-      }
-
+      if (error) throw error;
       setCertificates(data || []);
-    } catch (err) {
-      console.error('Error:', err);
+    } catch (error) {
+      console.error('Error loading certificates:', error);
+      alert('Error loading certificates');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.title || !formData.date || !formData.institution) {
-      alert('Please fill in all required fields');
-      return;
-    }
-
-    try {
-      if (editingId) {
-        const { error } = await supabase
-          .from('certificates')
-          .update(formData)
-          .eq('id', editingId);
-
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('certificates')
-          .insert([formData]);
-
-        if (error) throw error;
-      }
-
-      setFormData({
-        title: '',
-        date: new Date().toISOString().split('T')[0],
-        institution: '',
-        description: '',
-        image_url: '',
-      });
-      setEditingId(null);
-      setShowForm(false);
-      loadCertificates();
-    } catch (err) {
-      alert('Error saving certificate: ' + (err as Error).message);
-    }
+  const handleAdd = () => {
+    setEditingCert(null);
+    setFormData({
+      title: '',
+      date: new Date().toISOString().split('T')[0],
+      institution: '',
+      description: '',
+      image_url: '',
+    });
+    setIsDialogOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure?')) return;
+  const handleEdit = (cert: Certificate) => {
+    setEditingCert(cert);
+    setFormData(cert);
+    setIsDialogOpen(true);
+  };
 
+  const handleDelete = async (cert: Certificate) => {
     try {
       const { error } = await supabase
         .from('certificates')
         .delete()
-        .eq('id', id);
+        .eq('id', cert.id);
 
       if (error) throw error;
       loadCertificates();
-    } catch (err) {
-      alert('Error deleting certificate: ' + (err as Error).message);
+    } catch (error) {
+      console.error('Error deleting certificate:', error);
+      alert('Error deleting certificate');
     }
   };
 
-  const handleEdit = (cert: Certificate) => {
-    setFormData(cert);
-    setEditingId(cert.id);
-    setShowForm(true);
+  const handleSubmit = async (data: Record<string, any>) => {
+    try {
+      if (editingCert) {
+        const { error } = await supabase
+          .from('certificates')
+          .update(data)
+          .eq('id', editingCert.id);
+
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('certificates').insert([data]);
+        if (error) throw error;
+      }
+
+      loadCertificates();
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
-    <AdminLayout title="Certificates Management">
-      <div className="flex gap-4 mb-8">
-        <button
-          onClick={() => {
-            setShowForm(true);
-            setEditingId(null);
-            setFormData({
-              title: '',
-              date: new Date().toISOString().split('T')[0],
-              institution: '',
-              description: '',
-              image_url: '',
-            });
-          }}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
-        >
-          <Plus className="w-4 h-4" />
-          Add Certificate
-        </button>
-      </div>
+    <AdminLayout title="Certificates">
+      <CRUDTable<Certificate>
+        title="Certificates"
+        data={certificates}
+        columns={columns}
+        loading={loading}
+        onAdd={handleAdd}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        addButtonLabel="Add Certificate"
+        emptyMessage="No certificates yet. Add your first certificate!"
+      />
 
-        {showForm && (
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold mb-6">
-              {editingId ? 'Edit Certificate' : 'Add New Certificate'}
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Title *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.title || ''}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Date *
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.date || ''}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Institution *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.institution || ''}
-                    onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Image URL
-                </label>
-                <input
-                  type="text"
-                  value={formData.image_url || ''}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                  placeholder="https://example.com/cert.jpg"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Description
-                </label>
-                <textarea
-                  value={formData.description || ''}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
-                  rows={4}
-                  placeholder="Details about the certificate"
-                />
-              </div>
-
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
-                >
-                  {editingId ? 'Update Certificate' : 'Add Certificate'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowForm(false)}
-                  className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-
-        {loading ? (
-          <p className="text-center py-8">Loading certificates...</p>
-        ) : (
-          <div className="space-y-4">
-            {certificates.length === 0 ? (
-              <p className="text-center py-8 text-gray-500">No certificates yet</p>
-            ) : (
-              certificates.map((cert) => (
-                <div key={cert.id} className="bg-white rounded-lg shadow p-6">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900">{cert.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {new Date(cert.date).toLocaleDateString()} • {cert.institution}
-                      </p>
-                      <p className="text-gray-700 mt-2 line-clamp-2">{cert.description}</p>
-                    </div>
-                    <div className="flex gap-2 ml-4">
-                      <button
-                        onClick={() => handleEdit(cert)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(cert.id)}
-                        className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        )}
+      <CRUDDialog
+        isOpen={isDialogOpen}
+        title={editingCert ? 'Edit Certificate' : 'Add New Certificate'}
+        fields={formFields}
+        data={formData}
+        onClose={() => setIsDialogOpen(false)}
+        onSubmit={handleSubmit}
+        submitButtonLabel={editingCert ? 'Update Certificate' : 'Add Certificate'}
+      />
     </AdminLayout>
   );
 }
