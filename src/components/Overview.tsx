@@ -53,8 +53,8 @@ export function Overview() {
 
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="inline-flex items-center gap-2 font-semibold mt-4 transition-colors"
-              style={{ color: '#e76c2c', paddingBottom: '24px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.color = '#e76c2c'}
+              className="inline-flex items-center gap-2 font-semibold transition-colors"
+              style={{ color: '#e76c2c', paddingBottom: '24px', marginTop: '0px', marginBottom: '10px' }} onMouseEnter={(e) => e.currentTarget.style.color = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.color = '#e76c2c'}
             >
               {isExpanded ? (
                 <>
