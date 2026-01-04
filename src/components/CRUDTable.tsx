@@ -278,7 +278,7 @@ export function CRUDTable<T extends { id: string }>({
                               onDelete(item);
                             }
                           }}
-                          className="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition-colors text-xs font-medium"
+                          className="inline-flex items-center gap-1 bg-red-700 hover:bg-red-800 text-white px-3 py-1 rounded transition-colors text-xs font-medium border border-red-800"
                           title="Delete"
                         >
                           <Trash2 className="w-3 h-3" />
