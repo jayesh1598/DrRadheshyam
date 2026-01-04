@@ -146,15 +146,15 @@ export default function AdminDashboard() {
     <AdminLayout title="Dashboard">
       <div className="space-y-8">
         {/* Overview Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-lg">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">Welcome Back!</h2>
-              <p className="text-blue-100 max-w-2xl">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="flex-1">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Welcome Back!</h2>
+              <p className="text-blue-100 max-w-2xl text-sm sm:text-base">
                 Here's an overview of your site content and management options.
               </p>
             </div>
-            <TrendingUp className="w-12 h-12 text-blue-200 opacity-50" />
+            <TrendingUp className="w-10 sm:w-12 h-10 sm:h-12 text-blue-200 opacity-50 flex-shrink-0" />
           </div>
         </div>
 
