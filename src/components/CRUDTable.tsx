@@ -184,8 +184,8 @@ export function CRUDTable<T extends { id: string }>({
       )}
 
       {/* Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-4 rounded-lg border border-gray-200">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 flex-wrap">
           <label htmlFor="pageSize" className="font-medium">
             Show
           </label>
@@ -196,7 +196,7 @@ export function CRUDTable<T extends { id: string }>({
               setPageSize(Number(e.target.value));
               setCurrentPage(1);
             }}
-            className="border border-gray-300 rounded px-2 py-1 text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            className="border border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
@@ -212,7 +212,7 @@ export function CRUDTable<T extends { id: string }>({
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => handleSearch(e.target.value)}
-          className="flex-1 sm:flex-none px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
+          className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-xs sm:text-sm"
         />
       </div>
 
