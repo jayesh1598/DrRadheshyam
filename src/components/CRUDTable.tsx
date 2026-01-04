@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Trash2, Edit2 } from 'lucide-react';
+import { Button } from './ui/button';
 
 export interface TableColumn {
   key: string;
@@ -170,19 +171,22 @@ export function CRUDTable<T extends { id: string }>({
       {/* Header with Add Button */}
       {onAdd && (
         <div className="flex justify-end">
-          <button
+          <Button
             onClick={onAdd}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm"
+            variant="default"
+            size="sm"
+            className="gap-1 sm:gap-2 text-xs sm:text-sm"
           >
-            <span className="text-lg leading-none">+</span>
-            {addButtonLabel}
-          </button>
+            <span className="text-base sm:text-lg leading-none">+</span>
+            <span className="hidden xs:inline">{addButtonLabel}</span>
+            <span className="xs:hidden">Add</span>
+          </Button>
         </div>
       )}
 
       {/* Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-4 rounded-lg border border-gray-200">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 flex-wrap">
           <label htmlFor="pageSize" className="font-medium">
             Show
           </label>
@@ -193,7 +197,7 @@ export function CRUDTable<T extends { id: string }>({
               setPageSize(Number(e.target.value));
               setCurrentPage(1);
             }}
-            className="border border-gray-300 rounded px-2 py-1 text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            className="border border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
@@ -209,7 +213,7 @@ export function CRUDTable<T extends { id: string }>({
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => handleSearch(e.target.value)}
-          className="flex-1 sm:flex-none px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
+          className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-xs sm:text-sm"
         />
       </div>
 
@@ -224,20 +228,20 @@ export function CRUDTable<T extends { id: string }>({
             <p className="text-gray-500">{emptyMessage}</p>
           </div>
         ) : (
-          <table className="w-full text-sm">
+          <table className="w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="px-6 py-3 text-left font-semibold text-gray-900 w-12">#</th>
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 w-8 sm:w-12">#</th>
                 {columns.map((col) => (
                   <th
                     key={col.key}
-                    className={`px-6 py-3 text-left font-semibold text-gray-900 ${
+                    className={`px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 ${
                       col.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
                     }`}
                     onClick={() => col.sortable && handleSort(col.key)}
                     style={{ width: col.width }}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <span>{col.label}</span>
                       {col.sortable && sortKey === col.key && (
                         <span className="text-xs">
@@ -247,29 +251,30 @@ export function CRUDTable<T extends { id: string }>({
                     </div>
                   </th>
                 ))}
-                <th className="px-6 py-3 text-left font-semibold text-gray-900 w-24">Action</th>
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-gray-900 w-16 sm:w-24">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {paginatedData.map((item, index) => (
                 <tr key={item.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 text-gray-600 font-medium">{startIndex + index + 1}</td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-4 text-gray-600 font-medium text-xs sm:text-sm">{startIndex + index + 1}</td>
                   {columns.map((col) => (
-                    <td key={`${item.id}-${col.key}`} className="px-6 py-4 text-gray-700">
+                    <td key={`${item.id}-${col.key}`} className="px-2 sm:px-4 py-2 sm:py-4 text-gray-700 text-xs sm:text-sm">
                       {col.render ? col.render(item[col.key as keyof T], item) : String(item[col.key as keyof T] || '-')}
                     </td>
                   ))}
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2">
+                  <td className="px-2 sm:px-4 py-2 sm:py-4">
+                    <div className="flex gap-1 sm:gap-2 flex-wrap">
                       {onEdit && (
-                        <button
+                        <Button
                           onClick={() => onEdit(item)}
-                          className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors text-xs font-medium"
+                          variant="default"
+                          size="sm"
                           title="Edit"
                         >
                           <Edit2 className="w-3 h-3" />
                           Edit
-                        </button>
+                        </Button>
                       )}
                       {onDelete && (
                         <button
@@ -278,7 +283,7 @@ export function CRUDTable<T extends { id: string }>({
                               onDelete(item);
                             }
                           }}
-                          className="inline-flex items-center gap-1 bg-red-700 hover:bg-red-800 text-white px-3 py-1 rounded transition-colors text-xs font-medium border border-red-800"
+                          className="inline-flex items-center gap-1 bg-white border border-red-600 hover:bg-red-50 text-red-600 px-3 py-1 rounded transition-colors text-xs font-medium"
                           title="Delete"
                         >
                           <Trash2 className="w-3 h-3" />
@@ -296,22 +301,22 @@ export function CRUDTable<T extends { id: string }>({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-4 rounded-lg border border-gray-200">
-          <div className="text-sm text-gray-600">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
+          <div className="text-xs sm:text-sm text-gray-600">
             Showing {startIndex + 1} to {Math.min(startIndex + pageSize, sortedData.length)} of{' '}
             {sortedData.length} entries
             {searchTerm && ` (filtered from ${data.length} total)`}
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="inline-flex items-center gap-1 px-2 py-1 text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1 px-2 py-1 text-xs sm:text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               title="Previous"
             >
-              <ChevronLeft className="w-4 h-4" />
-              Previous
+              <ChevronLeft className="w-3 sm:w-4 h-3 sm:h-4" />
+              <span className="hidden sm:inline">Previous</span>
             </button>
 
             <div className="flex gap-1">{renderPageNumbers()}</div>
@@ -319,11 +324,11 @@ export function CRUDTable<T extends { id: string }>({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="inline-flex items-center gap-1 px-2 py-1 text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1 px-2 py-1 text-xs sm:text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               title="Next"
             >
-              Next
-              <ChevronRight className="w-4 h-4" />
+              <span className="hidden sm:inline">Next</span>
+              <ChevronRight className="w-3 sm:w-4 h-3 sm:h-4" />
             </button>
           </div>
         </div>

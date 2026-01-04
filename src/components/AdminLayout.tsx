@@ -61,7 +61,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-64 flex flex-col ${
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-72 flex flex-col ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
@@ -112,9 +112,9 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-card border-b sticky top-0 z-20 md:top-0">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center min-h-fit">
-            <div className="pl-12 md:pl-0">
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{title}</h1>
+          <div className="px-3 sm:px-6 lg:px-8 py-3 sm:py-6 flex justify-between items-center min-h-fit gap-2">
+            <div className="pl-10 md:pl-0 flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
             </div>
             {/* Mobile Logout - shown only on small screens */}
             <Button
@@ -122,10 +122,10 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
               disabled={loading}
               variant="destructive"
               size="sm"
-              className="md:hidden"
+              className="md:hidden whitespace-nowrap"
             >
-              <LogOut className="w-4 h-4" />
-              {loading ? '...' : 'Logout'}
+              <LogOut className="w-3 sm:w-4 h-3 sm:h-4" />
+              <span className="hidden xs:inline">{loading ? '...' : 'Logout'}</span>
             </Button>
           </div>
         </header>

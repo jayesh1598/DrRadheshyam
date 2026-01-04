@@ -146,15 +146,15 @@ export default function AdminDashboard() {
     <AdminLayout title="Dashboard">
       <div className="space-y-8">
         {/* Overview Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-lg">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">Welcome Back!</h2>
-              <p className="text-blue-100 max-w-2xl">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="flex-1">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Welcome Back!</h2>
+              <p className="text-blue-100 max-w-2xl text-sm sm:text-base">
                 Here's an overview of your site content and management options.
               </p>
             </div>
-            <TrendingUp className="w-12 h-12 text-blue-200 opacity-50" />
+            <TrendingUp className="w-10 sm:w-12 h-10 sm:h-12 text-blue-200 opacity-50 flex-shrink-0" />
           </div>
         </div>
 
@@ -172,18 +172,18 @@ export default function AdminDashboard() {
                 <button
                   key={card.path}
                   onClick={() => navigate(card.path)}
-                  className={`border-2 rounded-xl p-6 transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
+                  className={`border-2 rounded-xl p-4 sm:p-6 transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
                 >
-                  <div className={`w-12 h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className="w-6 h-6" />
+                  <div className={`w-10 sm:w-12 h-10 sm:h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className="w-5 sm:w-6 h-5 sm:h-6" />
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{card.label}</p>
-                  <p className="text-3xl font-bold text-gray-900">
+                  <p className="text-xs sm:text-sm text-gray-600 mb-2">{card.label}</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-gray-900">
                     {loading ? '-' : card.count}
                   </p>
-                  <div className="flex items-center gap-1 text-sm text-gray-600 mt-4">
+                  <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 mt-4">
                     <span>Manage</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4" />
                   </div>
                 </button>
               );
@@ -205,16 +205,16 @@ export default function AdminDashboard() {
                 <button
                   key={item.path}
                   onClick={() => navigate(item.path)}
-                  className={`border-2 rounded-xl p-6 text-left transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
+                  className={`border-2 rounded-xl p-4 sm:p-6 text-left transition-all hover:shadow-lg hover:scale-105 cursor-pointer ${cardColor}`}
                 >
-                  <div className={`w-12 h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4 mb-4`}>
-                    <Icon className="w-6 h-6" />
+                  <div className={`w-10 sm:w-12 h-10 sm:h-12 ${lightColor} rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className="w-5 sm:w-6 h-5 sm:h-6" />
                   </div>
-                  <h4 className="font-semibold text-gray-900 mb-1">{item.label}</h4>
-                  <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                  <div className="flex items-center gap-1 text-sm font-medium">
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">{item.label}</h4>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-4">{item.description}</p>
+                  <div className="flex items-center gap-1 text-xs sm:text-sm font-medium">
                     <span>Access</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4" />
                   </div>
                 </button>
               );
@@ -223,7 +223,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Getting Started</h3>
           <ul className="space-y-3">
             <li className="flex gap-3 items-start">

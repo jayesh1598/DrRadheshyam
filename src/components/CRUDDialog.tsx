@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import { Button } from './ui/button';
 
 export interface FormField {
   name: string;
@@ -86,22 +87,22 @@ export function CRUDDialog({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
-          <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+        <div className="flex items-center justify-between p-3 sm:p-6 border-b border-gray-200 sticky top-0 bg-white gap-2">
+          <h2 className="text-lg sm:text-2xl font-bold text-gray-900 flex-1 truncate">{title}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors p-1"
+            className="text-gray-500 hover:text-gray-700 transition-colors p-1 flex-shrink-0"
             aria-label="Close"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 sm:w-6 h-5 sm:h-6" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-6 space-y-4 sm:space-y-6">
           {/* Form-level error */}
           {errors.form && (
             <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
@@ -110,7 +111,7 @@ export function CRUDDialog({
           )}
 
           {/* Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {fields.map((field) => {
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
@@ -192,22 +193,26 @@ export function CRUDDialog({
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4 pt-6 border-t border-gray-200 sticky bottom-0 bg-white">
-            <button
+          <div className="flex gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200 sticky bottom-0 bg-white">
+            <Button
               type="submit"
               disabled={isSubmitting || loading}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-2 rounded-lg transition-colors"
+              variant="default"
+              size="sm"
+              className="flex-1 text-xs sm:text-sm"
             >
               {isSubmitting || loading ? 'Saving...' : submitButtonLabel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={onClose}
               disabled={isSubmitting || loading}
-              className="flex-1 bg-gray-300 hover:bg-gray-400 disabled:bg-gray-200 text-gray-900 font-medium py-2 rounded-lg transition-colors"
+              variant="outline"
+              size="sm"
+              className="flex-1 text-xs sm:text-sm"
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>
