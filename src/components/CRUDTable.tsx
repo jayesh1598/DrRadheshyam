@@ -283,9 +283,8 @@ export function CRUDTable<T extends { id: string }>({
                       {onDelete && (
                         <button
                           onClick={() => {
-                            if (confirm('Are you sure you want to delete this item?')) {
-                              onDelete(item);
-                            }
+                            setItemToDelete(item);
+                            setDeleteConfirmOpen(true);
                           }}
                           className="inline-flex items-center gap-1 bg-white border border-red-600 hover:bg-red-50 text-red-600 px-3 py-1 rounded transition-colors text-xs font-medium"
                           title="Delete"
