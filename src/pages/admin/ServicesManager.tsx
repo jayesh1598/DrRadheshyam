@@ -77,6 +77,12 @@ const formFields: FormField[] = [
     rows: 5,
     required: true,
   },
+  {
+    name: 'active',
+    label: 'Active Service',
+    type: 'checkbox',
+    help: 'Check to display this service on the website',
+  },
 ];
 
 export default function ServicesManager() {
