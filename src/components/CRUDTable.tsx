@@ -213,7 +213,7 @@ export function CRUDTable<T extends { id: string }>({
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => handleSearch(e.target.value)}
-          className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-xs sm:text-sm"
+          className="w-full sm:w-auto px-3 sm:px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-xs sm:text-sm"
         />
       </div>
 
