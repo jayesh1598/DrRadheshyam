@@ -88,6 +88,7 @@ export default function NewsManager() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const { toasts, removeToast, success, error: showError } = useToast();
 
   useEffect(() => {
     loadArticles();
