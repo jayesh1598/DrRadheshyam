@@ -139,10 +139,11 @@ export default function NewsManager() {
         .eq('id', article.id);
 
       if (error) throw error;
-      loadArticles();
+      await loadArticles();
+      success('Article deleted successfully!');
     } catch (error) {
       console.error('Error deleting article:', error);
-      alert('Error deleting article');
+      showError('Failed to delete article. Please try again.');
     }
   };
 
