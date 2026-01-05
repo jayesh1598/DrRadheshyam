@@ -197,7 +197,7 @@ export function CRUDTable<T extends { id: string }>({
               setPageSize(Number(e.target.value));
               setCurrentPage(1);
             }}
-            className="border border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            className="border-2 border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
