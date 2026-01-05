@@ -46,7 +46,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed top-3 sm:top-4 left-3 sm:left-4 z-40 bg-card p-2 rounded-lg shadow hover:shadow-md transition-shadow"
+        className="md:hidden fixed top-3 sm:top-4 left-3 sm:left-4 z-50 bg-card p-2 rounded-lg shadow hover:shadow-md transition-shadow"
         aria-label="Toggle menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
