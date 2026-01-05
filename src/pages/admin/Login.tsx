@@ -47,13 +47,15 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-2xl p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            Admin Panel
-          </h1>
-          <p className="text-gray-600 text-center mb-8">
-            Login to manage the website
-          </p>
+        <div className="bg-white rounded-xl shadow-2xl p-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
+              Admin Panel
+            </h1>
+            <p className="text-gray-600 text-center text-sm">
+              Login to manage the website
+            </p>
+          </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {error && (
