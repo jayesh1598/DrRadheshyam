@@ -116,6 +116,27 @@ export function CRUDDialog({
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
 
+              if (field.type === 'checkbox') {
+                return (
+                  <div key={field.name} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={field.name}
+                      checked={value === true || value === 'true'}
+                      onChange={(e) => handleChange(field.name, e.target.checked)}
+                      className="w-5 h-5 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                    />
+                    <label htmlFor={field.name} className="ml-3 text-sm font-medium text-gray-700 cursor-pointer">
+                      {field.label}
+                      {field.required && <span className="text-red-600 ml-1">*</span>}
+                    </label>
+                    {field.help && (
+                      <p className="text-xs text-gray-500 mt-1">{field.help}</p>
+                    )}
+                  </div>
+                );
+              }
+
               if (field.type === 'textarea') {
                 return (
                   <div key={field.name} className="md:col-span-2">
