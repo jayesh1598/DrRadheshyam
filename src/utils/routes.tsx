@@ -136,4 +136,13 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorBoundary />,
   },
+  {
+    path: "/admin/overview",
+    Component: () => (
+      <ProtectedRoute>
+        <OverviewManager />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorBoundary />,
+  },
 ]);
