@@ -106,7 +106,7 @@ export default function NewsManager() {
       setArticles(data || []);
     } catch (error) {
       console.error('Error loading articles:', error);
-      alert('Error loading articles');
+      showError('Failed to load articles. Please try again.');
     } finally {
       setLoading(false);
     }
