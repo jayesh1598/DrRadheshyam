@@ -55,14 +55,14 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       {/* Sidebar Overlay for Mobile */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden z-40"
+          className="fixed inset-0 bg-black/50 md:hidden z-30"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-50 w-72 flex flex-col ${
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-40 w-72 flex flex-col ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
