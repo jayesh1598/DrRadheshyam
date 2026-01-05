@@ -219,7 +219,7 @@ export default function SiteSettingsManager() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all active:scale-95"
           >
             <Save className="w-5 h-5" />
             {saving ? 'Saving...' : 'Save Settings'}
