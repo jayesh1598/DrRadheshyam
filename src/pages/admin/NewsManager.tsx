@@ -3,6 +3,8 @@ import { supabase } from '../../utils/supabase/client';
 import { AdminLayout } from '../../components/AdminLayout';
 import { CRUDTable, TableColumn } from '../../components/CRUDTable';
 import { CRUDDialog, FormField } from '../../components/CRUDDialog';
+import { ToastContainer } from '../../components/Toast';
+import { useToast } from '../../hooks/useToast';
 
 interface NewsArticle {
   id: string;
