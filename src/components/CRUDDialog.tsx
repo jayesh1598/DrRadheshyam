@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 export interface FormField {
   name: string;
   label: string;
-  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select';
+  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox';
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string | number; label: string }>;
