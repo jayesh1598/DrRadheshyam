@@ -205,7 +205,7 @@ export default function SiteSettingsManager() {
                 value={favicon}
                 onChange={(e) => setFavicon(e.target.value)}
                 placeholder="https://example.com/favicon.ico"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all"
               />
               <p className="text-xs text-gray-500 mt-1">
                 Use .ico, .png, or .jpg format. Recommended size: 32x32 or 64x64 pixels
