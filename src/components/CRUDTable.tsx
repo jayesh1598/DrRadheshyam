@@ -39,6 +39,9 @@ export function CRUDTable<T extends { id: string }>({
   const [pageSize, setPageSize] = useState(10);
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<T | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Filter data based on search
   const filteredData = useMemo(() => {
