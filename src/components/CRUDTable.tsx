@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Trash2, Edit2 } from 'lucide-react';
 import { Button } from './ui/button';
+import { ConfirmDialog } from './ConfirmDialog';
 
 export interface TableColumn {
   key: string;
