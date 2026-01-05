@@ -15,6 +15,7 @@ import BannersManager from "../pages/admin/BannersManager";
 import AboutManager from "../pages/admin/AboutManager";
 import SiteSettingsManager from "../pages/admin/SiteSettingsManager";
 import ServicesManager from "../pages/admin/ServicesManager";
+import OverviewManager from "../pages/admin/OverviewManager";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 
