@@ -336,6 +336,32 @@ export function CRUDTable<T extends { id: string }>({
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={deleteConfirmOpen}
+        title="Delete Item"
+        message="Are you sure you want to delete this item? This action cannot be undone."
+        confirmLabel="Delete"
+        isDangerous={true}
+        isLoading={isDeleting}
+        onConfirm={async () => {
+          if (itemToDelete && onDelete) {
+            setIsDeleting(true);
+            try {
+              await onDelete(itemToDelete);
+            } finally {
+              setIsDeleting(false);
+              setDeleteConfirmOpen(false);
+              setItemToDelete(null);
+            }
+          }
+        }}
+        onCancel={() => {
+          setDeleteConfirmOpen(false);
+          setItemToDelete(null);
+        }}
+      />
     </div>
   );
 }
