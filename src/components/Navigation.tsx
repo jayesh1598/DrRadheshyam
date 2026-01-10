@@ -301,6 +301,27 @@ export function Navigation() {
                   </div>
                 )}
               </div>
+
+              {/* Mobile Admin Menu */}
+              {isAdminLoggedIn && (
+                <div className="pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.2)' }}>
+                  <Link
+                    to="/admin/dashboard"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-4 py-2 rounded text-sm font-bold uppercase text-white hover:bg-orange-600 transition-colors"
+                  >
+                    Admin Panel
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
+                    className="w-full mt-2 px-4 py-2 rounded text-sm font-bold uppercase text-white bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    {isLoggingOut ? 'Logging out...' : 'Logout'}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
