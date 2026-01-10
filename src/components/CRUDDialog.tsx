@@ -118,6 +118,21 @@ export function CRUDDialog({
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
 
+              if (field.type === 'image-upload') {
+                return (
+                  <div key={field.name} className="md:col-span-2">
+                    <ImageUploadField
+                      label={field.label}
+                      value={value}
+                      onChange={(url) => handleChange(field.name, url)}
+                      required={field.required}
+                      uploadPath={field.uploadPath || 'gallery'}
+                    />
+                    {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
+                  </div>
+                );
+              }
+
               if (field.type === 'checkbox') {
                 return (
                   <div key={field.name} className="flex items-center">
