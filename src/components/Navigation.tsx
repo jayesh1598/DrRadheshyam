@@ -7,11 +7,15 @@ const defaultLogoUrl = 'https://cdn.builder.io/api/v1/image/assets%2Fff7e0f6cbec
 
 export function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState(defaultLogoUrl);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     const loadLogo = async () => {
