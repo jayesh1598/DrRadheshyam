@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './ui/button';
+import { ImageUploadField } from './ImageUploadField';
 
 export interface FormField {
   name: string;
   label: string;
-  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox';
+  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox' | 'image-upload';
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string | number; label: string }>;
   maxLength?: number;
   rows?: number;
   help?: string;
+  uploadPath?: string;
 }
 
 export interface CRUDDialogProps {
