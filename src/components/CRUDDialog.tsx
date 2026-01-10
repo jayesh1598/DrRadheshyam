@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 export interface FormField {
   name: string;
   label: string;
-  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select';
+  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox';
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string | number; label: string }>;
@@ -87,7 +87,7 @@ export function CRUDDialog({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-2 sm:p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-3 sm:p-6 border-b border-gray-200 sticky top-0 bg-white gap-2">
@@ -116,6 +116,27 @@ export function CRUDDialog({
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
 
+              if (field.type === 'checkbox') {
+                return (
+                  <div key={field.name} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={field.name}
+                      checked={value === true || value === 'true'}
+                      onChange={(e) => handleChange(field.name, e.target.checked)}
+                      className="w-5 h-5 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                    />
+                    <label htmlFor={field.name} className="ml-3 text-sm font-medium text-gray-700 cursor-pointer">
+                      {field.label}
+                      {field.required && <span className="text-red-600 ml-1">*</span>}
+                    </label>
+                    {field.help && (
+                      <p className="text-xs text-gray-500 mt-1">{field.help}</p>
+                    )}
+                  </div>
+                );
+              }
+
               if (field.type === 'textarea') {
                 return (
                   <div key={field.name} className="md:col-span-2">
@@ -129,8 +150,8 @@ export function CRUDDialog({
                       placeholder={field.placeholder}
                       rows={field.rows || 4}
                       maxLength={field.maxLength}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none ${
-                        error ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 transition-all resize-none ${
+                        error ? 'border-red-500 focus:border-red-600 focus:ring-red-200' : 'border-gray-300 focus:border-blue-600 focus:ring-blue-200'
                       }`}
                     />
                     {field.help && (
@@ -151,8 +172,8 @@ export function CRUDDialog({
                     <select
                       value={value}
                       onChange={(e) => handleChange(field.name, e.target.value)}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                        error ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                        error ? 'border-red-500 focus:border-red-600 focus:ring-red-200' : 'border-gray-300 focus:border-blue-600 focus:ring-blue-200'
                       }`}
                     >
                       <option value="">Select {field.label.toLowerCase()}</option>
@@ -179,8 +200,8 @@ export function CRUDDialog({
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     placeholder={field.placeholder}
                     maxLength={field.maxLength}
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                      error ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                      error ? 'border-red-500 focus:border-red-600 focus:ring-red-200' : 'border-gray-300 focus:border-blue-600 focus:ring-blue-200'
                     }`}
                   />
                   {field.help && (

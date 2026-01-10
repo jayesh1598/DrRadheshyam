@@ -47,13 +47,15 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-2xl p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            Admin Panel
-          </h1>
-          <p className="text-gray-600 text-center mb-8">
-            Login to manage the website
-          </p>
+        <div className="bg-white rounded-xl shadow-2xl p-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
+              Admin Panel
+            </h1>
+            <p className="text-gray-600 text-center text-sm">
+              Login to manage the website
+            </p>
+          </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {error && (
@@ -71,7 +73,8 @@ export default function AdminLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all"
+                placeholder="Enter your email"
                 required
               />
             </div>
@@ -84,7 +87,8 @@ export default function AdminLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all"
+                placeholder="Enter your password"
                 required
               />
             </div>
@@ -92,7 +96,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-all duration-200 active:scale-95"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>

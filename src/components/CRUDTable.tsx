@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Trash2, Edit2 } from 'lucide-react';
 import { Button } from './ui/button';
+import { ConfirmDialog } from './ConfirmDialog';
 
 export interface TableColumn {
   key: string;
@@ -38,6 +39,9 @@ export function CRUDTable<T extends { id: string }>({
   const [pageSize, setPageSize] = useState(10);
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<T | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Filter data based on search
   const filteredData = useMemo(() => {
@@ -197,7 +201,7 @@ export function CRUDTable<T extends { id: string }>({
               setPageSize(Number(e.target.value));
               setCurrentPage(1);
             }}
-            className="border border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            className="border-2 border-gray-300 rounded px-2 py-1 text-xs sm:text-sm font-medium hover:border-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
@@ -213,7 +217,7 @@ export function CRUDTable<T extends { id: string }>({
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => handleSearch(e.target.value)}
-          className="w-full sm:w-auto px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-xs sm:text-sm"
+          className="w-full sm:w-auto px-3 sm:px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all text-xs sm:text-sm"
         />
       </div>
 
@@ -279,9 +283,8 @@ export function CRUDTable<T extends { id: string }>({
                       {onDelete && (
                         <button
                           onClick={() => {
-                            if (confirm('Are you sure you want to delete this item?')) {
-                              onDelete(item);
-                            }
+                            setItemToDelete(item);
+                            setDeleteConfirmOpen(true);
                           }}
                           className="inline-flex items-center gap-1 bg-white border border-red-600 hover:bg-red-50 text-red-600 px-3 py-1 rounded transition-colors text-xs font-medium"
                           title="Delete"
@@ -333,6 +336,32 @@ export function CRUDTable<T extends { id: string }>({
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={deleteConfirmOpen}
+        title="Delete Item"
+        message="Are you sure you want to delete this item? This action cannot be undone."
+        confirmLabel="Delete"
+        isDangerous={true}
+        isLoading={isDeleting}
+        onConfirm={async () => {
+          if (itemToDelete && onDelete) {
+            setIsDeleting(true);
+            try {
+              await onDelete(itemToDelete);
+            } finally {
+              setIsDeleting(false);
+              setDeleteConfirmOpen(false);
+              setItemToDelete(null);
+            }
+          }
+        }}
+        onCancel={() => {
+          setDeleteConfirmOpen(false);
+          setItemToDelete(null);
+        }}
+      />
     </div>
   );
 }

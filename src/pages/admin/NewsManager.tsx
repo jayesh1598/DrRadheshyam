@@ -3,6 +3,8 @@ import { supabase } from '../../utils/supabase/client';
 import { AdminLayout } from '../../components/AdminLayout';
 import { CRUDTable, TableColumn } from '../../components/CRUDTable';
 import { CRUDDialog, FormField } from '../../components/CRUDDialog';
+import { ToastContainer } from '../../components/Toast';
+import { useToast } from '../../hooks/useToast';
 
 interface NewsArticle {
   id: string;
@@ -86,6 +88,7 @@ export default function NewsManager() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const { toasts, removeToast, success, error: showError } = useToast();
 
   useEffect(() => {
     loadArticles();
@@ -103,7 +106,7 @@ export default function NewsManager() {
       setArticles(data || []);
     } catch (error) {
       console.error('Error loading articles:', error);
-      alert('Error loading articles');
+      showError('Failed to load articles. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -136,10 +139,11 @@ export default function NewsManager() {
         .eq('id', article.id);
 
       if (error) throw error;
-      loadArticles();
+      await loadArticles();
+      success('Article deleted successfully!');
     } catch (error) {
       console.error('Error deleting article:', error);
-      alert('Error deleting article');
+      showError('Failed to delete article. Please try again.');
     }
   };
 
