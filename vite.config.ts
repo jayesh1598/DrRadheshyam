@@ -1,9 +1,11 @@
-
-  import { defineConfig } from 'vite';
+import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
   export default defineConfig({
+    define: {
+      'import.meta.env.VITE_GITHUB_TOKEN': JSON.stringify(process.env.GITHUB_TOKEN),
+    },
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
