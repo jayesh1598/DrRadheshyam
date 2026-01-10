@@ -1,5 +1,5 @@
-import { Link, useLocation } from 'react-router';
-import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play, Facebook, Instagram, Twitter, ChevronDown, Calendar } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { Home, User, ImageIcon, Newspaper, Award, Menu, X, Play, Facebook, Instagram, Twitter, ChevronDown, Calendar, LogOut, Settings } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
