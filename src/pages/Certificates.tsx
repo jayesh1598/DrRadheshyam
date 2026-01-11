@@ -1,6 +1,6 @@
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
-import { Award, Eye } from 'lucide-react';
+import { Award } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
