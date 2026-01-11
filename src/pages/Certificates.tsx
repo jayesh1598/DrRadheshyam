@@ -103,18 +103,9 @@ export default function Certificates() {
                     {certificate.institution}
                   </p>
 
-                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                  <p className="text-sm text-gray-500 line-clamp-2">
                     {certificate.description}
                   </p>
-
-                  <button
-                    onClick={() => setSelectedCertificate(certificate)}
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-white rounded-lg transition-colors text-sm"
-                    style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>View</span>
-                  </button>
                 </div>
               </div>
             ))}
