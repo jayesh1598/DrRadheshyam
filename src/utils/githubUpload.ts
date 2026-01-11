@@ -9,7 +9,7 @@ export async function uploadToGitHub(
   const token = import.meta.env.VITE_GITHUB_TOKEN;
   const owner = 'jayesh1598';
   const repo = 'DrRadheshyam';
-  const branch = 'Main';
+  const branch = 'main';
 
   if (!token) {
     throw new Error('GitHub token not configured');

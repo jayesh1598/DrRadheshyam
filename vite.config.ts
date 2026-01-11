@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 
   export default defineConfig({
     define: {
-      'import.meta.env.VITE_GITHUB_TOKEN': JSON.stringify(process.env.GITHUB_TOKEN),
+      'import.meta.env.VITE_GITHUB_TOKEN': JSON.stringify(process.env.VITE_GITHUB_TOKEN),
     },
     plugins: [react()],
     resolve: {
