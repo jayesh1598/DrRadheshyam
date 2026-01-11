@@ -26,7 +26,6 @@ const defaultCertificates: Certificate[] = [
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState<Certificate[]>(defaultCertificates);
-  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
