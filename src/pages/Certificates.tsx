@@ -113,55 +113,6 @@ export default function Certificates() {
         )}
       </div>
 
-      {/* Certificate Modal */}
-      {selectedCertificate && (
-        <div 
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedCertificate(null)}
-        >
-          <div 
-            className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h2 className="text-gray-900 mb-2">{selectedCertificate.title}</h2>
-                  <p className="text-gray-600">{selectedCertificate.institution}</p>
-                  <p className="mt-1" style={{ color: '#e76c2c' }}>{selectedCertificate.date}</p>
-                </div>
-                <button
-                  onClick={() => setSelectedCertificate(null)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="mb-4">
-                <img
-                  src={selectedCertificate.image_url}
-                  alt={selectedCertificate.title}
-                  className="w-full rounded-lg"
-                />
-              </div>
-              
-              <p className="text-gray-700 mb-6">
-                {selectedCertificate.description}
-              </p>
-              
-              <button
-                onClick={() => setSelectedCertificate(null)}
-                className="w-full px-6 py-3 text-white rounded-lg transition-colors"
-                style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Footer */}
       <Footer />
     </div>
