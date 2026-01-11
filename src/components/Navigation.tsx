@@ -63,16 +63,6 @@ export function Navigation() {
     return location.pathname === path;
   };
 
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    const { error } = await supabase.auth.signOut();
-    setIsAdminMenuOpen(false);
-    if (!error) {
-      navigate('/', { replace: true });
-    }
-    setIsLoggingOut(false);
-  };
-
   const mainNavLinks = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/about', label: 'About Us', icon: User },
