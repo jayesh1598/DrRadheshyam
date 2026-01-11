@@ -158,42 +158,6 @@ export function Navigation() {
               Book a Table
             </button>
 
-            {/* Admin Menu Dropdown */}
-            {isAdminLoggedIn && (
-              <div className="relative">
-                <button
-                  onClick={() => setIsAdminMenuOpen(!isAdminMenuOpen)}
-                  className="p-2 rounded-lg transition-colors text-white hover:bg-orange-700"
-                  title="Admin Menu"
-                >
-                  <User className="w-5 h-5" />
-                </button>
-
-                {isAdminMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
-                    <Link
-                      to="/admin/dashboard"
-                      onClick={() => setIsAdminMenuOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      <Settings className="w-4 h-4" />
-                      <span className="text-sm font-medium">Admin Panel</span>
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      disabled={isLoggingOut}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      <span className="text-sm font-medium">
-                        {isLoggingOut ? 'Logging out...' : 'Logout'}
-                      </span>
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Mobile Menu Button */}
             {!isDesktop && (
               <button
