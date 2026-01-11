@@ -14,28 +14,6 @@ export function Navigation() {
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkAdminStatus = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setIsAdminLoggedIn(!!session);
-    };
-
-    checkAdminStatus();
-
-    // Subscribe to auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAdminLoggedIn(!!session);
-    });
-
-    return () => {
-      subscription?.unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
     const loadLogo = async () => {
       try {
         const { data, error } = await supabase
