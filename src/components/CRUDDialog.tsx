@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './ui/button';
+import { ImageUploadField } from './ImageUploadField';
 
 export interface FormField {
   name: string;
   label: string;
-  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox';
+  type?: 'text' | 'email' | 'url' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox' | 'image-upload';
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string | number; label: string }>;
   maxLength?: number;
   rows?: number;
   help?: string;
+  uploadPath?: string;
 }
 
 export interface CRUDDialogProps {
@@ -115,6 +117,21 @@ export function CRUDDialog({
             {fields.map((field) => {
               const value = formData[field.name] ?? '';
               const error = errors[field.name];
+
+              if (field.type === 'image-upload') {
+                return (
+                  <div key={field.name} className="md:col-span-2">
+                    <ImageUploadField
+                      label={field.label}
+                      value={value}
+                      onChange={(url) => handleChange(field.name, url)}
+                      required={field.required}
+                      uploadPath={field.uploadPath || 'gallery'}
+                    />
+                    {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
+                  </div>
+                );
+              }
 
               if (field.type === 'checkbox') {
                 return (

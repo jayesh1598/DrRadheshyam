@@ -49,10 +49,10 @@ const formFields: FormField[] = [
   },
   {
     name: 'image_url',
-    label: 'Banner Image URL',
-    type: 'url',
-    placeholder: 'https://example.com/banner.jpg',
+    label: 'Upload Banner Image',
+    type: 'image-upload',
     required: true,
+    uploadPath: 'banners',
   },
   {
     name: 'display_order',
