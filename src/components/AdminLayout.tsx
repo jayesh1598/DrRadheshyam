@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Sparkles, Play, Zap } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Play } from 'lucide-react';
 import { supabase } from '../utils/supabase/client';
 import { Button } from './ui/button';
 
