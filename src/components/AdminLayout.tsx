@@ -101,18 +101,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t">
-          <Button
-            onClick={handleLogout}
-            disabled={loading}
-            variant="destructive"
-            className="w-full"
-            size="sm"
-          >
-            <LogOut className="w-4 h-4" />
-            {loading ? 'Logging out...' : 'Logout'}
-          </Button>
-        </div>
       </aside>
 
       {/* Main Content */}
