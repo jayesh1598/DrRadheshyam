@@ -35,6 +35,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
     { label: 'Certificates', path: '/admin/certificates', icon: Award },
     { label: 'Banner Slides', path: '/admin/banners', icon: Image },
     { label: 'About Content', path: '/admin/about', icon: BookOpen },
+    { label: 'Logout', path: null, icon: LogOut, isLogout: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
