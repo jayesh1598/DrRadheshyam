@@ -171,7 +171,7 @@ export function CRUDTable<T extends { id: string }>({
   };
 
   return (
-    <div className="space-y-4 pt-12 md:pt-0">
+    <div className="space-y-4">
       {/* Header with Add Button */}
       {onAdd && (
         <div className="flex justify-end">
