@@ -29,8 +29,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
   const menuItems = [
     { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
     { label: 'Site Settings', path: '/admin/settings', icon: Settings },
-    { label: 'Overview', path: '/admin/overview', icon: Sparkles },
-    { label: 'Services', path: '/admin/services', icon: Zap },
     { label: 'News Articles', path: '/admin/news', icon: FileText },
     { label: 'Gallery', path: '/admin/gallery', icon: Images },
     { label: 'Videos', path: '/admin/videos', icon: Play },
