@@ -107,7 +107,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-card border-b sticky top-0 z-20">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center min-h-fit gap-3 pt-12 sm:pt-3 md:pt-0">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center min-h-fit gap-3">
             <div className="flex-1 min-w-0">
               <h1 className="text-base sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
             </div>
