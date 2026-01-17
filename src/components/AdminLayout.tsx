@@ -45,7 +45,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed top-3 sm:top-4 left-3 sm:left-4 z-50 bg-card p-2 rounded-lg shadow hover:shadow-md transition-shadow"
+        className="md:hidden fixed top-4 left-4 z-50 bg-card p-2 rounded-lg shadow hover:shadow-md transition-shadow"
         aria-label="Toggle menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -61,16 +61,16 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-40 w-72 flex flex-col ${
+        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r transition-transform duration-300 z-40 w-64 sm:w-72 flex flex-col ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
-        <div className="px-6 py-6 border-b">
-          <h2 className="text-xl font-bold text-foreground">Admin Panel</h2>
-          <p className="text-muted-foreground text-sm mt-1">Dr. Gupta's Profile</p>
+        <div className="px-4 sm:px-6 py-4 sm:py-6 border-b flex-shrink-0">
+          <h2 className="text-lg sm:text-xl font-bold text-foreground">Admin Panel</h2>
+          <p className="text-muted-foreground text-xs sm:text-sm mt-1">Dr. Gupta's Profile</p>
         </div>
 
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+        <nav className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const active = item.path && isActive(item.path);
@@ -86,7 +86,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
                   }
                 }}
                 disabled={item.isLogout && loading}
-                className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-3 ${
+                className={`w-full text-left px-2 sm:px-3 py-2 rounded-lg transition-colors flex items-center gap-2 sm:gap-3 text-sm sm:text-base ${
                   item.isLogout
                     ? 'text-red-600 hover:bg-red-50'
                     : active
@@ -94,8 +94,8 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
                     : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                 }`}
               >
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">{loading && item.isLogout ? 'Logging out...' : item.label}</span>
+                <Icon className="w-4 sm:w-5 h-4 sm:h-5 flex-shrink-0" />
+                <span className="font-medium truncate">{loading && item.isLogout ? 'Logging out...' : item.label}</span>
               </button>
             );
           })}
@@ -107,27 +107,16 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-card border-b sticky top-0 z-20">
-          <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-6 flex justify-between items-center min-h-fit gap-3">
+          <div className="px-16 sm:px-6 lg:px-8 py-3 sm:py-6 flex justify-between items-center min-h-fit gap-3">
             <div className="flex-1 min-w-0">
-              <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
+              <h1 className="text-base sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
             </div>
-            {/* Mobile Logout - shown only on small screens */}
-            <Button
-              onClick={handleLogout}
-              disabled={loading}
-              variant="destructive"
-              size="sm"
-              className="md:hidden whitespace-nowrap flex-shrink-0"
-            >
-              <LogOut className="w-3 sm:w-4 h-3 sm:h-4" />
-              <span className="hidden xs:inline ml-1">{loading ? '...' : 'Logout'}</span>
-            </Button>
           </div>
         </header>
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-auto bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
             {children}
           </div>
         </main>
