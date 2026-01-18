@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Play, ChevronRight } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Play } from 'lucide-react';
 import { supabase } from '../utils/supabase/client';
 import { Button } from './ui/button';
 
@@ -13,7 +13,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -41,125 +40,83 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-primary text-primary-foreground p-2 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-        aria-label="Toggle menu"
-      >
-        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-      </button>
-
-      {/* Sidebar Overlay for Mobile */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 md:hidden z-30"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed md:relative md:translate-x-0 h-screen bg-card border-r border-border transition-all duration-300 z-40 flex flex-col shadow-lg ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        } ${sidebarCollapsed ? 'md:w-20' : 'md:w-64'} w-64 sm:w-72`}
-      >
-        {/* Sidebar Header */}
-        <div className="px-4 py-6 border-b border-border flex items-center justify-between flex-shrink-0">
-          {!sidebarCollapsed && (
-            <div className="flex-1 min-w-0">
-              <h2 className="text-lg font-bold text-foreground">Dr. Gupta</h2>
-              <p className="text-muted-foreground text-xs mt-1">Admin Panel</p>
-            </div>
-          )}
-          <button
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="hidden md:flex p-1 hover:bg-accent rounded-lg transition-colors flex-shrink-0"
-            aria-label="Toggle sidebar"
-          >
-            <ChevronRight className={`w-5 h-5 text-foreground transition-transform duration-300 ${sidebarCollapsed ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto p-2 space-y-2">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.path);
-            return (
-              <button
-                key={item.path}
-                onClick={() => {
-                  navigate(item.path);
-                  setIsMobileMenuOpen(false);
-                }}
-                title={sidebarCollapsed ? item.label : ''}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative ${
-                  active
-                    ? 'bg-primary text-primary-foreground shadow-md'
-                    : 'text-muted-foreground hover:bg-accent/50'
-                }`}
-              >
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                {!sidebarCollapsed && (
-                  <span className="font-medium text-sm truncate">{item.label}</span>
-                )}
-                
-                {/* Tooltip for collapsed state */}
-                {sidebarCollapsed && (
-                  <div className="absolute left-full ml-2 px-2 py-1 bg-foreground text-background rounded text-xs font-medium opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity">
-                    {item.label}
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Sidebar Footer */}
-        <div className="p-2 border-t border-border flex-shrink-0 space-y-2">
-          <button
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="bg-card border-b border-border sticky top-0 z-40 shadow-sm">
+        {/* Top Bar */}
+        <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
+          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
+          
+          {/* Desktop Logout Button */}
+          <Button
             onClick={handleLogout}
             disabled={loading}
-            title={sidebarCollapsed ? 'Logout' : ''}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative text-red-600 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed`}
+            variant="destructive"
+            size="sm"
+            className="hidden sm:flex gap-2"
           >
-            <LogOut className="w-5 h-5 flex-shrink-0" />
-            {!sidebarCollapsed && (
-              <span className="font-medium text-sm">
-                {loading ? 'Logging out...' : 'Logout'}
-              </span>
-            )}
-            
-            {/* Tooltip for collapsed state */}
-            {sidebarCollapsed && (
-              <div className="absolute left-full ml-2 px-2 py-1 bg-foreground text-background rounded text-xs font-medium opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity">
-                Logout
-              </div>
-            )}
+            <LogOut className="w-4 h-4" />
+            {loading ? 'Logging out...' : 'Logout'}
+          </Button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="sm:hidden p-2 hover:bg-accent rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </aside>
+
+        {/* Tabs Navigation */}
+        <div className={`border-t border-border overflow-x-auto scrollbar-hide ${isMobileMenuOpen ? 'block' : 'hidden sm:block'}`}>
+          <nav className="flex gap-1 px-4 sm:px-6 lg:px-8 py-0 min-w-max sm:min-w-0">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.path);
+              return (
+                <button
+                  key={item.path}
+                  onClick={() => {
+                    navigate(item.path);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 transition-all whitespace-nowrap text-sm sm:text-base ${
+                    active
+                      ? 'border-primary text-primary font-semibold'
+                      : 'border-transparent text-muted-foreground hover:text-foreground hover:border-accent'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="hidden sm:inline">{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Mobile Logout Button */}
+          <div className="sm:hidden px-4 py-2 border-t border-border">
+            <Button
+              onClick={handleLogout}
+              disabled={loading}
+              variant="destructive"
+              size="sm"
+              className="w-full gap-2"
+            >
+              <LogOut className="w-4 h-4" />
+              {loading ? 'Logging out...' : 'Logout'}
+            </Button>
+          </div>
+        </div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Header */}
-        <header className="bg-card border-b border-border sticky top-0 z-20 shadow-sm">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <h1 className="text-base sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
-            </div>
-          </div>
-        </header>
-
-        {/* Main Content Area */}
-        <main className="flex-1 overflow-auto bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pt-12 md:pt-0">
-            {children}
-          </div>
-        </main>
-      </div>
+      <main className="flex-1 overflow-auto bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }
