@@ -101,19 +101,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
             })}
           </nav>
 
-          {/* Mobile Logout Button */}
-          <div className="sm:hidden px-4 py-2 border-t border-border">
-            <Button
-              onClick={handleLogout}
-              disabled={loading}
-              variant="destructive"
-              size="sm"
-              className="w-full gap-2"
-            >
-              <LogOut className="w-4 h-4" />
-              {loading ? 'Logging out...' : 'Logout'}
-            </Button>
-          </div>
         </div>
       </header>
 
