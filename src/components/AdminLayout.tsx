@@ -48,17 +48,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
           <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
           
-          {/* Desktop Logout Button */}
-          <Button
-            onClick={handleLogout}
-            disabled={loading}
-            variant="destructive"
-            size="sm"
-            className="hidden sm:flex gap-2"
-          >
-            <LogOut className="w-4 h-4" />
-            {loading ? 'Logging out...' : 'Logout'}
-          </Button>
 
           {/* Mobile Menu Button */}
           <button
