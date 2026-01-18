@@ -76,21 +76,28 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
               const Icon = item.icon;
               const active = isActive(item.path);
               return (
-                <button
-                  key={item.path}
-                  onClick={() => {
-                    navigate(item.path);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 transition-all whitespace-nowrap text-sm sm:text-base ${
-                    active
-                      ? 'border-primary text-primary font-semibold'
-                      : 'border-transparent text-muted-foreground hover:text-foreground hover:border-accent'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="hidden sm:inline">{item.label}</span>
-                </button>
+                <div key={item.path} className="relative group">
+                  <button
+                    onClick={() => {
+                      navigate(item.path);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    title={item.label}
+                    className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 transition-all whitespace-nowrap text-sm sm:text-base ${
+                      active
+                        ? 'border-primary text-primary font-semibold'
+                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-accent'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{item.label}</span>
+                  </button>
+
+                  {/* Tooltip - visible on mobile only */}
+                  <div className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-2 py-1 bg-foreground text-background text-xs font-medium rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
+                    {item.label}
+                  </div>
+                </div>
               );
             })}
           </nav>
