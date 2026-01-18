@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { LogOut, Menu, X, LayoutDashboard, Settings, FileText, Images, Award, Image, BookOpen, Play } from 'lucide-react';
 import { supabase } from '../utils/supabase/client';
-import { Button } from './ui/button';
 
 interface AdminLayoutProps {
   children: JSX.Element;
@@ -35,6 +34,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
     { label: 'Certificates', path: '/admin/certificates', icon: Award },
     { label: 'Banner Slides', path: '/admin/banners', icon: Image },
     { label: 'About Content', path: '/admin/about', icon: BookOpen },
+    { label: 'Logout', path: '/logout', icon: LogOut, action: 'logout' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -47,17 +47,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
           <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground truncate">{title}</h1>
           
-          {/* Desktop Logout Button */}
-          <Button
-            onClick={handleLogout}
-            disabled={loading}
-            variant="destructive"
-            size="sm"
-            className="hidden sm:flex gap-2"
-          >
-            <LogOut className="w-4 h-4" />
-            {loading ? 'Logging out...' : 'Logout'}
-          </Button>
 
           {/* Mobile Menu Button */}
           <button
@@ -75,16 +64,25 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
             {menuItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.path);
+              const isLogout = (item as any).action === 'logout';
+
               return (
                 <div key={item.path} className="relative group">
                   <button
                     onClick={() => {
-                      navigate(item.path);
-                      setIsMobileMenuOpen(false);
+                      if (isLogout) {
+                        handleLogout();
+                      } else {
+                        navigate(item.path);
+                        setIsMobileMenuOpen(false);
+                      }
                     }}
+                    disabled={isLogout && loading}
                     title={item.label}
                     className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 transition-all whitespace-nowrap text-sm sm:text-base ${
-                      active
+                      isLogout
+                        ? 'border-transparent text-destructive hover:text-destructive hover:border-destructive disabled:opacity-50'
+                        : active
                         ? 'border-primary text-primary font-semibold'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:border-accent'
                     }`}
@@ -102,19 +100,6 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
             })}
           </nav>
 
-          {/* Mobile Logout Button */}
-          <div className="sm:hidden px-4 py-2 border-t border-border">
-            <Button
-              onClick={handleLogout}
-              disabled={loading}
-              variant="destructive"
-              size="sm"
-              className="w-full gap-2"
-            >
-              <LogOut className="w-4 h-4" />
-              {loading ? 'Logging out...' : 'Logout'}
-            </Button>
-          </div>
         </div>
       </header>
 
