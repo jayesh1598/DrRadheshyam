@@ -76,16 +76,25 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
             {menuItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.path);
+              const isLogout = (item as any).action === 'logout';
+
               return (
                 <div key={item.path} className="relative group">
                   <button
                     onClick={() => {
-                      navigate(item.path);
-                      setIsMobileMenuOpen(false);
+                      if (isLogout) {
+                        handleLogout();
+                      } else {
+                        navigate(item.path);
+                        setIsMobileMenuOpen(false);
+                      }
                     }}
+                    disabled={isLogout && loading}
                     title={item.label}
                     className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 transition-all whitespace-nowrap text-sm sm:text-base ${
-                      active
+                      isLogout
+                        ? 'border-transparent text-destructive hover:text-destructive hover:border-destructive disabled:opacity-50'
+                        : active
                         ? 'border-primary text-primary font-semibold'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:border-accent'
                     }`}
