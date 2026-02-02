@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <div className="flex gap-4 pt-2">
               <a
-                href="#"
+                href="https://www.facebook.com/dr.radheshyamguptaji"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-orange-500 transition-all duration-200 hover:scale-110 p-2"
@@ -27,7 +27,7 @@ export function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/dr.radheshyamguptaji"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-orange-500 transition-all duration-200 hover:scale-110 p-2"
