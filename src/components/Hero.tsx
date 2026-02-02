@@ -1,6 +1,6 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F2e2e8381dd584ea8a16aee5e50efd1c7%2F930bf2b97f2f4b4f8bf28cb96236cf56?format=webp&width=800';
+const logoUrl = 'https://cdn.builder.io/api/v1/image/assets%2F1ed9e9a564934324bd38cc90fd43566a%2Fa8fef2efc3004152b3ff54b61dec33cf?format=webp&width=800&height=1200';
 
 export function Hero() {
   return (
