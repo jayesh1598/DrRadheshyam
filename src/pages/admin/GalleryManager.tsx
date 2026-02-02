@@ -43,10 +43,10 @@ const formFields: FormField[] = [
   },
   {
     name: 'image_url',
-    label: 'Image URL',
-    type: 'url',
-    placeholder: 'https://example.com/image.jpg',
+    label: 'Upload Gallery Image',
+    type: 'image-upload',
     required: true,
+    uploadPath: 'gallery',
   },
 ];
 

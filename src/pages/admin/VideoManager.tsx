@@ -68,9 +68,9 @@ const formFields: FormField[] = [
   },
   {
     name: 'thumbnail_url',
-    label: 'Custom Thumbnail URL',
-    type: 'url',
-    placeholder: 'https://... (optional - auto-generated if left empty)',
+    label: 'Custom Thumbnail (optional)',
+    type: 'image-upload',
+    uploadPath: 'thumbnails',
     help: 'Leave empty to use YouTube default thumbnail',
   },
 ];

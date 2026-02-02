@@ -1,6 +1,6 @@
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
-import { Award, Eye } from 'lucide-react';
+import { Award } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
@@ -26,7 +26,6 @@ const defaultCertificates: Certificate[] = [
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState<Certificate[]>(defaultCertificates);
-  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -104,73 +103,15 @@ export default function Certificates() {
                     {certificate.institution}
                   </p>
 
-                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                  <p className="text-sm text-gray-500 line-clamp-2">
                     {certificate.description}
                   </p>
-
-                  <button
-                    onClick={() => setSelectedCertificate(certificate)}
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-white rounded-lg transition-colors text-sm"
-                    style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>View</span>
-                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
-
-      {/* Certificate Modal */}
-      {selectedCertificate && (
-        <div 
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedCertificate(null)}
-        >
-          <div 
-            className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h2 className="text-gray-900 mb-2">{selectedCertificate.title}</h2>
-                  <p className="text-gray-600">{selectedCertificate.institution}</p>
-                  <p className="mt-1" style={{ color: '#e76c2c' }}>{selectedCertificate.date}</p>
-                </div>
-                <button
-                  onClick={() => setSelectedCertificate(null)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="mb-4">
-                <img
-                  src={selectedCertificate.image_url}
-                  alt={selectedCertificate.title}
-                  className="w-full rounded-lg"
-                />
-              </div>
-              
-              <p className="text-gray-700 mb-6">
-                {selectedCertificate.description}
-              </p>
-              
-              <button
-                onClick={() => setSelectedCertificate(null)}
-                className="w-full px-6 py-3 text-white rounded-lg transition-colors"
-                style={{ backgroundColor: '#e76c2c' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#c55a1b'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#e76c2c'}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Footer */}
       <Footer />

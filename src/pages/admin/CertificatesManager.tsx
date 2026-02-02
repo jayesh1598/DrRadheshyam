@@ -70,10 +70,10 @@ const formFields: FormField[] = [
   },
   {
     name: 'image_url',
-    label: 'Certificate Image URL',
-    type: 'url',
-    placeholder: 'https://example.com/certificate.jpg',
+    label: 'Upload Certificate Image',
+    type: 'image-upload',
     required: true,
+    uploadPath: 'certificates',
   },
   {
     name: 'description',

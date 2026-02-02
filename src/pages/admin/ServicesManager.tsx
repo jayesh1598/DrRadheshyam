@@ -65,9 +65,9 @@ const formFields: FormField[] = [
   },
   {
     name: 'image',
-    label: 'Image URL',
-    type: 'url',
-    placeholder: 'https://example.com/image.jpg',
+    label: 'Upload Service Image',
+    type: 'image-upload',
+    uploadPath: 'services',
   },
   {
     name: 'description',
