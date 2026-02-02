@@ -82,12 +82,13 @@ export function Navigation() {
         <div className="flex justify-between items-center h-24">
           {/* Logo - Left */}
           <Link to="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
-            <img
-              src={logoUrl}
-              alt="Dr. RSG Logo"
-              className="h-20 w-20 object-contain"
-              style={{ maxWidth: '150px', maxHeight: '150px' }}
-            />
+            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-lg flex-shrink-0">
+              <img
+                src={logoUrl}
+                alt="Dr. RSG Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation - Center */}
